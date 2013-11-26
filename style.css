@@ -1,0 +1,195 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:13px;	
+	width:100%;
+	min-width:960px;
+	line-height:1.6em;
+}
+
+h2
+{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:18px;	
+	color:#444;
+	padding-top:12px;
+}
+
+ul
+{
+	list-style:square outside;
+	margin-left:0px;	
+	padding-left:32px;	
+	left:0px;	
+}
+
+input
+{
+	border-radius:2px;
+	border:1px #999 solid;	
+}
+
+img#header
+{
+	width:720px;
+	max-height:240px;	
+	margin-bottom:32px;
+	margin-top:12px;
+}
+
+#media-download
+{
+	border:1px #999 solid;
+	color:#666;
+	line-height:32px;
+	border-radius:2px;
+	width:720px;
+	height:32px;
+	text-align:center;
+	background-color:#ddd;	
+	margin-bottom:12px;
+}
+
+#media-download:hover
+{
+	border:1px #666 solid;
+	background-color:#bbb;	
+}
+
+#awards li, #quotes li
+{
+	margin-bottom:12px;	
+}
+
+#container
+{
+	width:960px;	
+	margin:0px auto;
+}
+
+#content
+{
+	position:relative;
+	left:240px;
+	float:left;
+	width:720px;
+	height:100%;	
+}
+
+#container a
+{
+	color:#666;
+}
+
+#container a:visited
+{
+	color:#666;	
+}
+
+#navigation
+{
+	position:fixed;
+	width:240px;	
+	height:100%;
+}
+
+#navigation ul
+{
+	margin-left:0px;
+	padding-left:0px;
+	left:0px;
+	list-style:none inside none;
+}
+
+#navigation li
+{
+	margin-bottom:4px;	
+}
+
+#navigation a
+{
+	font-weight:bolder;	
+	text-decoration:none;
+}
+
+#navigation a:hover
+{
+	color:#000;
+}
+
+#factsheet
+{
+	float:left;
+	width:240px;
+	height:100%;
+}
+
+#right-of-factsheet
+{
+	float:left;
+	width:480px;		
+}
+
+#description, #history, #features
+{
+	width:480px;	
+}
+
+#images, #screenshots
+{
+	overflow:hidden;
+	width:740px;	
+}
+
+#logo img
+{
+	max-width:720px;	
+}
+
+#images img.preview
+{
+	min-width:355px;
+	min-height:255px;
+	max-width:550px;
+	max-height:460px
+}
+
+#screenshots img.preview
+{
+	width:355px;
+	min-height:255px;
+	max-height:460px;
+}
+
+div.preview-wrapper
+{
+	width:355px;
+	height:255px;
+	margin-right:10px;
+	margin-bottom:10px;
+	float:left;	
+	overflow:hidden;
+}
+
+#contact, #credits
+{
+	float:left;	
+	width:360px;
+}
+
+p.credits
+{
+	color:#999;
+}
+
+.clear
+{
+	clear:both;
+	width:100%;
+	margin-top:30px;
+	height:30px;
+	border-top:1px #ddd solid;	
+}
