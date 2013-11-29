@@ -100,12 +100,15 @@ foreach( $xml->children() as $child )
 
 function parseLink($uri)
 {
-	$parsed = $uri;
-	if( strpos($uri, "http://") >= 0 )
+	$parsed = trim($uri);
+	if( strpos($parsed, "http://") === 0 )
 		$parsed = substr($parsed, 7);
-	if( strpos($uri, "www.") >= 0 )
+	if (strpos($parsed, "https://") === 0 )
+		$parsed = substr($parsed, 8);
+	if( strpos($parsed, "www.") === 0 )
 		$parsed = substr($parsed, 4);
-	$parsed = trim($parsed,"/");
+	if( strrpos($parsed, "/") === strlen($parsed) - 1)
+		$parsed = substr($parsed, 0, strlen($parsed) - 1);
 	return $parsed;
 }
 
