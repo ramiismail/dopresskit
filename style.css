@@ -18,6 +18,14 @@ h2
 	padding-top:12px;
 }
 
+h3
+{
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 14px;
+	color: #444;
+	padding-top: 12px;
+}
+
 ul
 {
 	list-style:square outside;
@@ -29,7 +37,39 @@ ul
 input
 {
 	border-radius:2px;
-	border:1px #999 solid;	
+	border:1px #999 solid;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;	
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+    outline: none;
+}
+
+.submit_button{
+
+	-webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+
+}
+
+.submit_button:hover, .submit_button:focus{
+	background:#808080;
+	border: solid 1px black;
+    text-decoration: none;
+}
+
+.submit_button:active {
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    background: white;
+    border: solid 1px #203E5F;
 }
 
 img#header
@@ -192,4 +232,11 @@ p.credits
 	margin-top:30px;
 	height:30px;
 	border-top:1px #ddd solid;	
+}
+
+.error
+{
+	color: red;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 10px;
 }
