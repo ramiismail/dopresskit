@@ -1,4 +1,8 @@
 <?php
+
+	// Turn off all error reporting
+	error_reporting(0);
+
 	/*
 	 * Press Kit Installation Script
 	 * 
@@ -8,6 +12,35 @@
 	 * Put the install.php file in the root folder of a completed installation to upgrade your installation.
 	 *
 	 */	
+
+
+
+	function isEmpty($var)
+	{
+		if(strlen($var) == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function ftp_is_dir($connection, $dir)
+	{
+	    $pushd = ftp_pwd($connection);
+
+	    if ($pushd !== false && @ftp_chdir($connection, $dir))
+	    {
+	        ftp_chdir($connection, $pushd);   
+	        return true;
+	    }
+
+	    return false;
+	}	 
+
+
 
     function dl_r($filename, $remote_url = 'http://www.ramiismail.com/kit/press/' ) {
 		$remote_url .=  $filename;
@@ -33,11 +66,133 @@
         
         return true;
     }
+
+    // We'll first need to grab the CSS files. Otherwise, this'll look like crap.
+	//if( file_exists('style.css') ) unlink('style.css');
+	//dl_r('style.css');
+	//if( !file_exists('style.css') ) dl_r('style.css', 'http://dl.dropbox.com/u/12157099/presskit/');
+
 	
-	if( ini_get('safe_mode') )
+	if( true )
 	{
-		echo('<h1>Server Environment Check Failed: PHP Safe Mode Enabled</h1><p>Sadly, you or your host seem to have enabled PHP Safe Mode. PHP Safe Mode results in unexpected behaviour with user-installed scripts on your server and might cause presskit() to not function correctly. Please upgrade to PHP 5.4.0 or later or disable Safe Mode to continue.</p><p>If you cannot disable Safe Mode nor upgrade and are comfortable installing scripts, please download the <a href="http://ramiismail.com/kit/press/manual-install.zip">manual installation package</a>.</p>');
-		die();
+		session_start();
+		
+
+			if (isset($_POST['ftpSubmit']))
+			{	
+			   $_SESSION['ftp_servername'] = $_POST["ftp_servername"];
+			   
+			   if(isEmpty($_SESSION['ftp_servername']))
+			   {
+			   		$serverError="Server Name cannot be empty";
+			   }
+
+			   
+			   $_SESSION['ftp_username'] = $_POST["ftp_username"];
+			   
+			   if(isEmpty($_SESSION['ftp_username']))
+			   {
+			   		$usernameError="Username cannot be empty";
+			   }
+
+			   $_SESSION['ftp_password'] = $_POST["ftp_password"];
+
+			   if(isEmpty($_SESSION['ftp_password']))
+			   		$passwordError="Password cannot be empty";
+
+			   	$connection = ftp_connect($_SESSION['ftp_servername']);
+       			$user = $_SESSION['ftp_username'];
+       			$pass = $_SESSION['ftp_password'];
+
+				
+
+			   	if(!ftp_login($connection,$user,$pass))
+			   	{
+			   		
+					   	if(!$connection)
+					   	{
+					   		$serverError="Server does not exist or could not be connected to";
+					   	}
+					   	else
+					   	{
+					   		$serverError="";
+					   		$usernameError="Username/Password is incorrect";
+					   		$passwordError="Username/Password is incorrect";
+					   	}
+
+			   	}
+			   	else{
+
+			   		$installing = 1;
+			   		$upgrade = 0;
+			   		$file_needed = 0;
+			   		$contents_on_server = ftp_nlist($connection, ftp_pwd($connection)); 
+			   		$path = ftp_pwd($connection);
+			   		
+			   		if(count(ftp_nlist($connection, $path)) > 3)
+			   		{
+			   			if(!in_array($path . "validation.js", $contents_on_server))
+			   			{
+
+			   			}else{
+
+			   				if(in_array($path . "data.xml", $contents_on_server))
+			   				{
+			   					$upgrade = 1;
+			   				}
+
+			   				if(in_array($path . "_data.xml", $contents_on_server))
+			   				{
+			   					ftp_rename($connection, "_data.xml", "_data.bak");
+			   				}
+
+			   			
+			   			}
+			   		} 
+
+
+			   		if(!ftp_is_dir($connection,"images"))
+			   			ftp_mkdir($connection,"images");
+			   		if(!ftp_is_dir($connection,"trailers"))
+			   			ftp_mkdir($connection, "trailers");
+
+
+			   		// install procedures here
+
+			   		ftp_close($connection);
+
+
+			   	}
+			  
+			}
+				
+		
+			echo('<html>');
+
+			if( $upgrade == 0 )
+				echo('<head><title>Installation</title><link href="style.css" rel="stylesheet" type="text/css" />');
+			else
+				echo('<head><title>Upgrade</title><link href="style.css" rel="stylesheet" type="text/css" />');
+			
+			echo('<div id="navigation"><p><h1 id="game-title">Installation</h1><strong>Press Kit</strong></p></div><div id="content">');
+			echo('<h2>Server Environment Check Failed: PHP Safe Mode Enabled</h2>');
+			echo('<p>Sadly, you or your host seem to have enabled <b>PHP Safe Mode</b>. PHP Safe Mode results in unexpected behavior with user-installed sripts on your server and might cause presskit() to not function correctly. Please upgrade to PHP 5.4.0 or later or disable Safe Mode to continue.</p>');
+			echo('<p>Alternatively, if you do not have the rights to disable PHP Safe Mode, you can use an FTP Connection to complete the installation. </p>');
+
+				echo('<h3>FTP Connection</h3>');
+				echo('<form name="ftp" method=POST action=\''.htmlspecialchars($_SERVER['PHP_SELF']).'\'>');
+				echo('<p>Server Name: <input type="text" name="ftp_servername" placeholder="ftp.myserver.com" value=\''.(isset($_POST['ftp_servername']) ? $_POST['ftp_servername']: $_SESSION['ftp_servername'] ).'\'></p><span class="error">'. $serverError .'</span>');
+				echo('<p>Username: <input type="text" name="ftp_username" placeholder="John Doe" value=\''.(isset($_POST['ftp_username']) ? $_POST['ftp_username']: $_SESSION['ftp_username'] ).'\'></p><span class="error">'. $usernameError .'</span>');
+				echo('<p>Password: <input type="password" name="ftp_password" value=\''.(isset($_POST['ftp_password']) ? $_POST['ftp_password']: $_SESSION['ftp_password'] ).'\'></p> <span class="error">'. $passwordError .'</span>');
+				echo('<p><input type="submit" name="ftpSubmit" value="Submit" class="submit_button"></p>');
+				echo('</form>');
+
+				echo '<html>';
+
+		
+
+		return; 
+
 	}
 	
 	$upgrade = 0;
@@ -63,10 +218,7 @@
 		}
 	}
 
-	// We'll first need to grab the CSS files. Otherwise, this'll look like crap.
-	if( file_exists('style.css') ) unlink('style.css');
-	dl_r('style.css');
-	if( !file_exists('style.css') ) dl_r('style.css', 'http://dl.dropbox.com/u/12157099/presskit/');
+	
 
 	echo('<html>');
 	
