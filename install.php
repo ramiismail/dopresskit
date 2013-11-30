@@ -73,7 +73,7 @@
 	//if( !file_exists('style.css') ) dl_r('style.css', 'http://dl.dropbox.com/u/12157099/presskit/');
 
 	
-	if( true )
+	if(ini_get('safe_mode'))
 	{
 		session_start();
 		
