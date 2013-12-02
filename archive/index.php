@@ -325,67 +325,70 @@ echo '							</ul>
 
 					<h2 id="trailers">Videos</h2>';
 
-for( $i = 0; $i < count($trailers); $i++ )
+if( count($trailers) == 0 )
 {
-	$name = $youtube = $vimeo = $mov = $mp4 = "";
-	$ytfirst = -1;
-
-	foreach( $trailers[$i]['trailer']->children() as $child )
+	echo '<p>There are currently no trailers available for '.COMPANY_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';
+}
+else
+{
+	for( $i = 0; $i < count($trailers); $i++ )
 	{
-		if( $child->getName() == "name" ) {
-			$name = $child;
-		} else if( $child->getName() == "youtube" ) { 
-			$youtube = $child; 
-			
-			if( $ytfirst == -1 ) { 
-				$ytfirst = 1; 
-			} 
-		} else if( $child->getName() == "vimeo" ) {
-			$vimeo = $child; if( $ytfirst == -1 ) {
-				$ytfirst = 0;
-			}
-		} else if( $child->getName() == "mov" ) {
-			$mov = $child;
-		} else if( $child->getName() == "mp4" ) {
-			$mp4 = $child;
-		}
-	}
-				
-	if( strlen($youtube) + strlen($vimeo) > 0 )				
-	{
-		echo '<p><strong>'.$name.'</strong>';
-		$result = "";
+		$name = $youtube = $vimeo = $mov = $mp4 = "";
+		$ytfirst = -1;
 
-		if( strlen( $youtube ) > 0 ) {
-			$result .= '<a href="http://www.youtube.com/watch?v='.$youtube.'">YouTube</a>, ';
-		}
-		if( strlen( $vimeo ) > 0 ) {
-			$result .= '<a href="http://www.vimeo.com/'.$vimeo.'">Vimeo</a>, ';
-		}
-		if( strlen( $mov ) > 0 ) {
-			$result .= '<a href="trailers/'.$mov.'">.mov</a>, ';
-		}
-		if( strlen( $mp4 ) > 0 ) {
-			$result .= '<a href="trailers/'.$mp4.'">.mp4</a>, ';
-		}
-
-		echo substr($result, 0, -2);
-
-		if( $ytfirst == 1 ) 
+		foreach( $trailers[$i]['trailer']->children() as $child )
 		{
-			echo '<div class="uk-responsive-width iframe-container">
-	<iframe src="http://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
-</div>';
-		} elseif ( $ytfirst == 0 ) {
-			echo '<div class="uk-responsive-width iframe-container">
-	<iframe src="http://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
-</div>';
+			if( $child->getName() == "name" ) {
+				$name = $child;
+			} else if( $child->getName() == "youtube" ) { 
+				$youtube = $child; 
+			
+				if( $ytfirst == -1 ) { 
+					$ytfirst = 1; 
+				} 
+			} else if( $child->getName() == "vimeo" ) {
+				$vimeo = $child; if( $ytfirst == -1 ) {
+					$ytfirst = 0;
+				}
+			} else if( $child->getName() == "mov" ) {
+				$mov = $child;
+			} else if( $child->getName() == "mp4" ) {
+				$mp4 = $child;
+			}
 		}
-		echo '</p>';
-	}
-	else
-	{
-		echo '<p>There are currently no trailers available for '.COMPANY_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';					
+				
+		if( strlen($youtube) + strlen($vimeo) > 0 )				
+		{
+			echo '<p><strong>'.$name.'</strong>';
+			$result = "";
+
+			if( strlen( $youtube ) > 0 ) {
+				$result .= '<a href="http://www.youtube.com/watch?v='.$youtube.'">YouTube</a>, ';
+			}
+			if( strlen( $vimeo ) > 0 ) {
+				$result .= '<a href="http://www.vimeo.com/'.$vimeo.'">Vimeo</a>, ';
+			}
+			if( strlen( $mov ) > 0 ) {
+				$result .= '<a href="trailers/'.$mov.'">.mov</a>, ';
+			}
+			if( strlen( $mp4 ) > 0 ) {
+				$result .= '<a href="trailers/'.$mp4.'">.mp4</a>, ';
+			}
+
+			echo substr($result, 0, -2);
+
+			if( $ytfirst == 1 ) 
+			{
+				echo '<div class="uk-responsive-width iframe-container">
+		<iframe src="http://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
+</div>';
+			} elseif ( $ytfirst == 0 ) {
+				echo '<div class="uk-responsive-width iframe-container">
+		<iframe src="http://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
+</div>';
+			}
+			echo '</p>';
+		}				
 	}
 }
 
