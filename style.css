@@ -1,195 +1,74 @@
-@charset "utf-8";
-/* CSS Document */
-
-body
-{
-	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-size:13px;	
-	width:100%;
-	min-width:960px;
+body {
+	padding: 15px 0;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
 	line-height:1.6em;
 }
 
-h2
-{
-	font-family:Georgia, "Times New Roman", Times, serif;
-	font-size:18px;	
-	color:#444;
-	padding-top:12px;
+img {
+	width: 100%;
 }
 
-ul
-{
-	list-style:square outside;
-	margin-left:0px;	
-	padding-left:32px;	
-	left:0px;	
+#navigation h1.nav-header {
+	padding: 0 15px;
+	margin-bottom: 0;
 }
 
-input
-{
-	border-radius:2px;
-	border:1px #999 solid;	
+#navigation a.nav-header {
+	padding: 5px 15px;
+	font-weight: bold;
 }
 
-img#header
-{
-	width:720px;
-	max-height:240px;	
-	margin-bottom:32px;
-	margin-top:12px;
+#navigation ul.uk-nav {
+	padding: 15px 0;
 }
 
-#media-download
-{
-	border:1px #999 solid;
-	color:#666;
-	line-height:32px;
-	border-radius:2px;
-	width:720px;
-	height:32px;
-	text-align:center;
-	background-color:#ddd;	
-	margin-bottom:12px;
+#navigation p {
+	padding-bottom: 10px;
 }
 
-#media-download:hover
-{
-	border:1px #666 solid;
-	background-color:#bbb;	
+#content h2 {
+	font-family: Georgia, "Times New Roman", Times, serif;s
 }
 
-#awards li, #quotes li
-{
-	margin-bottom:12px;	
+#content img.header {
+	margin-bottom: 20px;
 }
 
-#container
-{
-	width:960px;	
-	margin:0px auto;
+#content ul {
+	list-style-type: square;
 }
 
-#content
-{
-	position:relative;
-	left:240px;
-	float:left;
-	width:720px;
-	height:100%;	
+#content li.done {
+	color: #008000;
+	text-decoration: line-through;
 }
 
-#container a
-{
-	color:#666;
+#content div.images div {
+	padding-bottom: 25px;
 }
 
-#container a:visited
-{
-	color:#666;	
+#content p.images-text {
+	margin-top: -15px;
 }
 
-#navigation
-{
-	position:fixed;
-	width:240px;	
-	height:100%;
+#content .iframe-container {
+	position: relative;
+	/* Magic! Makes sure the container is high enough to show the entire iframe 
+	 * Thanks to http://andmag.se/2011/11/responsive-embeds/ */
+	padding-bottom: 56.5%;
 }
 
-#navigation ul
-{
-	margin-left:0px;
-	padding-left:0px;
-	left:0px;
-	list-style:none inside none;
+#content iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
-#navigation li
-{
-	margin-bottom:4px;	
-}
-
-#navigation a
-{
-	font-weight:bolder;	
-	text-decoration:none;
-}
-
-#navigation a:hover
-{
-	color:#000;
-}
-
-#factsheet
-{
-	float:left;
-	width:240px;
-	height:100%;
-}
-
-#right-of-factsheet
-{
-	float:left;
-	width:480px;		
-}
-
-#description, #history, #features
-{
-	width:480px;	
-}
-
-#images, #screenshots
-{
-	overflow:hidden;
-	width:740px;	
-}
-
-#logo img
-{
-	max-width:720px;	
-}
-
-#images img.preview
-{
-	min-width:355px;
-	min-height:255px;
-	max-width:550px;
-	max-height:460px
-}
-
-#screenshots img.preview
-{
-	width:355px;
-	min-height:255px;
-	max-height:460px;
-}
-
-div.preview-wrapper
-{
-	width:355px;
-	height:255px;
-	margin-right:10px;
-	margin-bottom:10px;
-	float:left;	
-	overflow:hidden;
-}
-
-#contact, #credits
-{
-	float:left;	
-	width:360px;
-}
-
-p.credits
-{
-	color:#999;
-}
-
-.clear
-{
-	clear:both;
-	width:100%;
-	margin-top:30px;
-	height:30px;
-	border-top:1px #ddd solid;	
+@media (max-width: 767px) {
+	h2 {
+		margin-top: 25px;
+	}
 }
