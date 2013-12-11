@@ -184,7 +184,7 @@ echo '<!DOCTYPE html>
 			$(function() {
 				var updateContent = function(type) {
 					var company = $("#company").val();
-                                        var nocache = new Date().getTime();
+					var nocache = new Date().getTime();
 					$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
 								    \'&no_cache=\' + nocache);
 
