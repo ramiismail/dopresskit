@@ -179,7 +179,7 @@ foreach( $xml->children() as $child )
 			if( strtolower($child) == "false" ) $press_request = FALSE;
 			else $press_request = TRUE;
 			break;
-		case("lets-play-permission"):
+		case("monetization-permission"):
 			if( strtolower($child) == "false" ) $monetize = 1;
 			else if( strtolower($child) == "ask") $monetize = 2;
 			else if( strtolower($child) == "non-commercial") $monetize = 3;
@@ -311,7 +311,7 @@ echo '<!DOCTYPE html>
 if( count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">Awards & Recognition</a></li>');
 if( count($promoterquotes) + count($quotes) > 0 ) echo('<li><a href="#quotes">Selected Articles</a></li>');
 if( $press_request == TRUE) { echo '<li><a href="#preview">Request Press Copy</a></li>'; }
-if( $monetize >= 1) { echo '<li><a href="#monetize">Let\'s Play Permission</a></li>'; }
+if( $monetize >= 1) { echo '<li><a href="#monetize">Monetization Permission</a></li>'; }
 echo '						<li><a href="#links">Additional Links</a></li>
 						<li><a href="#about">About '. COMPANY_TITLE .'</a></li>
 						<li><a href="#credits">Team</a></li>
@@ -709,7 +709,7 @@ if( $press_request == TRUE )
 
 if( $monetize >= 1 )
 {
-	echo '<h2 id="monetize">Let\'s Play Permission</h2>';
+	echo '<h2 id="monetize">Monetization Permission</h2>';
 	if( $monetize == 1 ) echo('<p>'.COMPANY_TITLE.' does currently not allow for the contents of '.GAME_TITLE.' to be published through video broadcasting services.</p>');
 	if( $monetize == 2 ) echo('<p>'.COMPANY_TITLE.' does allow the contents of this game to be published through video broadcasting services only with direct written permission from '.COMPANY_TITLE.'. Check at the bottom of this page for contact information.</p>');
 	if( $monetize == 3 ) echo('<p>'.COMPANY_TITLE.' allows for the contents of '.GAME_TITLE.' to be published through video broadcasting services for non-commercial purposes only. Monetization of any video created containing assets from '.GAME_TITLE.' is not allowed.</p>');
