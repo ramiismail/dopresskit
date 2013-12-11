@@ -90,6 +90,7 @@ if( !file_exists( $game.'/data.xml' ) )
 }
 
 $press_request = TRUE;
+$monetize = 0;
 $xml = simplexml_load_file($game."/data.xml");
 
 foreach( $xml->children() as $child )
@@ -177,7 +178,13 @@ foreach( $xml->children() as $child )
 		case("press-can-request-copy"):
 			if( strtolower($child) == "false" ) $press_request = FALSE;
 			else $press_request = TRUE;
-			break;					
+			break;
+		case("lets-play-permission"):
+			if( strtolower($child) == "false" ) $monetize = 1;
+			else if( strtolower($child) == "ask") $monetize = 2;
+			else if( strtolower($child) == "non-commercial") $monetize = 3;
+			else if( strtolower($child) == "monetize") $monetize = 4;
+			break;
 		case("additionals"):
 			$additionals = array();
 			$i = 0;
@@ -291,7 +298,7 @@ echo '<!DOCTYPE html>
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
-					<strong><a href="index.php" target="_self">press kit</a></strong></p>
+					<a class="nav-header" href="index.php" target="_self">press kit</a></strong>
 
 					<ul class="uk-nav uk-nav-side">
 						<li><a href="#factsheet">Factsheet</a></li>
@@ -300,10 +307,11 @@ echo '<!DOCTYPE html>
 						<li><a href="#projects">Projects</a></li>
 						<li><a href="#trailers">Videos</a></li>
 						<li><a href="#images">Images</a></li>
-						<li><a href="#logo">Logo & Icon</a></li>
-						<li><a href="#awards">Awards & Recognition</a></li>
-						<li><a href="#quotes">Selected Articles</a></li>';
+						<li><a href="#logo">Logo & Icon</a></li>';
+if( count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">Awards & Recognition</a></li>');
+if( count($promoterquotes) + count($quotes) > 0 ) echo('<li><a href="#quotes">Selected Articles</a></li>');
 if( $press_request == TRUE) { echo '<li><a href="#preview">Request Press Copy</a></li>'; }
+if( $monetize >= 1) { echo '<li><a href="#monetize">Let\'s Play Permission</a></li>'; }
 echo '						<li><a href="#links">Additional Links</a></li>
 						<li><a href="#about">About '. COMPANY_TITLE .'</a></li>
 						<li><a href="#credits">Team</a></li>
@@ -574,113 +582,110 @@ if( !file_exists($game.'/images/logo.png') && !file_exists($game.'/images/icon.p
 	echo '<p>There are currently no logos or icons available for '.GAME_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';
 }
 
-echo '					<hr>
+echo '<hr>';
 
-					<h2 id="awards">Awards & Recognition</h2>
-					<ul>';
-
-if( count($promoterawards) >= 0 )
+if( count( $promoterawards ) + count( $awards ) > 0 )
 {
-	for( $i = 0; $i < count($promoterawards); $i++ )
-	{
-		$description = $info = "";
-		foreach( $promoterawards[$i]['award']->children() as $child )
-		{
-			if( $child->getName() == "title" ) {
-				$description = $child;
-			} else if( $child->getName() == "location" ) {
-				$info = $child;
-			} else if( $child->getName() == "url" ) {
-				$url = $child;
-			} else if( $child->getName() == "year" ) {
-				$year = $child;
-			}
-		}
-		echo '<li>"'.$description.'" <cite>'.$info.'</cite></li>';
-	}			
-}
+	echo('<h2 id="awards">Awards & Recognition</h2>');
+	echo('<ul>');
 
-if( count($awards) > 0 )
-{
-	for( $i = 0; $i < count($awards); $i++ )
+	if( count($promoterawards) >= 0 )
 	{
-		$description = $info = "";
-		foreach( $awards[$i]['award']->children() as $child )
+		for( $i = 0; $i < count($promoterawards); $i++ )
 		{
-			if( $child->getName() == "description" ) {
-				$description = $child;
-			} else if( $child->getName() == "info" ) {
-				$info = $child;
+			$description = $info = "";
+			foreach( $promoterawards[$i]['award']->children() as $child )
+			{
+				if( $child->getName() == "title" ) {
+					$description = $child;
+				} else if( $child->getName() == "location" ) {
+					$info = $child;
+				} else if( $child->getName() == "url" ) {
+					$url = $child;
+				} else if( $child->getName() == "year" ) {
+					$year = $child;
+				}
 			}
-		}
-		echo '<li>"'.$description.'" <cite>'.$info.'</cite></li>';
+			echo '<li>"'.$description.'" <cite>'.$info.'</cite></li>';
+		}			
 	}
-}
-
-echo '</ul>';
-
-if( count($awards) + count($promoterawards) == 0 )
-{
-	echo '<p>'.GAME_TITLE.' has not received any awards or recognitions yet. Please check back later to see if things change.</p>';
-}
-
-echo '					<hr>
-		
-					<h2>Selected Articles</h2>
-					<ul>';
-
-if( count($promoterquotes) >= 0 )
-{
-	for( $i = 0; $i < count($promoterquotes); $i++ )
+	
+	if( count($awards) > 0 )
 	{
-		$name = $description = $website = $link = "";
-		foreach( $promoterquotes[$i]['review']->children() as $child )
+		for( $i = 0; $i < count($awards); $i++ )
 		{
-			if( $child->getName() == "quote" ) {
-				$description = $child;
-			} else if( $child->getName() == "reviewer-name" ) {
-				$name = $child;
-			} else if( $child->getName() == "publication-name" ) {
-				$website = $child;
-			} else if( $child->getName() == "url" ) {
-				$link = $child;
+			$description = $info = "";
+			foreach( $awards[$i]['award']->children() as $child )
+			{
+				if( $child->getName() == "description" ) {
+					$description = $child;
+				} else if( $child->getName() == "info" ) {
+					$info = $child;
+				}
 			}
+			echo '<li>"'.$description.'" <cite>'.$info.'</cite></li>';
 		}
-		echo '<li>"'.$description.'" <br/>
-<cite>- '.$name.', <a href="http://'.parseLink($link).'">'.$website.'</a></cite></li>';
 	}
+	
+	echo '</ul>';
+	echo '<hr>';
 }
 
-if( count($quotes) > 0 )
+if( count($promoterquotes) + count($quotes) > 0 )
 {
-	for( $i = 0; $i < count($quotes); $i++ )
+	echo '					<hr>
+			
+						<h2>Selected Articles</h2>
+						<ul>';
+
+	if( count($promoterquotes) >= 0 )
 	{
-		$name = $description = $website = $link = "";
-		foreach( $quotes[$i]['quote']->children() as $child )
+		for( $i = 0; $i < count($promoterquotes); $i++ )
 		{
-			if( $child->getName() == "description" ) {
-				$description = $child;
-			} else if( $child->getName() == "name" ) {
-				$name = $child;
-			} else if( $child->getName() == "website" ) {
-				$website = $child;
-			} else if( $child->getName() == "link" ) {
-				$link = $child;
+			$name = $description = $website = $link = "";
+			foreach( $promoterquotes[$i]['review']->children() as $child )
+			{
+				if( $child->getName() == "quote" ) {
+					$description = $child;
+				} else if( $child->getName() == "reviewer-name" ) {
+					$name = $child;
+				} else if( $child->getName() == "publication-name" ) {
+					$website = $child;
+				} else if( $child->getName() == "url" ) {
+					$link = $child;
+				}
 			}
+			echo '<li>"'.$description.'" <br/>
+	<cite>- '.$name.', <a href="http://'.parseLink($link).'">'.$website.'</a></cite></li>';
 		}
-		echo '<li>"'.$description.'" <br/>
-<cite>- '.$name.', <a href="http://'.parseLink($link).'/">'.$website.'</a></cite></li>';
 	}
+	
+	if( count($quotes) > 0 )
+	{
+		for( $i = 0; $i < count($quotes); $i++ )
+		{
+			$name = $description = $website = $link = "";
+			foreach( $quotes[$i]['quote']->children() as $child )
+			{
+				if( $child->getName() == "description" ) {
+					$description = $child;
+				} else if( $child->getName() == "name" ) {
+					$name = $child;
+				} else if( $child->getName() == "website" ) {
+					$website = $child;
+				} else if( $child->getName() == "link" ) {
+					$link = $child;
+				}
+			}
+			echo '<li>"'.$description.'" <br/>
+	<cite>- '.$name.', <a href="http://'.parseLink($link).'/">'.$website.'</a></cite></li>';
+		}
+	}
+	
+	echo '</ul>';
+	echo '<hr>';
 }
 
-echo '</ul>';
-
-if( count($quotes) + count($promoterquotes) == 0 )
-{
-	echo '<p>'.GAME_TITLE.' hasn\'t been the subject of any interesting article or (p)review yet. You could be the first!</p>';
-}
-
-echo '					<hr>';
 
 if( $press_request == TRUE )
 {
@@ -701,6 +706,17 @@ if( $press_request == TRUE )
 
 	echo '<hr>';
 }
+
+if( $monetize >= 1 )
+{
+	echo '<h2 id="monetize">Let\'s Play Permission</h2>';
+	if( $monetize == 1 ) echo('<p>'.COMPANY_TITLE.' does currently not allow for the contents of '.GAME_TITLE.' to be published through video broadcasting services.</p>');
+	if( $monetize == 2 ) echo('<p>'.COMPANY_TITLE.' does allow the contents of this game to be published through video broadcasting services only with direct written permission from '.COMPANY_TITLE.'. Check at the bottom of this page for contact information.</p>');
+	if( $monetize == 3 ) echo('<p>'.COMPANY_TITLE.' allows for the contents of '.GAME_TITLE.' to be published through video broadcasting services for non-commercial purposes only. Monetization of any video created containing assets from '.GAME_TITLE.' is not allowed.</p>');
+	if( $monetize == 4 ) echo('<p>'.COMPANY_TITLE.' allows for the contents of '.GAME_TITLE.' to be published through video broadcasting services for any commercial or non-commercial purposes. Monetization of videos created containing assets from '.GAME_TITLE.' is legally & explicitly allowed by '.COMPANY_TITLE.'. This permission can be found in writing at <a href="'.'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'].'">http://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'].'</a>.</p>');
+	echo '<hr>';
+}
+
 
 echo '					<h2 id="links">Additional Links</h2>';
 		
@@ -736,6 +752,8 @@ echo '					<hr>
 						<strong>More information</strong><br/>
 						More information on '. COMPANY_TITLE .', our logo & relevant media are available <a href="index.php">here</a>.
 					</p>
+					
+					<hr>
 
 					<div class="uk-grid">
 						<div class="uk-width-medium-1-2">
