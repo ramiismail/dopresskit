@@ -184,10 +184,15 @@ echo '<!DOCTYPE html>
 			$(function() {
 				var updateContent = function(type) {
 					var company = $("#company").val();
-					$(".uk-grid").load("create.php?s=" + type + "&p=" + company);
+                                        var nocache = new Date().getTime();
+					$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
+								    \'&no_cache=\' + nocache);
 
 					setInterval(function() {
-						$(".uk-grid").load("create.php?s=" + type + "&p=" + company);
+						// We need to generate a new time each call to avoid caching.
+						var nocache = new Date().getTime();
+						$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
+									\'&no_cache=\' + nocache);
 					}, 5000);
 				}
 

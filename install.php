@@ -181,20 +181,27 @@ echo '<!DOCTYPE html>
 		</div>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript">
-			$( document ).ready(function() {
+			$(function() {
 				var updateContent = function(type) {
-					var company = $(\'#company\').val();
-					$(\'.uk-grid\').load(\'create.php?s=\' + type + \'&p=\' + company);
+					var company = $("#company").val();
+                                        var nocache = new Date().getTime();
+					$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
+								    \'&no_cache=\' + nocache);
+
+					setInterval(function() {
+						// We need to generate a new time each call to avoid caching.
+						var nocache = new Date().getTime();
+						$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
+									\'&no_cache=\' + nocache);
+					}, 5000);
 				}
 
-				$(\'.loadInstall\').click(function() {
-					updateContent(\'installation\');
-					setInterval(updateContent(\'installation\'), 5000);
+				$(".loadInstall").click(function() {
+					updateContent("installation");
 				});
 
-				$(\'.loadUpgrade\').click(function() {
-					updateContent(\'upgrade\');
-					setInterval(updateContent(\'upgrade\'), 5000);
+				$(".loadUpgrade").click(function() {
+					updateContent("upgrade");
 				});
 			});
 		</script>
