@@ -271,15 +271,19 @@ foreach( $xml->children() as $child )
 
 function parseLink($uri)
 {
-	$parsed = $uri;
-	if( strpos($parsed, "http://") === 0 )
-		$parsed = substr($parsed, 7);
-	if (strpos($parsed, "https://") === 0 )
-		$parsed = substr($parsed, 8);
-	if( strpos($parsed, "www.") === 0 )
-		$parsed = substr($parsed, 4);
-	$parsed = trim($parsed);
-	return $parsed;
+    $parsed = trim($uri);
+    if( strpos($parsed, "http://") === 0 )
+        $parsed = substr($parsed, 7);
+    if (strpos($parsed, "https://") === 0 )
+        $parsed = substr($parsed, 8);
+    if( strpos($parsed, "www.") === 0 )
+        $parsed = substr($parsed, 4);
+    if( strrpos($parsed, "/") == strlen($parsed) - 1)
+        $parsed = substr($parsed, 0, strlen($parsed) - 1);
+    if( substr($parsed,-1,1) == "/" )
+    	$parsed = substr($parsed, 0, strlen($parsed) - 1);
+    
+    return $parsed;
 }
 
 echo '<!DOCTYPE html>
@@ -351,7 +355,7 @@ for( $i = 0; $i < count($platforms); $i++ )
 			$link = $child;
 		}
 	}
-	echo '<a href="http://'.parseLink($link).'/">'.$name.'</a><br/>';
+	echo '<a href="http://'.parseLink($link).'">'.$name.'</a><br/>';
 }
 
 echo '							</p>
@@ -474,7 +478,7 @@ else
 				
 		if( strlen($youtube) + strlen($vimeo) > 0 )				
 		{
-			echo '<p><strong>'.$name.'</strong>';
+			echo '<p><strong>'.$name.'</strong>&nbsp;';
 			$result = "";
 
 			if( strlen( $youtube ) > 0 ) {
@@ -678,7 +682,7 @@ if( count($promoterquotes) + count($quotes) > 0 )
 				}
 			}
 			echo '<li>"'.$description.'" <br/>
-	<cite>- '.$name.', <a href="http://'.parseLink($link).'/">'.$website.'</a></cite></li>';
+	<cite>- '.$name.', <a href="http://'.parseLink($link).'">'.$website.'</a></cite></li>';
 		}
 	}
 	
@@ -734,9 +738,13 @@ for( $i = 0; $i < count($additionals); $i++ )
 		}
 	}
 
+	if( strpos(parseLink($link),'/') !== 0 ) {
+		$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
+	} else { $linkTitle = $link; }
+	
 	echo '<p>
 	<strong>'.$title.'</strong><br/>
-	'.$description.' <a href="http://'.parseLink($link).'/" alt="'.parseLink($link).'">'.substr(parseLink($link),0,strpos(parseLink($link), "/")).'</a>.
+	'.$description.' <a href="http://'.parseLink($link).'" alt="'.parseLink($link).'">'.$linkTitle.'</a>.
 </p>';
 }
 
@@ -783,7 +791,7 @@ for( $i = 0; $i < count($credits); $i++ )
 	}
 	else
 	{
-		echo '<strong>'.$person.'</strong><br/><a href="http://'.parseLink($website).'/">'.$role.'</a>';
+		echo '<strong>'.$person.'</strong><br/><a href="http://'.parseLink($website).'">'.$role.'</a>';
 	}
 
 	echo '</p>';

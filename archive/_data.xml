@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- example file containing base tags -->
 
 <game>	
 	<title>Company Name</title>
@@ -102,6 +103,11 @@
 		</quote>
 	</quotes>
 	
+	<press-can-request-copy>TRUE</press-can-request-copy> <!-- can be true or false -->
+	<monetization-permission>monetize</monetization-permission> <!-- can be: 	false (no video allowed),
+																			 	ask (permission on case-per-case basis),
+																			 	non-commercial (no monetization allowed),
+																			 	monetize (full permission) -->	
 	<additionals>
 		<additional>
 			<title>Company Link #1</title>

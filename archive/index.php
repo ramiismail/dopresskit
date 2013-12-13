@@ -165,18 +165,21 @@ foreach( $xml->children() as $child )
 	}
 }
 
-function parseHubLink($uri)
+function parseLink($uri)
 {
-	$parsed = trim($uri);
-	if( strpos($parsed, "http://") === 0 )
-		$parsed = substr($parsed, 7);
-	if (strpos($parsed, "https://") === 0 )
-		$parsed = substr($parsed, 8);
-	if( strpos($parsed, "www.") === 0 )
-		$parsed = substr($parsed, 4);
-	if( strrpos($parsed, "/") === strlen($parsed) - 1)
-		$parsed = substr($parsed, 0, strlen($parsed) - 1);
-	return $parsed;
+    $parsed = trim($uri);
+    if( strpos($parsed, "http://") === 0 )
+        $parsed = substr($parsed, 7);
+    if (strpos($parsed, "https://") === 0 )
+        $parsed = substr($parsed, 8);
+    if( strpos($parsed, "www.") === 0 )
+        $parsed = substr($parsed, 4);
+    if( strrpos($parsed, "/") == strlen($parsed) - 1)
+        $parsed = substr($parsed, 0, strlen($parsed) - 1);
+    if( substr($parsed,-1,1) == "/" )
+    	$parsed = substr($parsed, 0, strlen($parsed) - 1);
+
+    return $parsed;
 }
 
 echo '<!DOCTYPE html>
@@ -195,7 +198,7 @@ echo '<!DOCTYPE html>
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
-					<a class="nav-header" href="http://'. parseHubLink(COMPANY_WEBSITE) .'">'. trim( parseHubLink(COMPANY_WEBSITE), "/") .'</a>
+					<a class="nav-header" href="http://'. parseLink(COMPANY_WEBSITE) .'">'. trim( parseLink(COMPANY_WEBSITE), "/") .'</a>
 
 					<ul class="uk-nav uk-nav-side">
 						<li><a href="#factsheet">Factsheet</a></li>
@@ -204,9 +207,9 @@ echo '<!DOCTYPE html>
 						<li><a href="#projects">Projects</a></li>
 						<li><a href="#trailers">Videos</a></li>
 						<li><a href="#images">Images</a></li>
-						<li><a href="#logo">Logo & Icon</a></li>
-						<li><a href="#awards">Awards & Recognition</a></li>
-						<li><a href="#quotes">Selected Articles</a></li>';
+						<li><a href="#logo">Logo & Icon</a></li>';
+						if( count($awards) > 0 ) echo'<li><a href="#awards">Awards & Recognition</a></li>';
+						if( count($quotes) > 0 ) echo '<li><a href="#quotes">Selected Articles</a></li>';
 
 if( count($additionals) > 0 ) {
 	echo '<li><a href="#links">Additional Links</a></li>';
@@ -236,7 +239,7 @@ echo '					<div class="uk-grid">
 							</p>
 							<p>
 								<strong>Website:</strong><br/>
-								<a href="http://'. parseHubLink(COMPANY_WEBSITE) .'">'. parseHubLink(COMPANY_WEBSITE) .'</a>
+								<a href="http://'. parseLink(COMPANY_WEBSITE) .'">'. parseLink(COMPANY_WEBSITE) .'</a>
 							</p>
 							<p>
 								<strong>Press / Business Contact:</strong><br/>
@@ -254,7 +257,7 @@ for( $i = 0; $i < count($socials); $i++ )
 		if( $child->getName() == "name" ) $name = $child;
 		else if( $child->getName() == "link" ) $link = $child;
 	}
-	echo( '<a href="http://'.parseHubLink($link).'">'.$name.'</a><br/>' );
+	echo( '<a href="http://'.parseLink($link).'">'.$name.'</a><br/>' );
 }
 
 echo '							</p>
@@ -263,7 +266,7 @@ echo '							</p>
 
 if ($handle = opendir('.')) {
 	while (false !== ($entry = readdir($handle))) {
-		if ($entry != "." && $entry != ".." && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" ) {
+		if ($entry != "." && $entry != ".." && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" && substr($entry,0,9) != "error_log") {
 			echo '<a href="sheet.php?p='.$entry.'">'.ucwords(str_replace("_", " ", $entry)).'</a><br />';
 		}
 	}
@@ -311,7 +314,7 @@ echo '							<h2 id="projects">Projects</h2>
 
 if ($handle = opendir('.')) {
 	while (false !== ($entry = readdir($handle))) {
-		if ($entry != "." && $entry != ".." && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" ) {
+		if ($entry != "." && $entry != ".." && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" && substr($entry,0,9) != "error_log") {
 			echo '<li><a href="sheet.php?p='.$entry.'">'.ucwords(str_replace("_", " ", $entry)).'</a></li>';
 		}
 	}
@@ -360,7 +363,7 @@ else
 				
 		if( strlen($youtube) + strlen($vimeo) > 0 )				
 		{
-			echo '<p><strong>'.$name.'</strong>';
+			echo '<p><strong>'.$name.'</strong>&nbsp;';
 			$result = "";
 
 			if( strlen( $youtube ) > 0 ) {
@@ -464,10 +467,12 @@ if( !file_exists('images/logo.png') && !file_exists('images/icon.png')) {
 	echo '<p>There are currently no logos or icons available for '.COMPANY_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';
 }
 
-echo '					<hr>
+echo '					<hr>';
 
-					<h2 id="awards">Awards & Recognition</h2>
-					<ul>';
+if( count( $awards > 0 ) )
+{
+	echo('<h2 id="awards">Awards & Recognition</h2>
+					<ul>');
 
 for( $i = 0; $i < count($awards); $i++ )
 {
@@ -485,36 +490,36 @@ for( $i = 0; $i < count($awards); $i++ )
 	echo '<li>"'.$description.'" - <cite>'.$info.'</cite></li>';
 }
 
-echo '					</ul>
-
-					<hr>
-
-					<h2 id="quotes">Selected Articles</h2>
-					<ul>';
-
-for( $i = 0; $i < count($quotes); $i++ )
-{
-	$description = $name = $website = $link = "";
-
-	foreach( $quotes[$i]['quote']->children() as $child )
-	{
-		if( $child->getName() == "description" ) {
-			$description = $child;
-		} else if( $child->getName() == "name" ) {
-			$name = $child;
-		} else if( $child->getName() == "website" ) {
-			$website = $child;
-		} else if( $child->getName() == "link" ) {
-			$link = $child;
-		}
-	}
-
-	echo '<li>"'.$description.'"<br/><cite>- '.$name.', <a href="http://'.parseHubLink($link).'/">'.$website.'</a></cite></li></li>';
+echo('</ul><hr>');
 }
 
-echo '					</ul>
-
-					<hr>';
+if( count($quotes) > 0 )
+{
+	echo '					<h2 id="quotes">Selected Articles</h2>
+						<ul>';
+	
+	for( $i = 0; $i < count($quotes); $i++ )
+	{
+		$description = $name = $website = $link = "";
+	
+		foreach( $quotes[$i]['quote']->children() as $child )
+		{
+			if( $child->getName() == "description" ) {
+				$description = $child;
+			} else if( $child->getName() == "name" ) {
+				$name = $child;
+			} else if( $child->getName() == "website" ) {
+				$website = $child;
+			} else if( $child->getName() == "link" ) {
+				$link = $child;
+			}
+		}
+	
+		echo '<li>"'.$description.'"<br/><cite>- '.$name.', <a href="http://'.parseLink($link).'/">'.$website.'</a></cite></li></li>';
+	}
+	
+	echo '</ul><hr>';
+}
 
 if( count($additionals) > 0 ) {
 	echo '<h2 id="links">Additional Links</h2>';
@@ -534,7 +539,15 @@ if( count($additionals) > 0 ) {
 			}
 		}
 
-		echo '<p><strong>'.$title.'</strong><br/>'.$description.' <a href="http://'.parseHubLink($link).'">'.substr(parseHubLink($link),0,strpos(parseHubLink($link), "/")).'</a>.</p>';
+		if( strpos(parseLink($link),'/') !== false ) {
+			$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
+		} else { $linkTitle = $link; }
+		
+		echo '<p>
+		<strong>'.$title.'</strong><br/>
+		'.$description.' <a href="http://'.parseLink($link).'" alt="'.parseLink($link).'">'.$linkTitle.'</a>.
+	</p>';
+
 	}
 
 	echo '<hr>';
@@ -568,7 +581,7 @@ for( $i = 0; $i < count($credits); $i++ )
 	}
 	else
 	{
-		echo '<strong>'.$person.'</strong><br/><a href="http://'.parseHubLink($website).'/">'.$role.'</a>';
+		echo '<strong>'.$person.'</strong><br/><a href="http://'.parseLink($website).'/">'.$role.'</a>';
 	}
 
 	echo '</p>';
@@ -598,7 +611,7 @@ for( $i = 0; $i < count($contacts); $i++ )
 		echo '<strong>'.$name.'</strong><br/><a href="mailto:'.$mail.'">'.$mail.'</a>';
 	}
 	if( strlen($link) > 0 && strlen($mail) == 0 ) {
-		echo '<strong>'.$name.'</strong><br/><a href="http://'.parseHubLink($link).'">'.parseHubLink($link).'</a>';
+		echo '<strong>'.$name.'</strong><br/><a href="http://'.parseLink($link).'">'.parseLink($link).'</a>';
 	}
 
 	echo '</p>';
