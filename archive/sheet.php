@@ -308,7 +308,7 @@ echo '<!DOCTYPE html>
 						<li><a href="#factsheet">Factsheet</a></li>
 						<li><a href="#description">Description</a></li>
 						<li><a href="#history">History</a></li>
-						<li><a href="#projects">Projects</a></li>
+						<li><a href="#features">Features</a></li>
 						<li><a href="#trailers">Videos</a></li>
 						<li><a href="#images">Images</a></li>
 						<li><a href="#logo">Logo & Icon</a></li>';
@@ -428,7 +428,7 @@ for( $i = 0; $i < count($histories); $i++ ) {
 	echo '<strong>'.$header.'</strong><p>'.$text.'</p>';
 }
 
-echo '							<h2>Features</h2>
+echo '							<h2 id="features">Features</h2>
 							<ul>';
 
 for( $i = 0; $i < count($features); $i++ )
