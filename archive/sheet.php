@@ -292,7 +292,7 @@ echo '<!DOCTYPE html>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>'. COMPANY_TITLE .'</title>
+		<title>'. GAME_TITLE .'</title>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
@@ -301,7 +301,7 @@ echo '<!DOCTYPE html>
 		<div class="uk-container uk-container-center">
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
-					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
+					<h1 class="nav-header" id="game-title">'. GAME_TITLE .'</h1>
 					<a class="nav-header" href="index.php" target="_self">press kit</a></strong>
 
 					<ul class="uk-nav uk-nav-side">
