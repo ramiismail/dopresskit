@@ -292,7 +292,7 @@ echo '<!DOCTYPE html>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>'. COMPANY_TITLE .'</title>
+		<title>'. GAME_TITLE .'</title>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
@@ -301,14 +301,14 @@ echo '<!DOCTYPE html>
 		<div class="uk-container uk-container-center">
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
-					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
+					<h1 class="nav-header" id="game-title">'. GAME_TITLE .'</h1>
 					<a class="nav-header" href="index.php" target="_self">press kit</a></strong>
 
 					<ul class="uk-nav uk-nav-side">
 						<li><a href="#factsheet">Factsheet</a></li>
 						<li><a href="#description">Description</a></li>
 						<li><a href="#history">History</a></li>
-						<li><a href="#projects">Projects</a></li>
+						<li><a href="#features">Features</a></li>
 						<li><a href="#trailers">Videos</a></li>
 						<li><a href="#images">Images</a></li>
 						<li><a href="#logo">Logo & Icon</a></li>';
@@ -428,7 +428,7 @@ for( $i = 0; $i < count($histories); $i++ ) {
 	echo '<strong>'.$header.'</strong><p>'.$text.'</p>';
 }
 
-echo '							<h2>Features</h2>
+echo '							<h2 id="features">Features</h2>
 							<ul>';
 
 for( $i = 0; $i < count($features); $i++ )
@@ -695,6 +695,9 @@ if( $press_request == TRUE )
 {
 	echo '<h2 id="preview">Request Press Copy</h2>
 <p>Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.<br/>
+<div class="uk-alert" id="mailsuccess" style="display:none;">
+	Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>
+</div>
 <div id="mailform">
 
 	<form class="uk-form">
@@ -702,10 +705,13 @@ if( $press_request == TRUE )
 			<input type="text" placeholder="me@website.com" id="from">, writing for <input type="text" placeholder="company name" id="outlet"> would like to <button class="uk-button" id="submit-button">request a press copy</button>
 		</fieldset>
 	</form>
+	<div class="uk-alert" id="mailinvalid" style="display:none;">
+		Please enter a valid email address.
+	</div>
+	<div class="uk-alert" id="mailerror" style="display:none;">
+		There was an error performing this request. Please try again later or <a href="#contact">send us an email</a>
+	</div>
 	<p>Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.
-</div>
-<div id="mailsuccess" style="display:none;">
-	Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>
 </div>';
 
 	echo '<hr>';

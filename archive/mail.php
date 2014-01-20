@@ -18,9 +18,9 @@ $subject = $_REQUEST['subject'];
 $header = "From: <".$from.">" ."\r\n";
 
 $send = @mail($to, $subject, $message, $header);
-
-if(!$send){
-	die();
+if(!$send)
+{
+	http_response_code(500); // send internal server error
 }
 
 ?>
