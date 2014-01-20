@@ -695,6 +695,9 @@ if( $press_request == TRUE )
 {
 	echo '<h2 id="preview">Request Press Copy</h2>
 <p>Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.<br/>
+<div class="uk-alert" id="mailsuccess" style="display:none;">
+	Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>
+</div>
 <div id="mailform">
 
 	<form class="uk-form">
@@ -702,10 +705,13 @@ if( $press_request == TRUE )
 			<input type="text" placeholder="me@website.com" id="from">, writing for <input type="text" placeholder="company name" id="outlet"> would like to <button class="uk-button" id="submit-button">request a press copy</button>
 		</fieldset>
 	</form>
+	<div class="uk-alert" id="mailinvalid" style="display:none;">
+		Please enter a valid email address.
+	</div>
+	<div class="uk-alert" id="mailerror" style="display:none;">
+		There was an error performing this request. Please try again later or <a href="#contact">send us an email</a>
+	</div>
 	<p>Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.
-</div>
-<div id="mailsuccess" style="display:none;">
-	Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>
 </div>';
 
 	echo '<hr>';
