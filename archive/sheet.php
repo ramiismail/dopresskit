@@ -697,16 +697,27 @@ if( $press_request == TRUE )
 <p>Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.<br/>
 <div id="mailform">
 
-	<form class="uk-form">
+	<form id="pressrequest" class="uk-form" action="mail.php" method="post">
+		<input type="hidden" value="'. GAME_TITLE .'" id="gametitle" name="gametitle">
+		<input type="hidden" value="'. $game .'" id="game" name="game">
 		<fieldset>
-			<input type="text" placeholder="me@website.com" id="from">, writing for <input type="text" placeholder="company name" id="outlet"> would like to <button class="uk-button" id="submit-button">request a press copy</button>
+			<input type="text" placeholder="me@website.com" id="from" name="from">, writing for <input type="text" placeholder="company name" id="outlet" name="outlet"> would like to <button class="uk-button" id="submit-button">request a press copy</button>
 		</fieldset>
 	</form>
 	<p>Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.
-</div>
-<div id="mailsuccess" style="display:none;">
-	Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>
 </div>';
+
+	if (isset($_GET['mail'])) {
+		if ($_GET['mail'] == 'success') {
+			echo '<div class="uk-alert uk-alert-success">Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a></div>';
+		} else if ($_GET['mail'] == 'fromerror') {
+			echo '<div class="uk-alert uk-alert-danger">We could not validate your email address. Please try contacting us using <a href="#contact">one of the options listed here</a>.</div>';
+		} else if ($_GET['mail'] == 'emptyerror') {
+			echo '<div class="uk-alert uk-alert-danger">Please fill in all the fields or try contacting us using <a href="#contact">one of the options listed here</a>.</div>';
+		} else {
+			echo '<div class="uk-alert uk-alert-danger">We failed to send the email. Please try contacting us using <a href="#contact">one of the options listed here</a>.</div>';
+		}
+	}
 
 	echo '<hr>';
 }

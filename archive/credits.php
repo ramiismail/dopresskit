@@ -17,6 +17,7 @@
 		<li>Jan Pieter van Seventer - <a href="http://www.dutchgamegarden.nl/">Dutch Game Garden</a> - for support &amp; feedback.</li>
 		<li>Philip Tibitoski - <a href="http://www.octodadgame.com/">octodadgame.com</a> - for inspiring me to make this publically available.</li>
 		<li>Adriaan de Jongh - <a href="http://www.gameovernstudios.com/">gameovenstudios.com</a> - for distractions and meaningful Skype-conversations during presskit()s development.</li>
+		<li>Remco Meeuwissen - <a href="http://www.dearon.com/">dearon.com</a> - for contributions to presskit() on Github.</li>
 		<br/>
 		<li>The indie community at large for being amazing, open-minded, supportive, creative and interesting people.</li>
 		<li>Friends, family &amp; girlfriend for allowing &amp; supporting me to do what I love to do, to pursue my dreams and to make games.</li>
