@@ -15,7 +15,7 @@ if( !file_exists('data.xml') )
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+
 		<title>Instructions</title>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
@@ -50,7 +50,7 @@ foreach( $xml->children() as $child )
 	{
 		case("title"):
 			define("COMPANY_TITLE", $child);
-			break;	
+			break;
 		case("founding-date"):
 			define("COMPANY_DATE", $child);
 			break;
@@ -83,7 +83,7 @@ foreach( $xml->children() as $child )
 				$address[$i] = $subchild;
 				$i++;
 			}
-			break;	
+			break;
 		case("phone"):
 			define("COMPANY_PHONE", $child);
 			break;
@@ -107,7 +107,7 @@ foreach( $xml->children() as $child )
 				$features[$i] = $subchild;
 				$i++;
 			}
-			break;	
+			break;
 		case("trailers"):
 			$trailers = array();
 			$i = 0;
@@ -116,7 +116,7 @@ foreach( $xml->children() as $child )
 				$trailers[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("awards"):
 			$awards = array();
 			$i = 0;
@@ -125,7 +125,7 @@ foreach( $xml->children() as $child )
 				$awards[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("quotes"):
 			$quotes = array();
 			$i = 0;
@@ -134,7 +134,7 @@ foreach( $xml->children() as $child )
 				$quotes[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("additionals"):
 			$additionals = array();
 			$i = 0;
@@ -143,7 +143,7 @@ foreach( $xml->children() as $child )
 				$additionals[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("credits"):
 			$credits = array();
 			$i = 0;
@@ -152,7 +152,7 @@ foreach( $xml->children() as $child )
 				$credits[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("contacts"):
 			$contacts = array();
 			$i = 0;
@@ -161,7 +161,7 @@ foreach( $xml->children() as $child )
 				$contacts[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 	}
 }
 
@@ -187,7 +187,7 @@ echo '<!DOCTYPE html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+
 		<title>'. COMPANY_TITLE .'</title>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
@@ -244,7 +244,7 @@ echo '					<div class="uk-grid">
 							<p>
 								<strong>Press / Business Contact:</strong><br/>
 								<a href="mailto:'. COMPANY_CONTACT .'">'. COMPANY_CONTACT .'</a>
-							</p>        
+							</p>
 							<p>
 								<strong>Social:</strong><br/>';
 
@@ -285,12 +285,14 @@ if( count($address) > 0 )
 	}
 }
 
-echo'							</p> 
-							<p>
+echo'							</p>';
+if (defined(COMPANY_PHONE)) {
+echo'							<p>
 								<strong>Phone:</strong><br/>
 								'. COMPANY_PHONE .'
-							</p>
-						</div>
+							</p>';
+}
+echo'						</div>
 						<div class="uk-width-medium-4-6">
 							<h2 id="description">Description</h2>
 							<p>'. COMPANY_DESCRIPTION .'</p>
@@ -344,12 +346,12 @@ else
 		{
 			if( $child->getName() == "name" ) {
 				$name = $child;
-			} else if( $child->getName() == "youtube" ) { 
-				$youtube = $child; 
-			
-				if( $ytfirst == -1 ) { 
-					$ytfirst = 1; 
-				} 
+			} else if( $child->getName() == "youtube" ) {
+				$youtube = $child;
+
+				if( $ytfirst == -1 ) {
+					$ytfirst = 1;
+				}
 			} else if( $child->getName() == "vimeo" ) {
 				$vimeo = $child; if( $ytfirst == -1 ) {
 					$ytfirst = 0;
@@ -360,8 +362,8 @@ else
 				$mp4 = $child;
 			}
 		}
-				
-		if( strlen($youtube) + strlen($vimeo) > 0 )				
+
+		if( strlen($youtube) + strlen($vimeo) > 0 )
 		{
 			echo '<p><strong>'.$name.'</strong>&nbsp;';
 			$result = "";
@@ -381,7 +383,7 @@ else
 
 			echo substr($result, 0, -2);
 
-			if( $ytfirst == 1 ) 
+			if( $ytfirst == 1 )
 			{
 				echo '<div class="uk-responsive-width iframe-container">
 		<iframe src="http://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
@@ -392,7 +394,7 @@ else
 </div>';
 			}
 			echo '</p>';
-		}				
+		}
 	}
 }
 
@@ -422,7 +424,7 @@ if ($handle = opendir('images'))
 		if( substr($entry,-4) == ".png" )
 		{
 			if( substr($entry,0,4) != "logo" && substr($entry,0,4) != "icon" && substr($entry,0,6) != "header" )
-			{	
+			{
 				echo '<div class="uk-width-medium-1-2"><a href="images/'. $entry .'"><img src="images/'.$entry.'" alt="'.$entry.'" /></a></div>';
 			}
 		}
@@ -527,7 +529,7 @@ if( count($additionals) > 0 ) {
 	for( $i = 0; $i < count($additionals); $i++ )
 	{
 		$title = $description = $link = "";
-				
+
 		foreach( $additionals[$i]['additional']->children() as $child )
 		{
 			if( $child->getName() == "title" ) {
@@ -574,7 +576,7 @@ for( $i = 0; $i < count($credits); $i++ )
 	}
 
 	echo '<p>';
-				
+
 	if( strlen($website) == 0 )
 	{
 		echo '<strong>'.$person.'</strong><br/>'.$role;
@@ -628,7 +630,7 @@ echo '						</div>
 		</div>
 
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>		
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
 		<script type="text/javascript">
 			$( document ).ready(function() {
@@ -640,7 +642,7 @@ echo '						</div>
 					});
 				});
 			});
-		</script>';		
+		</script>';
 if ( defined("ANALYTICS") && strlen(ANALYTICS) > 10 )
 {
 	echo '<script type="text/javascript">
