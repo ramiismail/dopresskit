@@ -15,11 +15,13 @@ function dl_r($filename, $remote_url = 'http://www.ramiismail.com/kit/press/' ) 
 	$local_file = $filename;
 	
 	if( ini_get('allow_url_fopen') ) {
-		copy($remote_url, $local_file);
+		if (copy($remote_url, $local_file)===FALSE)
+			return false;
 		return true;
 	}
         
 	$fp = fopen($local_file, 'w+');
+	if (!$fp) return false;
 
 	$cp = curl_init();
 	curl_setopt($cp, CURLOPT_URL, $remote_url);
@@ -40,6 +42,13 @@ if( ini_get('safe_mode') )
 	echo('<h1>Server Environment Check Failed: PHP Safe Mode Enabled</h1><p>Sadly, you or your host seem to have enabled PHP Safe Mode. PHP Safe Mode results in unexpected behaviour with user-installed scripts on your server and might cause presskit() to not function correctly. Please upgrade to PHP 5.4.0 or later or disable Safe Mode to continue.</p><p>If you cannot disable Safe Mode nor upgrade and are comfortable installing scripts, please download the <a href="http://ramiismail.com/kit/press/manual-install.zip">manual installation package</a>.</p>');
 	die();
 }
+
+if( !is_writable('./') )
+{
+	echo('<h1>Server Environment Check Failed: Directory not writable</h1><p>Sadly, you or your host seem to have not enabled write access on this directory. Please change the permissions to continue.</p><p>If you cannot change the permissions on this directory and are comfortable installing scripts, please download the <a href="http://ramiismail.com/kit/press/manual-install.zip">manual installation package</a>.</p>');
+	die();
+}
+
 	
 $upgrade = 0;
 
