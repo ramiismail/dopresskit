@@ -639,7 +639,7 @@ if( count($promoterquotes) + count($quotes) > 0 )
 {
 	echo '					<hr>
 			
-						<h2>Selected Articles</h2>
+						<h2 id="quotes">Selected Articles</h2>
 						<ul>';
 
 	if( count($promoterquotes) >= 0 )
