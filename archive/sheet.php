@@ -302,7 +302,7 @@ echo '<!DOCTYPE html>
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
-					<a class="nav-header" href="index.php" target="_self">press kit</a></strong>
+					<a class="nav-header" href="index.php" target="_self">press kit</a>
 
 					<ul class="uk-nav uk-nav-side">
 						<li><a href="#factsheet">Factsheet</a></li>
