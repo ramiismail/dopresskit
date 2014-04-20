@@ -755,7 +755,7 @@ for( $i = 0; $i < count($additionals); $i++ )
 	
 	echo '<p>
 	<strong>'.$title.'</strong><br/>
-	'.$description.' <a href="http://'.parseLink($link).'" alt="'.parseLink($link).'">'.$linkTitle.'</a>.
+	'.$description.' <a href="http://'.parseLink($link).'">'.$linkTitle.'</a>.
 </p>';
 }
 
