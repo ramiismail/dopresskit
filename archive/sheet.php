@@ -363,7 +363,7 @@ echo '							</p>
 								<strong>Website:</strong><br/>
 								<a href="http://'. parseLink(GAME_WEBSITE) .'">'. parseLink(GAME_WEBSITE) .'</a>
 							</p>
-							<p>
+							<div>
 								<strong>Regular Price:</strong><br/>';
 
 if( count($prices) == 0 )
@@ -390,7 +390,7 @@ else
 	echo'</table>';
 }
 
-echo'							</p>
+echo'							</div>
 						</div>
 						<div class="uk-width-medium-4-6">
 							<h2 id="description">Description</h2>
