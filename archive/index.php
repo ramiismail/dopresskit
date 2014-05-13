@@ -419,7 +419,7 @@ if ($handle = opendir('images'))
 	/* This is the correct way to loop over the directory. */
 	while (false !== ($entry = readdir($handle)))
 	{
-		if( substr($entry,-4) == ".png" )
+		if( substr($entry,-4) == ".png" || substr($entry,-4) == ".gif" )
 		{
 			if( substr($entry,0,4) != "logo" && substr($entry,0,4) != "icon" && substr($entry,0,6) != "header" )
 			{	
