@@ -469,7 +469,7 @@ if( !file_exists('images/logo.png') && !file_exists('images/icon.png')) {
 
 echo '					<hr>';
 
-if( count( $awards > 0 ) )
+if( count( $awards ) > 0 )
 {
 	echo('<h2 id="awards">Awards & Recognition</h2>
 					<ul>');
