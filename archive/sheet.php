@@ -302,7 +302,7 @@ echo '<!DOCTYPE html>
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
-					<a class="nav-header" href="index.php" target="_self">press kit</a></strong>
+					<a class="nav-header" href="index.php" target="_self">press kit</a>
 
 					<ul class="uk-nav uk-nav-side">
 						<li><a href="#factsheet">Factsheet</a></li>
@@ -363,7 +363,7 @@ echo '							</p>
 								<strong>Website:</strong><br/>
 								<a href="http://'. parseLink(GAME_WEBSITE) .'">'. parseLink(GAME_WEBSITE) .'</a>
 							</p>
-							<p>
+							<div>
 								<strong>Regular Price:</strong><br/>';
 
 if( count($prices) == 0 )
@@ -390,7 +390,7 @@ else
 	echo'</table>';
 }
 
-echo'							</p>
+echo'							</div>
 						</div>
 						<div class="uk-width-medium-4-6">
 							<h2 id="description">Description</h2>
@@ -755,7 +755,7 @@ for( $i = 0; $i < count($additionals); $i++ )
 	
 	echo '<p>
 	<strong>'.$title.'</strong><br/>
-	'.$description.' <a href="http://'.parseLink($link).'" alt="'.parseLink($link).'">'.$linkTitle.'</a>.
+	'.$description.' <a href="http://'.parseLink($link).'">'.$linkTitle.'</a>.
 </p>';
 }
 
