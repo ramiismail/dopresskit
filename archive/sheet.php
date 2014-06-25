@@ -292,7 +292,7 @@ echo '<!DOCTYPE html>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>'. COMPANY_TITLE .'</title>
+		<title>'. GAME_TITLE .'</title>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
@@ -301,14 +301,14 @@ echo '<!DOCTYPE html>
 		<div class="uk-container uk-container-center">
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
-					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
+					<h1 class="nav-header" id="game-title">'. GAME_TITLE .'</h1>
 					<a class="nav-header" href="index.php" target="_self">press kit</a></strong>
 
 					<ul class="uk-nav uk-nav-side">
 						<li><a href="#factsheet">Factsheet</a></li>
 						<li><a href="#description">Description</a></li>
 						<li><a href="#history">History</a></li>
-						<li><a href="#projects">Projects</a></li>
+						<li><a href="#features">Features</a></li>
 						<li><a href="#trailers">Videos</a></li>
 						<li><a href="#images">Images</a></li>
 						<li><a href="#logo">Logo & Icon</a></li>';
@@ -428,7 +428,7 @@ for( $i = 0; $i < count($histories); $i++ ) {
 	echo '<strong>'.$header.'</strong><p>'.$text.'</p>';
 }
 
-echo '							<h2>Features</h2>
+echo '							<h2 id="features">Features</h2>
 							<ul>';
 
 for( $i = 0; $i < count($features); $i++ )
@@ -639,7 +639,7 @@ if( count($promoterquotes) + count($quotes) > 0 )
 {
 	echo '					<hr>
 			
-						<h2>Selected Articles</h2>
+						<h2 id="quotes">Selected Articles</h2>
 						<ul>';
 
 	if( count($promoterquotes) >= 0 )
