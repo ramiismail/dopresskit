@@ -306,18 +306,17 @@ echo '<!DOCTYPE html>
 
 					<ul class="uk-nav uk-nav-side">
 						<li><a href="#factsheet">Factsheet</a></li>
-						<li><a href="#description">Description</a></li>
-						<li><a href="#history">History</a></li>
-						<li><a href="#projects">Projects</a></li>
-						<li><a href="#trailers">Videos</a></li>
+						<li><a href="#description">Description</a></li>';
+if ( isset($histories) || defined("GAME_HISTORY") ) echo('<li><a href="#history">History</a></li>');
+echo '						<li><a href="#trailers">Videos</a></li>
 						<li><a href="#images">Images</a></li>
 						<li><a href="#logo">Logo & Icon</a></li>';
-if( count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">Awards & Recognition</a></li>');
-if( count($promoterquotes) + count($quotes) > 0 ) echo('<li><a href="#quotes">Selected Articles</a></li>');
+if( (isset($promoterawards) ? count($promoterawards) : 0) + count($awards) > 0 ) echo('<li><a href="#awards">Awards & Recognition</a></li>');
+if( (isset($promoterquotes) ? count($promoterquotes) : 0) + count($quotes) > 0 ) echo('<li><a href="#quotes">Selected Articles</a></li>');
 if( $press_request == TRUE) { echo '<li><a href="#preview">Request Press Copy</a></li>'; }
 if( $monetize >= 1) { echo '<li><a href="#monetize">Monetization Permission</a></li>'; }
-echo '						<li><a href="#links">Additional Links</a></li>
-						<li><a href="#about">About '. COMPANY_TITLE .'</a></li>
+if ( isset($additionals) && count($additionals) > 0 ) echo('<li><a href="#links">Additional Links</a></li>');
+echo '						<li><a href="#about">About '. COMPANY_TITLE .'</a></li>
 						<li><a href="#credits">Team</a></li>
 						<li><a href="#contact">Contact</a></li>
 					</ul>
@@ -394,50 +393,64 @@ echo'							</p>
 						</div>
 						<div class="uk-width-medium-4-6">
 							<h2 id="description">Description</h2>
-							<p>'. GAME_DESCRIPTION .'</p>
-							<h2 id="history">History</h2>';
+							<p>'. GAME_DESCRIPTION .'</p>';
 
-for( $i = 0; $i < count($histories); $i++ )
+if ( isset($histories) || defined("GAME_HISTORY") )
 {
-	$header = $text ="";
+	echo'							<h2 id="history">History</h2>';
 
-	foreach( $histories[$i]['history']->children() as $child )
+	if ( isset($histories) )
 	{
-		if( $child->getName() == "header" ) $header = $child;
-		else if( $child->getName() == "text" ) $text = $child;
-	}
-	echo '<strong>'.$header.'</strong>
+		for( $i = 0; $i < count($histories); $i++ )
+		{
+			$header = $text ="";
+
+			foreach( $histories[$i]['history']->children() as $child )
+			{
+				if( $child->getName() == "header" ) $header = $child;
+				else if( $child->getName() == "text" ) $text = $child;
+			}
+			echo '<strong>'.$header.'</strong>
 <p>'.$text.'</p>';
-}
-
-if( defined("GAME_HISTORY") ) {
-	echo '<p>'. GAME_HISTORY .'</p>';
-}
-
-for( $i = 0; $i < count($histories); $i++ ) {
-	$header = $text ="";
-
-	foreach( $histories[$i]['history']->children() as $child )
-	{
-		if( $child->getName() == "header" ) {
-			$header = $child;
-		} else if( $child->getName() == "text" ) {
-			$text = $child;
 		}
 	}
-	echo '<strong>'.$header.'</strong><p>'.$text.'</p>';
+
+	if( defined("GAME_HISTORY") ) {
+		echo '<p>'. GAME_HISTORY .'</p>';
+	}
+
+	if ( isset($histories) )
+	{
+		for( $i = 0; $i < count($histories); $i++ ) {
+			$header = $text ="";
+
+			foreach( $histories[$i]['history']->children() as $child )
+			{
+				if( $child->getName() == "header" ) {
+					$header = $child;
+				} else if( $child->getName() == "text" ) {
+					$text = $child;
+				}
+			}
+			echo '<strong>'.$header.'</strong><p>'.$text.'</p>';
+		}
+	}
 }
 
-echo '							<h2>Features</h2>
+if ( isset($features) && count($features) > 0 )
+{
+	echo '							<h2>Features</h2>
 							<ul>';
 
-for( $i = 0; $i < count($features); $i++ )
-{
-	echo '<li>'.$features[$i].'</li>';
+	for( $i = 0; $i < count($features); $i++ )
+	{
+		echo '<li>'.$features[$i].'</li>';
+	}
+
+	echo '							</ul>';
 }
 
-echo '							</ul>
-						</div>
+echo'						</div>
 					</div>
 
 					<hr>
@@ -588,7 +601,7 @@ if( !file_exists($game.'/images/logo.png') && !file_exists($game.'/images/icon.p
 
 echo '<hr>';
 
-if( count( $promoterawards ) + count( $awards ) > 0 )
+if( (isset($promoterawards) ? count( $promoterawards ) : 0) + count( $awards ) > 0 )
 {
 	echo('<h2 id="awards">Awards & Recognition</h2>');
 	echo('<ul>');
@@ -635,14 +648,13 @@ if( count( $promoterawards ) + count( $awards ) > 0 )
 	echo '<hr>';
 }
 
-if( count($promoterquotes) + count($quotes) > 0 )
+if( (isset($promoterquotes) ? count($promoterquotes) : 0) + count($quotes) > 0 )
 {
-	echo '					<hr>
-			
-						<h2>Selected Articles</h2>
+	echo '
+						<h2 id ="quotes">Selected Articles</h2>
 						<ul>';
 
-	if( count($promoterquotes) >= 0 )
+	if( isset($promoterquotes) && count($promoterquotes) >= 0 )
 	{
 		for( $i = 0; $i < count($promoterquotes); $i++ )
 		{
@@ -732,36 +744,38 @@ if( $monetize >= 1 )
 	echo '<hr>';
 }
 
-
-echo '					<h2 id="links">Additional Links</h2>';
-		
-for( $i = 0; $i < count($additionals); $i++ )
+if ( isset($additionals) && count($additionals) > 0 )
 {
-	$title = $description = $link = "";
-	foreach( $additionals[$i]['additional']->children() as $child )
-	{
-		if( $child->getName() == "title" ) {
-			$title = $child;
-		} else if( $child->getName() == "description" ) {
-			$description = $child;
-		} else if( $child->getName() == "link" ) {
-			$link = $child;
-		}
-	}
+	echo '					<h2 id="links">Additional Links</h2>';
 
-	if( strpos(parseLink($link),'/') !== 0 ) {
-		$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
-	} else { $linkTitle = $link; }
-	
-	echo '<p>
+	for( $i = 0; $i < count($additionals); $i++ )
+	{
+		$title = $description = $link = "";
+		foreach( $additionals[$i]['additional']->children() as $child )
+		{
+			if( $child->getName() == "title" ) {
+				$title = $child;
+			} else if( $child->getName() == "description" ) {
+				$description = $child;
+			} else if( $child->getName() == "link" ) {
+				$link = $child;
+			}
+		}
+
+		if( strpos(parseLink($link),'/') !== 0 ) {
+			$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
+		} else { $linkTitle = $link; }
+
+		echo '<p>
 	<strong>'.$title.'</strong><br/>
 	'.$description.' <a href="http://'.parseLink($link).'" alt="'.parseLink($link).'">'.$linkTitle.'</a>.
 </p>';
+	}
+
+	echo '					<hr>';
 }
 
-echo '					<hr>
-
-					<h2 id="about">About '. COMPANY_TITLE .'</h2>
+echo'					<h2 id="about">About '. COMPANY_TITLE .'</h2>
 					<p>
 						<strong>Boilerplate</strong><br/>
 						'. COMPANY_DESCRIPTION .'

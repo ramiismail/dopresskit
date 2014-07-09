@@ -202,16 +202,16 @@ echo '<!DOCTYPE html>
 
 					<ul class="uk-nav uk-nav-side">
 						<li><a href="#factsheet">Factsheet</a></li>
-						<li><a href="#description">Description</a></li>
-						<li><a href="#history">History</a></li>
-						<li><a href="#projects">Projects</a></li>
+						<li><a href="#description">Description</a></li>';
+if ( isset($histories) && count($histories) > 0) echo'<li><a href="#history">History</a></li>';
+echo '						<li><a href="#projects">Projects</a></li>
 						<li><a href="#trailers">Videos</a></li>
 						<li><a href="#images">Images</a></li>
 						<li><a href="#logo">Logo & Icon</a></li>';
 						if( count($awards) > 0 ) echo'<li><a href="#awards">Awards & Recognition</a></li>';
 						if( count($quotes) > 0 ) echo '<li><a href="#quotes">Selected Articles</a></li>';
 
-if( count($additionals) > 0 ) {
+if( isset($additionals) && count($additionals) > 0 ) {
 	echo '<li><a href="#links">Additional Links</a></li>';
 }
 
@@ -276,7 +276,7 @@ closedir($handle);
 echo '							</p>
 							<p>';
 
-if( count($address) > 0 )
+if( isset($address) && count($address) > 0 )
 {
 	echo '<strong>Address:</strong><br/>';
 	for( $i = 0; $i < count($address); $i++ )
@@ -285,28 +285,38 @@ if( count($address) > 0 )
 	}
 }
 
-echo'							</p> 
-							<p>
+echo'							</p>';
+
+if ( defined('COMPANY_PHONE') )
+{
+	echo'							<p>
 								<strong>Phone:</strong><br/>
 								'. COMPANY_PHONE .'
-							</p>
-						</div>
+							</p>';
+}
+
+echo'						</div>
+
 						<div class="uk-width-medium-4-6">
 							<h2 id="description">Description</h2>
-							<p>'. COMPANY_DESCRIPTION .'</p>
-							<h2 id="history">History</h2>';
+							<p>'. COMPANY_DESCRIPTION .'</p>';
 
-for( $i = 0; $i < count($histories); $i++ )
+if ( isset($histories) && count($histories) > 0)
 {
-	$header = $text ="";
+	echo'							<h2 id="history">History</h2>';
 
-	foreach( $histories[$i]['history']->children() as $child )
+	for( $i = 0; $i < count($histories); $i++ )
 	{
-		if( $child->getName() == "header" ) $header = $child;
-		else if( $child->getName() == "text" ) $text = $child;
-	}
-	echo '<strong>'.$header.'</strong>
+		$header = $text ="";
+
+		foreach( $histories[$i]['history']->children() as $child )
+		{
+			if( $child->getName() == "header" ) $header = $child;
+			else if( $child->getName() == "text" ) $text = $child;
+		}
+		echo '<strong>'.$header.'</strong>
 <p>'.$text.'</p>';
+	}
 }
 
 echo '							<h2 id="projects">Projects</h2>
@@ -469,7 +479,7 @@ if( !file_exists('images/logo.png') && !file_exists('images/icon.png')) {
 
 echo '					<hr>';
 
-if( count( $awards > 0 ) )
+if( count( $awards ) > 0 )
 {
 	echo('<h2 id="awards">Awards & Recognition</h2>
 					<ul>');
@@ -521,7 +531,7 @@ if( count($quotes) > 0 )
 	echo '</ul><hr>';
 }
 
-if( count($additionals) > 0 ) {
+if( isset($additionals) && count($additionals) > 0 ) {
 	echo '<h2 id="links">Additional Links</h2>';
 
 	for( $i = 0; $i < count($additionals); $i++ )
