@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language name="Nederlands">
+	<set name="default" filename="index.php">
+		<translation>
+			<base>Factsheet</base>
+			<local>Feitenblad</local>
+		</translation>
+		<translation>
+			<base>Description</base>
+			<local>Beschrijving</local>
+		</translation>
+		<translation>
+			<base>History</base>
+			<local>Geschiedenis</local>
+		</translation>
+		<translation>
+			<base>Projects</base>
+			<local direction="rtl">مشس هخصث خهس تخت تخهثز!</local>
+		</translation>
+		<translation>
+			<base>Videos</base>
+			<local>Videofilms</local>
+		</translation>
+		<translation>
+			<base>Images</base>
+			<local>Afbeeldingen</local>
+		</translation>
+		<translation>
+			<base>Logo &amp; Icon</base>
+			<local>Logo &amp; ikoon</local>
+		</translation>
+		<translation>
+			<base>Awards &amp; Recognition</base>
+			<local>Prijzen &amp; Erkenning</local>
+		</translation>
+		<translation>
+			<base>Selected Articles</base>
+			<local>Geselecteerde Artikelen</local>
+		</translation>
+		<translation>
+			<base>Additional Links</base>
+			<local>Verdere Links</local>
+		</translation>
+		<translation>
+			<base>Team</base>
+			<local>Groep</local>
+		</translation>
+		<translation>
+			<base>Contact</base>
+			<local>Contact</local>
+		</translation>
+		<translation>
+			<base>Factsheet</base>
+			<local>Feitenblad</local>
+		</translation>
+		<translation>
+			<base>Developer:</base>
+			<local>Ontwikkelaar:</local>
+		</translation>
+		<translation>
+			<base>Based in %s</base>
+			<local>Gebaseerd in %s</local>
+		</translation>
+		<translation>
+			<base>Founding date:</base>
+			<local>Oprichtingsdatum:</local>
+		</translation>
+		<translation>
+			<base>Website:</base>
+			<local>Webzijde:</local>
+		</translation>
+		<translation>
+			<base>Press / Business Contact:</base>
+			<local>Media / bedrijfs contact:</local>
+		</translation>
+		<translation>
+			<base>Social:</base>
+			<local>Sociale media:</local>
+		</translation>
+		<translation>
+			<base>Releases:</base>
+			<local>Uitgaves:</local>
+		</translation>
+		<translation>
+			<base>Address:</base>
+			<local>Adres:</local>
+		</translation>
+		<translation>
+			<base>Phone:</base>
+			<local>Telefoon:</local>
+		</translation>
+		<translation>
+			<base><![CDATA[There are far more images available for %s, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#contact">contact us</a>!]]></base>
+			<local><![CDATA[Er zijn nog veel meer afbeeldingen voor %s, waar deze zijn waarschijnlijk het nuttigst voor u. Als u specifieke aanvragen heeft, neem gerust <a href="#contact">contact met ons op</a>!]]></local>
+		</translation>
+		<translation>
+			<base><![CDATA[There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>]]></base>
+			<local><![CDATA[Er zijn op dit moment geen logo's of icons beschikbaar voor %s. Kijk later voor meer, of <a href="#contact">neem contact op</a> voor specifieke requests!</p>]]></local>
+		</translation>
+		<translation>
+			<base>Team &amp; Repeating Collaborators</base>
+			<local>Team &amp; Herhalende Kornuiten</local>
+		</translation>
+		<translation>
+			<base>Contact</base>
+			<local>Contact</local>
+		</translation>
+	</set>
+</language>
