@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <language name="Nederlands">
-	<set name="default" filename="index.php">
+	<set name="default">
 		<translation>
 			<base>Factsheet</base>
 			<local>Feitenblad</local>
@@ -106,4 +106,82 @@
 			<local>Contact</local>
 		</translation>
 	</set>
+	<set name="default" filename="sheet.php">
+		<translation>
+			<base>Request Press Copy</base>
+			<local>Vraag media kopie</local>
+		</translation>
+		<translation>
+			<base>About %s</base>
+			<local>Over %s</local>
+		</translation>
+		<translation>
+			<base>Release date:</base>
+			<local>Uitgeefdatum:</local>
+		</translation>
+		<translation>
+			<base>Platforms:</base>
+			<local>Platforms:</local>
+		</translation>
+		<translation>
+			<base>Regular Price:</base>
+			<local>Reguliere Prijs:</local>
+		</translation>
+		<translation>
+			<base>Features</base>
+			<local>Kenmerken</local>
+		</translation>
+		<translation>
+			<base><![CDATA[There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!]]></base>
+			<local><![CDATA[Er zijn op dit moment geen logos of ikonen beschikbaar voor %s. Kom later terug voor meer of <a href="#contact">neem contact met ons op</a> voor specifieke wensen!]]></local>
+		</translation>	
+		<translation>
+			<base>Please fill in your e-mail address below and we'll get back to you as soon as a press copy is available for you.</base>
+			<local>Vul aub je e-mail adres beneden in en we zullen contact met je opnemen zodra er een press kopie beschikbaar is voor je.</local>
+		</translation>	
+		<translation>
+			<base>me@website.com</base>
+			<local>ik@website.nl</local>
+		</translation>			
+		<translation>
+			<base>, writing for </base>
+			<local>, schrijvende voor </local>
+		</translation>			
+		<translation>
+			<base>company name</base>
+			<local>bedrijfs naam</local>
+		</translation>			
+		<translation>
+			<base> would like to </base>
+			<local> zou graag </local>
+		</translation>
+		<translation>
+			<base>request a press copy</base>
+			<local>een press kopie willen aanvragen</local>
+		</translation>
+		<translation>
+			<base><![CDATA[Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.]]></base>
+			<local><![CDATA[Je kan ook altijd een press kopie aanvragen door ons <a href="#contact">een snelle email te versturen</a>.]]></local>
+		</translation>	
+		<translation>
+			<base>Boilerplate</base>
+			<local>Basisgegevens</local>
+		</translation>
+		<translation>
+			<base>More information</base>
+			<local>Meer informatie</local>
+		</translation>
+		<translation>
+			<base><![CDATA[More information on %s, our logo & relevant media are available <a href="%s">here</a>.]]></base>
+			<local><![CDATA[Meer informatie over %s, ons logo & relevante media zijn beschikbaar <a href="%s">hier</a>.]]></local>
+		</translation>		
+		<translation>
+			<base>%s Credits</base>
+			<local>%s Credits</local>
+		</translation>
+		<translation>
+			<base>press kit</base>
+			<local>press kit</local>
+		</translation>
+	</set>	
 </language>

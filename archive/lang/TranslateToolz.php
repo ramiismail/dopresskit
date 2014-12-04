@@ -44,7 +44,7 @@ class TranslateToolz
 			foreach ($xml as $set)
 			{
 				$attr = $set->attributes();
-				if ($attr['filename'] == $file)
+				if (!isset($attr['filename']) || $attr['filename'] == $file)
 				{
 					foreach ($set as $translation)
 					{

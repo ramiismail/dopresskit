@@ -8,7 +8,19 @@ if( file_exists('install.php') )
 
 $game = $_GET['p'];
 
-if( !file_exists( $game.'/data.xml' ) )
+// Language definition
+$language = isset($_GET['l']) && preg_match('~^[a-z_]+$~i', $_GET['l']) ? $_GET['l'] : 'en';
+$languageQuery = $language != 'en' ? '?l='. $language : '';
+
+include 'lang/TranslateToolz.php';
+TranslateToolz::loadLanguage($language, 'sheet.php');
+
+if (file_exists($game.'/data-'. $language .'.xml'))
+	$xml = simplexml_load_file($game.'/data-'. $language .'.xml');
+else if (file_exists($game.'/data.xml'))
+	$xml = simplexml_load_file($game.'/data.xml');
+
+if( !isset($xml) )
 {
 	if( $game == "credits" )
 	{
@@ -38,7 +50,7 @@ if( !file_exists( $game.'/data.xml' ) )
 </html>';
 		exit;		
 	}
-	else if( is_dir($game ) && $game != "images" && $game != "trailers" && $game != "_template" )
+	else if( is_dir($game) && $game != "lang" && $game != "images" && $game != "trailers" && $game != "_template" )
 	{
 		echo '<!DOCTYPE html>
 <html>
@@ -91,7 +103,6 @@ if( !file_exists( $game.'/data.xml' ) )
 
 $press_request = TRUE;
 $monetize = 0;
-$xml = simplexml_load_file($game."/data.xml");
 
 foreach( $xml->children() as $child )
 {
@@ -239,7 +250,10 @@ foreach( $xml->children() as $child )
 	}
 }
 
-$xml = simplexml_load_file("data.xml");
+if (file_exists('data-'. $language .'.xml'))
+	$xml = simplexml_load_file('data-'. $language .'.xml');
+else
+	$xml = simplexml_load_file('data.xml');
 
 foreach( $xml->children() as $child )
 {
@@ -302,24 +316,29 @@ echo '<!DOCTYPE html>
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
-					<a class="nav-header" href="index.php" target="_self">press kit</a></strong>
-
-					<ul class="uk-nav uk-nav-side">
-						<li><a href="#factsheet">Factsheet</a></li>
-						<li><a href="#description">Description</a></li>
-						<li><a href="#history">History</a></li>
-						<li><a href="#projects">Projects</a></li>
-						<li><a href="#trailers">Videos</a></li>
-						<li><a href="#images">Images</a></li>
-						<li><a href="#logo">Logo & Icon</a></li>';
-if( count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">Awards & Recognition</a></li>');
-if( count($promoterquotes) + count($quotes) > 0 ) echo('<li><a href="#quotes">Selected Articles</a></li>');
-if( $press_request == TRUE) { echo '<li><a href="#preview">Request Press Copy</a></li>'; }
-if( $monetize >= 1) { echo '<li><a href="#monetize">Monetization Permission</a></li>'; }
-echo '						<li><a href="#links">Additional Links</a></li>
-						<li><a href="#about">About '. COMPANY_TITLE .'</a></li>
-						<li><a href="#credits">Team</a></li>
-						<li><a href="#contact">Contact</a></li>
+					<a class="nav-header" href="index.php'. $languageQuery .'" target="_self">'. tl('press kit') .'</a></strong>';
+echo '<ul>';
+foreach (TranslateToolz::getLanguages() as $tag => $name)
+{
+	echo '<li><a href="sheet.php?p='. $game .'&l='. $tag .'">'. htmlspecialchars($name) .'</a></li>';
+}
+echo '</ul>';
+echo '				<ul class="uk-nav uk-nav-side">
+						<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
+						<li><a href="#description">'. tl('Description') .'</a></li>
+						<li><a href="#history">'. tl('History') .'</a></li>
+						<li><a href="#projects">'. tl('Projects') .'</a></li>
+						<li><a href="#trailers">'. tl('Videos') .'</a></li>
+						<li><a href="#images">'. tl('Images') .'</a></li>
+						<li><a href="#logo">'. tl('Logo & Icon') .'</a></li>';
+if( count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">'. tl('Awards & Recognition') .'</a></li>');
+if( count($promoterquotes) + count($quotes) > 0 ) echo('<li><a href="#quotes">'. tl('Selected Articles') .'</a></li>');
+if( $press_request == TRUE) { echo '<li><a href="#preview">'. tl('Request Press Copy') .'</a></li>'; }
+if( $monetize >= 1) { echo '<li><a href="#monetize">'. tl('Monetization Permission') .'</a></li>'; }
+echo '						<li><a href="#links">'. tl('Additional Links') .'</a></li>
+						<li><a href="#about">'. tl('About %s', COMPANY_TITLE) .'</a></li>
+						<li><a href="#credits">'. tl('Team') .'</a></li>
+						<li><a href="#contact">'. tl('Contact') .'</a></li>
 					</ul>
 				</div>
 				<div id="content" class="uk-width-medium-3-4">';
@@ -330,19 +349,19 @@ if( file_exists($game."/images/header.png") ) {
 
 echo '					<div class="uk-grid">
 						<div class="uk-width-medium-2-6">
-							<h2 id="factsheet">Factsheet</h2>
+							<h2 id="factsheet">'. tl('Factsheet'). '</h2>
 							<p>
-								<strong>Developer:</strong><br/>
-								<a href="index.php">'. COMPANY_TITLE .'</a><br/>
-								Based in '. COMPANY_BASED .'
+								<strong>'. tl('Developer:'). '</strong><br/>
+								<a href="index.php'. $languageQuery .'">'. COMPANY_TITLE .'</a><br/>
+								'. tl('Based in %s', COMPANY_BASED) .'
 							</p>
 							<p>
-								<strong>Release date:</strong><br/>
+								<strong>'. tl('Release date:'). '</strong><br/>
 								'. GAME_DATE .'
 							</p>
 
 							<p>
-								<strong>Platforms:</strong><br />';
+								<strong>'. tl('Platforms:'). '</strong><br />';
 
 for( $i = 0; $i < count($platforms); $i++ )
 {
@@ -360,11 +379,11 @@ for( $i = 0; $i < count($platforms); $i++ )
 
 echo '							</p>
 							<p>
-								<strong>Website:</strong><br/>
+								<strong>'. tl('Website:'). '</strong><br/>
 								<a href="http://'. parseLink(GAME_WEBSITE) .'">'. parseLink(GAME_WEBSITE) .'</a>
 							</p>
 							<p>
-								<strong>Regular Price:</strong><br/>';
+								<strong>'. tl('Regular Price:'). '</strong><br/>';
 
 if( count($prices) == 0 )
 {
@@ -393,9 +412,9 @@ else
 echo'							</p>
 						</div>
 						<div class="uk-width-medium-4-6">
-							<h2 id="description">Description</h2>
+							<h2 id="description">'. tl('Description'). '</h2>
 							<p>'. GAME_DESCRIPTION .'</p>
-							<h2 id="history">History</h2>';
+							<h2 id="history">'. tl('History'). '</h2>';
 
 for( $i = 0; $i < count($histories); $i++ )
 {
@@ -428,7 +447,7 @@ for( $i = 0; $i < count($histories); $i++ ) {
 	echo '<strong>'.$header.'</strong><p>'.$text.'</p>';
 }
 
-echo '							<h2>Features</h2>
+echo '							<h2>'. tl('Features'). '</h2>
 							<ul>';
 
 for( $i = 0; $i < count($features); $i++ )
@@ -442,11 +461,11 @@ echo '							</ul>
 
 					<hr>
 
-					<h2 id="trailers">Videos</h2>';
+					<h2 id="trailers">'. tl('Videos'). '</h2>';
 
 if( count($trailers) == 0 )
 {
-	echo '<p>There are currently no trailers available for '.GAME_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';
+	echo '<p>'. tlHtml('There are currently no trailers available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
 else
 {
@@ -513,7 +532,7 @@ else
 
 echo '					<hr>
 
-					<h2 id="images">Images</h2>';
+					<h2 id="images">'. tl('Images') .'</h2>';
 
 if( file_exists($game."/images/images.zip") )
 {
@@ -525,7 +544,7 @@ if( file_exists($game."/images/images.zip") )
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
-	echo '<a href="'. $game .'/images/images.zip"><div class="uk-alert">download all screenshots &amp; photos as .zip ('. $filesize .')</div></a>';
+	echo '<a href="'. $game .'/images/images.zip"><div class="uk-alert">'. tl('download all screenshots &amp; photos as .zip (%s)', $filesize) .'</div></a>';
 }
 
 echo '<div class="uk-grid images">';
@@ -550,12 +569,12 @@ echo '</div>';
 closedir($handle);
 
 if ($found == 0) {
-	echo '<p class="images-text">There are currently no screenshots available for '.GAME_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';
+	echo '<p class="images-text">'. tl('There are currently no screenshots available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
 					
 echo '					<hr>
 
-					<h2 id="logo">Logo & Icon</h2>';
+					<h2 id="logo">'. tl('Logo & Icon') .'</h2>';
 
 if( file_exists($game."/images/logo.zip") )
 {
@@ -567,7 +586,7 @@ if( file_exists($game."/images/logo.zip") )
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
-	echo '<a href="'.$game.'/images/logo.zip"><div class="uk-alert">download logo files as .zip ('. $filesize .')</div></a>';
+	echo '<a href="'.$game.'/images/logo.zip"><div class="uk-alert">'. tl('download logo files as .zip (%s)', $filesize) .'</div></a>';
 }
 
 echo '<div class="uk-grid images">';
@@ -583,14 +602,14 @@ if( file_exists($game.'/images/icon.png') ) {
 echo '</div>';
 
 if( !file_exists($game.'/images/logo.png') && !file_exists($game.'/images/icon.png')) {
-	echo '<p>There are currently no logos or icons available for '.GAME_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';
+	echo '<p>'. tlHtml('There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
 
 echo '<hr>';
 
 if( count( $promoterawards ) + count( $awards ) > 0 )
 {
-	echo('<h2 id="awards">Awards & Recognition</h2>');
+	echo('<h2 id="awards">'. tl('Awards & Recognition') .'</h2>');
 	echo('<ul>');
 
 	if( count($promoterawards) >= 0 )
@@ -639,7 +658,7 @@ if( count($promoterquotes) + count($quotes) > 0 )
 {
 	echo '					<hr>
 			
-						<h2>Selected Articles</h2>
+						<h2>'. tl('Selected Articles') .'</h2>
 						<ul>';
 
 	if( count($promoterquotes) >= 0 )
@@ -693,29 +712,29 @@ if( count($promoterquotes) + count($quotes) > 0 )
 
 if( $press_request == TRUE )
 {
-	echo '<h2 id="preview">Request Press Copy</h2>
-<p>Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.<br/>
+	echo '<h2 id="preview">'. tl('Request Press Copy') .'</h2>
+<p>'. tl('Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.') .'<br/>
 <div id="mailform">
 
 	<form id="pressrequest" class="uk-form" action="mail.php" method="post">
 		<input type="hidden" value="'. GAME_TITLE .'" id="gametitle" name="gametitle">
 		<input type="hidden" value="'. $game .'" id="game" name="game">
 		<fieldset>
-			<input type="text" placeholder="me@website.com" id="from" name="from">, writing for <input type="text" placeholder="company name" id="outlet" name="outlet"> would like to <button class="uk-button" id="submit-button">request a press copy</button>
+			<input type="text" placeholder="'. tl('me@website.com') .'" id="from" name="from">'. tl(', writing for ') .'<input type="text" placeholder="'. tl('company name') .'" id="outlet" name="outlet">'. tl(' would like to ') .'<button class="uk-button" id="submit-button">'. tl('request a press copy') .'</button>
 		</fieldset>
 	</form>
-	<p>Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.
+	<p>'. tlHtml('Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.') .'
 </div>';
 
 	if (isset($_GET['mail'])) {
 		if ($_GET['mail'] == 'success') {
-			echo '<div class="uk-alert uk-alert-success">Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a></div>';
+			echo '<div class="uk-alert uk-alert-success">'. tl('Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>') .'</div>';
 		} else if ($_GET['mail'] == 'fromerror') {
-			echo '<div class="uk-alert uk-alert-danger">We could not validate your email address. Please try contacting us using <a href="#contact">one of the options listed here</a>.</div>';
+			echo '<div class="uk-alert uk-alert-danger">'. tl('We could not validate your email address. Please try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
 		} else if ($_GET['mail'] == 'emptyerror') {
-			echo '<div class="uk-alert uk-alert-danger">Please fill in all the fields or try contacting us using <a href="#contact">one of the options listed here</a>.</div>';
+			echo '<div class="uk-alert uk-alert-danger">'. tl('Please fill in all the fields or try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
 		} else {
-			echo '<div class="uk-alert uk-alert-danger">We failed to send the email. Please try contacting us using <a href="#contact">one of the options listed here</a>.</div>';
+			echo '<div class="uk-alert uk-alert-danger">'. tl('We failed to send the email. Please try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
 		}
 	}
 
@@ -725,15 +744,15 @@ if( $press_request == TRUE )
 if( $monetize >= 1 )
 {
 	echo '<h2 id="monetize">Monetization Permission</h2>';
-	if( $monetize == 1 ) echo('<p>'.COMPANY_TITLE.' does currently not allow for the contents of '.GAME_TITLE.' to be published through video broadcasting services.</p>');
-	if( $monetize == 2 ) echo('<p>'.COMPANY_TITLE.' does allow the contents of this game to be published through video broadcasting services only with direct written permission from '.COMPANY_TITLE.'. Check at the bottom of this page for contact information.</p>');
-	if( $monetize == 3 ) echo('<p>'.COMPANY_TITLE.' allows for the contents of '.GAME_TITLE.' to be published through video broadcasting services for non-commercial purposes only. Monetization of any video created containing assets from '.GAME_TITLE.' is not allowed.</p>');
-	if( $monetize == 4 ) echo('<p>'.COMPANY_TITLE.' allows for the contents of '.GAME_TITLE.' to be published through video broadcasting services for any commercial or non-commercial purposes. Monetization of videos created containing assets from '.GAME_TITLE.' is legally & explicitly allowed by '.COMPANY_TITLE.'. This permission can be found in writing at <a href="'.'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'].'">http://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'].'</a>.</p>');
+	if( $monetize == 1 ) echo('<p>'. tl('%s does currently not allow for the contents of %s to be published through video broadcasting services.', COMPANY_TITLE, GAME_TITLE) .'</p>');
+	if( $monetize == 2 ) echo('<p>'. tl('%s does allow the contents of this game to be published through video broadcasting services only with direct written permission from %s. Check at the bottom of this page for contact information.', COMPANY_TITLE, GAME_TITLE) .'</p>');
+	if( $monetize == 3 ) echo('<p>'. tl('%s allows for the contents of %s to be published through video broadcasting services for non-commercial purposes only. Monetization of any video created containing assets from %s is not allowed.', COMPANY_TITLE, GAME_TITLE, GAME_TITLE) .'</p>');
+	if( $monetize == 4 ) echo('<p>'. tl('%s allows for the contents of %s to be published through video broadcasting services for any commercial or non-commercial purposes. Monetization of videos created containing assets from %s is legally & explicitly allowed by %s.', COMPANY_TITLE, GAME_TITLE, GAME_TITLE, COMPANY_TITLE) .' '. tlHtml('This permission can be found in writing at <a href="%s">%s</a>.', 'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) .'</p>');
 	echo '<hr>';
 }
 
 
-echo '					<h2 id="links">Additional Links</h2>';
+echo '					<h2 id="links">'. tl('Additional Links'). '</h2>';
 		
 for( $i = 0; $i < count($additionals); $i++ )
 {
@@ -761,22 +780,22 @@ for( $i = 0; $i < count($additionals); $i++ )
 
 echo '					<hr>
 
-					<h2 id="about">About '. COMPANY_TITLE .'</h2>
+					<h2 id="about">'. tl('About %s', COMPANY_TITLE) .'</h2>
 					<p>
-						<strong>Boilerplate</strong><br/>
+						<strong>'. tl('Boilerplate'). '</strong><br/>
 						'. COMPANY_DESCRIPTION .'
 					</p>
 
 					<p>
-						<strong>More information</strong><br/>
-						More information on '. COMPANY_TITLE .', our logo & relevant media are available <a href="index.php">here</a>.
+						<strong>'. tl('More information'). '</strong><br/>
+						'. tlHtml('More information on %s, our logo & relevant media are available <a href="%s">here</a>.', COMPANY_TITLE, 'index.php'. $languageQuery). '
 					</p>
 					
 					<hr>
 
 					<div class="uk-grid">
 						<div class="uk-width-medium-1-2">
-							<h2 id="credits">'. GAME_TITLE .' Credits</h2>';
+							<h2 id="credits">'. tl('%s Credits', GAME_TITLE) .'</h2>';
 
 for( $i = 0; $i < count($credits); $i++ )
 {
@@ -810,7 +829,7 @@ for( $i = 0; $i < count($credits); $i++ )
 
 echo '						</div>
 						<div class="uk-width-medium-1-2">
-							<h2 id="contact">Contact</h2>';
+							<h2 id="contact">'. tl('Contact') .'</h2>';
 
 for( $i = 0; $i < count($contacts); $i++ )
 {
