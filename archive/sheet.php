@@ -12,8 +12,8 @@ $game = $_GET['p'];
 $language = isset($_GET['l']) && preg_match('~^[a-z_]+$~i', $_GET['l']) ? $_GET['l'] : 'en';
 $languageQuery = $language != 'en' ? '?l='. $language : '';
 
-include 'lang/TranslateToolz.php';
-TranslateToolz::loadLanguage($language, 'sheet.php');
+include 'lang/TranslateTool.php';
+TranslateTool::loadLanguage($language, 'sheet.php');
 
 if (file_exists($game.'/data-'. $language .'.xml'))
 	$xml = simplexml_load_file($game.'/data-'. $language .'.xml');
@@ -318,7 +318,7 @@ echo '<!DOCTYPE html>
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
 					<a class="nav-header" href="index.php'. $languageQuery .'" target="_self">'. tl('press kit') .'</a></strong>';
 echo '<ul>';
-foreach (TranslateToolz::getLanguages() as $tag => $name)
+foreach (TranslateTool::getLanguages() as $tag => $name)
 {
 	echo '<li><a href="sheet.php?p='. $game .'&l='. $tag .'">'. htmlspecialchars($name) .'</a></li>';
 }

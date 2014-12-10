@@ -1,5 +1,5 @@
 <?php 
-class TranslateToolz
+class TranslateTool
 {
 	static protected $_translations;
 	static protected $_translated;
@@ -43,12 +43,12 @@ class TranslateToolz
 			self::$_translations = array();
 			foreach ($xml as $set)
 			{
-				$attr = $set->attributes();
-				if (!isset($attr['filename']) || $attr['filename'] == $file)
+				$setAttr = $set->attributes();
+				if (!isset($setAttr['filename']) || $setAttr['filename'] == $file)
 				{
 					foreach ($set as $translation)
 					{
-						self::$_translations[(string)$attr['name']][(string)$translation->base] = $translation->local;
+						self::$_translations[(string)$setAttr['name']][(string)$translation->base] = $translation->local;
 					}			
 				}		
 			}
@@ -123,19 +123,19 @@ function tl($text)
 {
 	$args = func_get_args();
 	$args = array_slice($args, 1);
-	return TranslateToolz::translate('default', $text, $args, false);
+	return TranslateTool::translate('default', $text, $args, false);
 }
 
 function tlSet($set, $text)
 {
 	$args = func_get_args();
 	$args = array_slice($args, 2);
-	return TranslateToolz::translate($set, $text, $args, false);
+	return TranslateTool::translate($set, $text, $args, false);
 }
 
 function tlHtml($text)
 {
 	$args = func_get_args();
 	$args = array_slice($args, 1);
-	return TranslateToolz::translate('default', $text, $args, true); 
+	return TranslateTool::translate('default', $text, $args, true); 
 }

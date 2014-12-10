@@ -46,8 +46,8 @@ if( !file_exists('data.xml') )
 $language = isset($_GET['l']) && preg_match('~^[a-z_]+$~i', $_GET['l']) ? $_GET['l'] : 'en';
 $languageQuery = $language != 'en' ? '?l='. $language : '';
 
-include 'lang/TranslateToolz.php';
-TranslateToolz::loadLanguage($language, 'index.php');
+include 'lang/TranslateTool.php';
+TranslateTool::loadLanguage($language, 'index.php');
 
 if (file_exists('data-'. $language .'.xml'))
 	$xml = simplexml_load_file('data-'. $language .'.xml');
@@ -210,7 +210,7 @@ echo '<!DOCTYPE html>
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
 					<a class="nav-header" href="http://'. parseLink(COMPANY_WEBSITE) .'">'. trim( parseLink(COMPANY_WEBSITE), "/") .'</a>';
 echo '<ul>';
-foreach (TranslateToolz::getLanguages() as $tag => $name)
+foreach (TranslateTool::getLanguages() as $tag => $name)
 {
 	echo '<li><a href="?l='. $tag .'">'. htmlspecialchars($name) .'</a></li>';
 }
