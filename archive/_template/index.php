@@ -2,7 +2,16 @@
 
 $game = $_GET['p'];
 
-$xml = simplexml_load_file("data.xml");
+// Language logic
+
+include '../lang/TranslateTool.php';
+$language = TranslateTool::loadLanguage(isset($_GET['l']) ? $_GET['l'] : null, '_template/index.php');
+$languageQuery = ($language != TranslateTool::getDefaultLanguage() ? '?l='. $language : '');
+
+if (file_exists('data-'. $language .'.xml'))
+	$xml = simplexml_load_file('data-'. $language .'.xml');
+else if (file_exists('data.xml'))
+	$xml = simplexml_load_file('data.xml');
 
 foreach( $xml->children() as $child )
 {
@@ -170,23 +179,31 @@ function parseLink($uri)
     <!-- Navigation start -->
     <div id="navigation">
         <p><h1 id="game-title"><?php echo(GAME_TITLE) ?></h1>
-        <strong><a href="#header">Press kit</a></strong></p>
+        <strong><a href="#header"><?php echo tl('Press kit') ?></a></strong></p>
         <br/>
+		<ul>
+<?php 
+	foreach (TranslateTool::getLanguages() as $tag => $name)
+	{
+		echo '<li><a href="?l='. $tag .'">'. htmlspecialchars($name) .'</a></li>';
+	}
+?>
+		</ul>        
         <ul>
-            <li><a href="#factsheet" id="m-factsheet" target="_self">Factsheet</a></li>
-            <li><a href="#description" id="m-description" target="_self">Description</a></li>
-            <li><a href="#history" id="m-history" target="_self">History</a></li>
-            <li><a href="#features" id="m-features" target="_self">Features</a></li>
-            <li><a href="#trailers" id="m-trailers" target="_self">Videos</a></li>
-            <li><a href="#screenshots" id="m-screenshots" target="_self">Screenshots</a></li>
-            <li><a href="#logo" id="m-logo" target="_self">Logo & Icon</a></li>
-            <li><a href="#awards" id="m-awards" target="_self">Awards & Recognition</a></li>
-            <li><a href="#quotes" id="m-quotes" target="_self">Selected Articles</a></li>
-            <li><a href="#preview" id="m-preview" target="_self">Request Press Copy</a></li>
-            <li><a href="#links" id="m-links" target="_self">Additional Links</a></li>
-            <li><a href="#about" id="m-about" target="_self">About Vlambeer</a></li>
-            <li><a href="#credits" id="m-credits" target="_self">Game Credits</a></li>
-            <li><a href="#contact" id="m-contact" target="_self">Contact</a></li>
+            <li><a href="#factsheet" id="m-factsheet" target="_self"><?php echo tl('Factsheet') ?></a></li>
+            <li><a href="#description" id="m-description" target="_self"><?php echo tl('Description') ?></a></li>
+            <li><a href="#history" id="m-history" target="_self"><?php echo tl('History') ?></a></li>
+            <li><a href="#features" id="m-features" target="_self"><?php echo tl('Features') ?></a></li>
+            <li><a href="#trailers" id="m-trailers" target="_self"><?php echo tl('Videos') ?></a></li>
+            <li><a href="#screenshots" id="m-screenshots" target="_self"><?php echo tl('Screenshots') ?></a></li>
+            <li><a href="#logo" id="m-logo" target="_self"><?php echo tl('Logo & Icon') ?></a></li>
+            <li><a href="#awards" id="m-awards" target="_self"><?php echo tl('Awards & Recognition') ?></a></li>
+            <li><a href="#quotes" id="m-quotes" target="_self"><?php echo tl('Selected Articles') ?></a></li>
+            <li><a href="#preview" id="m-preview" target="_self"><?php echo tl('Request Press Copy') ?></a></li>
+            <li><a href="#links" id="m-links" target="_self"><?php echo tl('Additional Links') ?></a></li>
+            <li><a href="#about" id="m-about" target="_self"><?php echo tl('About Vlambeer') ?></a></li>
+            <li><a href="#credits" id="m-credits" target="_self"><?php echo tl('Game Credits') ?></a></li>
+            <li><a href="#contact" id="m-contact" target="_self"><?php echo tl('Contact') ?></a></li>
         </ul>
     </div>
     
@@ -198,19 +215,19 @@ function parseLink($uri)
     
         <!-- Factsheet start -->
         <div id="factsheet">
-        <h2>Factsheet</h2>
+        <h2><?php echo tl('Factsheet') ?></h2>
         
         <!-- Developer information -->
-        <p><strong>Developer:</strong><br/>
+        <p><strong><?php echo tl('Developer:') ?></strong><br/>
         <a href="">Vlambeer</a><br/>
-        Based in Utrecht, Netherlands<br/></p>
+        <?php echo tl('Based in Utrecht, Netherlands') ?><br/></p>
         
         <!-- Release date -->
-        <p><strong>Release date:</strong><br/>
+        <p><strong><?php echo tl('Release date:') ?></strong><br/>
         <?php echo(GAME_DATE) ?><br/></p>
         
         <!-- Platforms -->
-        <p><strong>Platforms:</strong><br/>
+        <p><strong><?php echo tl('Platforms:') ?></strong><br/>
         <?php 
 			for( $i = 0; $i < count($platforms); $i++ )
 			{
@@ -225,11 +242,11 @@ function parseLink($uri)
         </p>
         
         <!-- Website -->
-        <p><strong>Website:</strong><br/>
+        <p><strong><?php echo tl('Website:') ?></strong><br/>
         <a href="<?php echo(GAME_WEBSITE) ?>"><?php echo parseLink(GAME_WEBSITE) ?></a><br/></p>
         
         <!-- Pricing -->
-        <p><strong>Regular Price:</strong><br/>
+        <p><strong><?php echo tl('Regular Price:') ?></strong><br/>
         <table>
         <?php
 			for( $i = 0; $i < count($prices); $i++ )
@@ -248,19 +265,19 @@ function parseLink($uri)
         
         <!-- Description start -->
         <div id="description">
-        <h2>Description</h2>
+        <h2><?php echo tl('Description') ?></h2>
         <?php echo(GAME_DESCRIPTION) ?>
         </div>
         
         <!-- History start -->
         <div id="history">
-        <h2>History</h2>
+        <h2><?php echo tl('History') ?></h2>
         <?php echo(GAME_HISTORY) ?>
         </div>
         
         <!-- Features start -->
         <div id="features">
-        <h2>Features</h2>
+        <h2><?php echo tl('Features') ?></h2>
         <ul>
         <?php
 			for( $i = 0; $i < count($features); $i++ )
@@ -276,7 +293,7 @@ function parseLink($uri)
         
         <!-- Trailers start -->
         <div id="trailers">
-		<h2>Videos</h2>
+		<h2><?php echo tl('Videos') ?></h2>
         <?php
 			for( $i = 0; $i < count($trailers); $i++ )
 			{
@@ -310,7 +327,7 @@ function parseLink($uri)
 				}
 				else
 				{
-					echo('<p>There are currently no trailers available for '.GAME_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>');					
+					echo('<p>'. tlHtml('There are currently no trailers available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>');					
 				}
 				echo('</p>');
 			}
@@ -322,7 +339,7 @@ function parseLink($uri)
 
         <!-- Screenshots start -->
         <div id="screenshots">
-        <h2>Screenshots</h2>
+        <h2><?php echo tl('Screenshots') ?></h2>
         <?php
 		
 			if( file_exists("images/images.zip") )
@@ -331,7 +348,7 @@ function parseLink($uri)
 				if( $filesize > 1024 && $filesize < 1048576 ) $filesize = (int)( $filesize / 1024 ).'KB';
 				if( $filesize > 1048576 ) $filesize = (int)( $filesize / 1024 ).'MB';
 				
-				echo('<a href="images/images.zip"><div id="media-download">download all screenshots, icons & logos as .zip ('. $filesize .')</div></a>');	
+				echo('<a href="images/images.zip"><div id="media-download">'. tl('download all screenshots, icons & logos as .zip (%s)', $filesize) .'</div></a>');	
 			}
 		
 			if ($handle = opendir('images')) {
@@ -347,7 +364,7 @@ function parseLink($uri)
 						}
 				}
 				
-				if( $found == 0 ) echo('<p>There are currently no screenshots available for '.GAME_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>');
+				if( $found == 0 ) echo('<p>'. tlHtml('There are currently no screenshots available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!') .'</p>');
 			}
 			
 			closedir($handle);
@@ -359,7 +376,7 @@ function parseLink($uri)
 
         <!-- Logo start -->
         <div id="logo">
-        <h2>Logo & Icon</h2>
+        <h2><?php echo tl('Logo & Icon') ?></h2>
         <?php
         	if( file_exists('images/logo.png') ) echo( '<a href="images/logo.png"><img src="images/logo.png" alt="logo" /></a>' );
         	if( file_exists('images/icon.png') ) echo( '<a href="images/icon.png"><img src="images/icon.png" alt="logo" /></a>' );
@@ -373,7 +390,7 @@ function parseLink($uri)
 
         <!-- Award start -->
         <div id="awards">
-        <h2>Awards & Recognition</h2>
+        <h2><?php echo tl('Awards & Recognition') ?></h2>
         <ul>
         <?php 
 			for( $i = 0; $i < count($awards); $i++ )
@@ -394,7 +411,7 @@ function parseLink($uri)
 
         <!-- Quote start -->
         <div id="quotes">
-        <h2>Selected Articles</h2>
+        <h2><?php echo tl('Selected Articles') ?></h2>
         <ul>
         <?php 
 			for( $i = 0; $i < count($quotes); $i++ )
@@ -418,10 +435,10 @@ function parseLink($uri)
 
         <!-- Request Preview Copy -->
         <div id="preview">
-        <h2>Request Press Copy</h2>
-        <p>Please fill in your e-mail address below and we'll get back to you as soon as a press copy is available for you.<br/>
+        <h2><?php echo tl('Request Press Copy') ?></h2>
+        <p><?php echo tl('Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.') ?><br/>
         <div id="mailform"><input type="text" value="me@website.com" id="from" /><input type="button" id="submit-button" value="Request Press Copy" /><br/>&nbsp;<br/>Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.</div>
-        <div id="mailsuccess" style="display:none;">Thanks for the request. We'll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a></div>
+        <div id="mailsuccess" style="display:none;"><?php echo tl('Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>') ?></div>
         </p></div>
         
 		<!-- Clear -->
@@ -429,7 +446,7 @@ function parseLink($uri)
 
         <!-- Links -->
         <div id="links">
-        <h2>Additional Links</h2>
+        <h2><?php echo tl('Additional Links') ?></h2>
         <?php 
 			for( $i = 0; $i < count($additionals); $i++ )
 			{
@@ -450,12 +467,12 @@ function parseLink($uri)
 
 		<!-- About -->
         <div id="about">
-        <h2>About Vlambeer</h2>
-        <p><strong>Boilerplate</strong><br/>
-        Vlambeer is a Dutch independent game studio made up of Rami Ismail and Jan Willem Nijman, bringing back arcade games since 1976. Vlambeer is best known for Super Crate Box, Radical Fishing, Serious Sam: The Random Encounter and GUN GODZ, even though they've released quite a few more games and experiments since their founding in September 2010.</p>
+        <h2><?php echo tl('About Vlambeer') ?></h2>
+        <p><strong><?php echo tl('Boilerplate') ?></strong><br/>
+        <?php echo tl('Vlambeer is a Dutch independent game studio made up of Rami Ismail and Jan Willem Nijman, bringing back arcade games since 1976. Vlambeer is best known for Super Crate Box, Radical Fishing, Serious Sam: The Random Encounter and GUN GODZ, even though they\'ve released quite a few more games and experiments since their founding in September 2010.') ?></p>
         
-        <p><strong>More information</strong><br/>
-        More information on Vlambeer, our logo & relevant media are available <a href="">here</a>.</p>
+        <p><strong><?php echo tl('More information') ?></strong><br/>
+        <?php echo tlHtml('More information on Vlambeer, our logo & relevant media are available <a href="">here</a>.') ?></p>
         </div>
         
 		<!-- Clear -->
@@ -463,7 +480,7 @@ function parseLink($uri)
         
         <!-- Credits -->
         <div id="credits">
-        <h2><?php echo( GAME_TITLE ) ?> Credits</h2>
+        <h2><?php echo tl('%s Credits', GAME_TITLE) ?></h2>
         <?php 
 			for( $i = 0; $i < count($credits); $i++ )
 			{
@@ -493,14 +510,14 @@ function parseLink($uri)
         
         <!-- Contact -->
         <div id="contact">
-        <h2>Contact</h2>
-        <p><strong>Inquiries</strong><br/>
+        <h2><?php echo tl('Contact') ?></h2>
+        <p><strong><?php echo tl('Inquiries') ?></strong><br/>
         <a href="mailto:rami@vlambeer.com">rami@vlambeer.com</a></p>
-        <p><strong>Twitter</strong><br/>
+        <p><strong><?php echo tl('Twitter') ?></strong><br/>
         <a href="http://www.twitter.com/Vlambeer">twitter.com/Vlambeer</a></p>
-        <p><strong>Facebook</strong><br/>
+        <p><strong><?php echo tl('Facebook') ?></strong><br/>
         <a href="http://www.facebook.com/Vlambeer">facebook.com/Vlambeer</a></p>
-        <p><strong>Web</strong><br/>
+        <p><strong><?php echo tl('Web') ?></strong><br/>
         <a href="http://www.vlambeer.com/">vlambeer.com</a></p>
         </div>
 
@@ -511,6 +528,7 @@ function parseLink($uri)
 
     </div>
 </div>
-
 </body>
 </html>
+
+<?php echo TranslateTool::makeBaseXml() ?>

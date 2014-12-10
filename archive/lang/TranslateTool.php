@@ -2,19 +2,20 @@
 class TranslateTool
 {
 	static protected $_translations;
+	
 	static protected $_translated;
+	static protected $_untranslated;
 	
 	static protected $_language;
+	static protected $_defaultLanguage;
 	static protected $_languages;
 	
 	public static function getLanguages()
 	{
 		if (!isset(self::$_languages))
 		{
-			$languages = array(
-				'en' => 'English',
-			);
-			if ($handle = opendir('lang')) 
+			$languages = array();
+			if ($handle = opendir(__DIR__)) 
 			{
 				while (false !== ($entry = readdir($handle))) 
 				{
@@ -25,20 +26,32 @@ class TranslateTool
 					}
 				}
 			}
+			
+			if (count($languages) == 0)
+			{
+				$languages = array(
+					'en' => 'English',
+				);
+			}	
+			
 			self::$_languages = $languages;
+			self::$_defaultLanguage = key($languages);
 		}
 		return self::$_languages;
 	}
 
 	public static function loadLanguage($language, $file)
 	{
-		self::$_language = $language;
-		
 		$languages = self::getLanguages();
+
+		if (!isset($languages[$language]))
+			$language = self::$_defaultLanguage;
 		
-		if (isset($languages[$language]) && file_exists('lang/'. $language .'-'. $languages[$language]. '.xml'))
+		self::$_language = $language;
+				
+		if (isset($languages[$language]) && file_exists(__DIR__ . '/'. $language .'-'. $languages[$language]. '.xml'))
 		{
-			$xml = simplexml_load_file('lang/'. $language .'-'. $languages[$language]. '.xml');
+			$xml = simplexml_load_file(__DIR__ . '/'. $language .'-'. $languages[$language]. '.xml');
 			
 			self::$_translations = array();
 			foreach ($xml as $set)
@@ -54,12 +67,20 @@ class TranslateTool
 				}		
 			}
 		}
+		
+		return self::$_language;
+	}
+	
+	public static function getDefaultLanguage()
+	{
+		self::getLanguages();
+		return self::$_defaultLanguage;
 	}
 	
 	public static function translate($set, $text, $args = array(), $isHtml = false)
 	{
-		self::$_translated[] = $text;
-		
+		$defaultText = $text;
+			
 		$found = true;
 		$direction = null;
 		if (isset(self::$_translations[$set][$text]))
@@ -76,12 +97,18 @@ class TranslateTool
 			
 			$text = self::$_translations['default'][$text];
 		}
-		else if (self::$_language != 'en')
-		{ 	
-			$text = '<span style="color:red">' . $text .'</span>';
+		else 
+		{
+			self::$_untranslated[$defaultText] = $text;
 			$found = false;
+				
+			if (self::$_language != 'en')
+			{ 	
+				$text = '<span style="color:red">' . $text .'</span>';
+			}
 		}
-	
+		self::$_translated[$defaultText] = $text;
+		
 		if (count($args) > 0)
 		{
 			$text = vsprintf($text, $args);
@@ -98,21 +125,27 @@ class TranslateTool
 		return $text;
 	}
 	
-	public static function makeBaseXml()
+	public static function makeBaseXml($untranslated = true)
 	{
-		$xml = '';
+		$translations = $untranslated ? self::$_untranslated : self::$_translated;
 		
-		foreach (self::$_translated as $translate)
+		$xml = '';
+		foreach ($translations as $base => $local)
 		{
-			if (strpos($translate, '<') !== false)
-				$translate = '<![CDATA['. $translate .']]>';
+			if (strpos($base, '<') !== false)
+				$base = '<![CDATA['. $base .']]>';
 			else
-				$translate = htmlspecialchars($translate);
+				$base = htmlspecialchars($base);
 			
-			$xml .= '<translation>' ."\n";
-			$xml .= '	<base>'. $translate .'</base>' ."\n";
-			$xml .= '	<local>'. $translate .'</local>' ."\n";
-			$xml .= '</translation>' ."\n";
+			if (strpos($local, '<') !== false)
+				$base = '<![CDATA['. $local .']]>';
+			else
+				$base = htmlspecialchars($local);
+			
+			$xml .= '		<translation>' ."\n";
+			$xml .= '			<base>'. $base .'</base>' ."\n";
+			$xml .= '			<local>'. $local .'</local>' ."\n";
+			$xml .= '		</translation>' ."\n";
 		}
 	
 		return $xml;

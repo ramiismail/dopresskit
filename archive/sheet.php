@@ -8,12 +8,11 @@ if( file_exists('install.php') )
 
 $game = $_GET['p'];
 
-// Language definition
-$language = isset($_GET['l']) && preg_match('~^[a-z_]+$~i', $_GET['l']) ? $_GET['l'] : 'en';
-$languageQuery = $language != 'en' ? '?l='. $language : '';
+// Language logic
 
 include 'lang/TranslateTool.php';
-TranslateTool::loadLanguage($language, 'sheet.php');
+$language = TranslateTool::loadLanguage(isset($_GET['l']) ? $_GET['l'] : null, 'sheet.php');
+$languageQuery = ($language != TranslateTool::getDefaultLanguage() ? '?l='. $language : '');
 
 if (file_exists($game.'/data-'. $language .'.xml'))
 	$xml = simplexml_load_file($game.'/data-'. $language .'.xml');

@@ -1,106 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <language name="Nederlands">
 	<!-- Set for texts used in 'index.php', and other pages --> 
-	<set name="default">
+	<set>
 		<translation>
 			<base>Factsheet</base>
-			<local>Feitenblad</local>
+			<local>Factsheet</local>
 		</translation>
 		<translation>
 			<base>Description</base>
-			<local>Beschrijving</local>
+			<local>Description</local>
 		</translation>
 		<translation>
 			<base>History</base>
-			<local>Geschiedenis</local>
+			<local>History</local>
 		</translation>
 		<translation>
 			<base>Projects</base>
-			<local direction="rtl">مشس هخصث خهس تخت تخهثز!</local>
+			<local>Projects</local>
 		</translation>
 		<translation>
 			<base>Videos</base>
-			<local>Videofilms</local>
+			<local>Videos</local>
 		</translation>
 		<translation>
 			<base>Images</base>
-			<local>Afbeeldingen</local>
+			<local>Images</local>
 		</translation>
 		<translation>
 			<base>Logo &amp; Icon</base>
-			<local>Logo &amp; ikoon</local>
+			<local>Logo &amp; Icon</local>
 		</translation>
 		<translation>
 			<base>Awards &amp; Recognition</base>
-			<local>Prijzen &amp; Erkenning</local>
+			<local>Awards &amp; Recognition</local>
 		</translation>
 		<translation>
 			<base>Selected Articles</base>
-			<local>Geselecteerde Artikelen</local>
+			<local>Selected Articles</local>
 		</translation>
 		<translation>
 			<base>Additional Links</base>
-			<local>Verdere Links</local>
+			<local>Additional Links</local>
 		</translation>
 		<translation>
 			<base>Team</base>
-			<local>Groep</local>
+			<local>Team</local>
 		</translation>
 		<translation>
 			<base>Contact</base>
 			<local>Contact</local>
 		</translation>
 		<translation>
-			<base>Factsheet</base>
-			<local>Feitenblad</local>
-		</translation>
-		<translation>
 			<base>Developer:</base>
-			<local>Ontwikkelaar:</local>
+			<local>Developer:</local>
 		</translation>
 		<translation>
 			<base>Based in %s</base>
-			<local>Gebaseerd in %s</local>
+			<local>Based in %s</local>
 		</translation>
 		<translation>
 			<base>Founding date:</base>
-			<local>Oprichtingsdatum:</local>
+			<local>Founding date:</local>
 		</translation>
 		<translation>
 			<base>Website:</base>
-			<local>Webzijde:</local>
+			<local>Website:</local>
 		</translation>
 		<translation>
 			<base>Press / Business Contact:</base>
-			<local>Media / bedrijfs contact:</local>
+			<local>Press / Business contact:</local>
 		</translation>
 		<translation>
 			<base>Social:</base>
-			<local>Sociale media:</local>
+			<local>Social:</local>
 		</translation>
 		<translation>
 			<base>Releases:</base>
-			<local>Uitgaves:</local>
+			<local>Releases:</local>
 		</translation>
 		<translation>
 			<base>Address:</base>
-			<local>Adres:</local>
+			<local>Address:</local>
 		</translation>
 		<translation>
 			<base>Phone:</base>
-			<local>Telefoon:</local>
+			<local>Phone:</local>
 		</translation>
 		<translation>
 			<base><![CDATA[There are far more images available for %s, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#contact">contact us</a>!]]></base>
-			<local><![CDATA[Er zijn nog veel meer afbeeldingen voor %s, waar deze zijn waarschijnlijk het nuttigst voor u. Als u specifieke aanvragen heeft, neem gerust <a href="#contact">contact met ons op</a>!]]></local>
+			<local><![CDATA[There are far more images available for %s, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#contact">contact us</a>!]]></local>
 		</translation>
 		<translation>
 			<base><![CDATA[There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>]]></base>
-			<local><![CDATA[Er zijn op dit moment geen logo's of icons beschikbaar voor %s. Kijk later voor meer, of <a href="#contact">neem contact op</a> voor specifieke requests!</p>]]></local>
+			<local><![CDATA[There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>]]></local>
 		</translation>
 		<translation>
 			<base>Team &amp; Repeating Collaborators</base>
-			<local>Team &amp; Herhalende Kornuiten</local>
+			<local>Team &amp; Repeating Collaborator</local>
 		</translation>
 		<translation>
 			<base>Contact</base>
@@ -111,15 +107,15 @@
 	<set>
 		<translation>
 			<base>Request Press Copy</base>
-			<local>Vraag media kopie</local>
+			<local>Request Press Copy</local>
 		</translation>
 		<translation>
 			<base>About %s</base>
-			<local>Over %s</local>
+			<local>About %s</local>
 		</translation>
 		<translation>
 			<base>Release date:</base>
-			<local>Uitgeefdatum:</local>
+			<local>Release date:</local>
 		</translation>
 		<translation>
 			<base>Platforms:</base>
@@ -127,55 +123,55 @@
 		</translation>
 		<translation>
 			<base>Regular Price:</base>
-			<local>Reguliere Prijs:</local>
+			<local>Regular Price:</local>
 		</translation>
 		<translation>
 			<base>Features</base>
-			<local>Kenmerken</local>
+			<local>Features</local>
 		</translation>
 		<translation>
 			<base><![CDATA[There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!]]></base>
-			<local><![CDATA[Er zijn op dit moment geen logos of ikonen beschikbaar voor %s. Kom later terug voor meer of <a href="#contact">neem contact met ons op</a> voor specifieke wensen!]]></local>
+			<local><![CDATA[There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!]]></local>
 		</translation>	
 		<translation>
 			<base>Please fill in your e-mail address below and we'll get back to you as soon as a press copy is available for you.</base>
-			<local>Vul aub je e-mail adres beneden in en we zullen contact met je opnemen zodra er een press kopie beschikbaar is voor je.</local>
+			<local>Please fill in your e-mail address below and we'll get back to you as soon as a press copy is available for you.</local>
 		</translation>	
 		<translation>
 			<base>me@website.com</base>
-			<local>ik@website.nl</local>
+			<local>me@website.com</local>
 		</translation>			
 		<translation>
 			<base>, writing for </base>
-			<local>, schrijvende voor </local>
+			<local>, writing for </local>
 		</translation>			
 		<translation>
 			<base>company name</base>
-			<local>bedrijfs naam</local>
+			<local>company naam</local>
 		</translation>			
 		<translation>
 			<base> would like to </base>
-			<local> zou graag </local>
+			<local> would like to </local>
 		</translation>
 		<translation>
 			<base>request a press copy</base>
-			<local>een press kopie willen aanvragen</local>
+			<local>request a press copy</local>
 		</translation>
 		<translation>
 			<base><![CDATA[Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.]]></base>
-			<local><![CDATA[Je kan ook altijd een press kopie aanvragen door ons <a href="#contact">een snelle email te versturen</a>.]]></local>
+			<local><![CDATA[Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.]]></local>
 		</translation>	
 		<translation>
 			<base>Boilerplate</base>
-			<local>Basisgegevens</local>
+			<local>Boilerplate</local>
 		</translation>
 		<translation>
 			<base>More information</base>
-			<local>Meer informatie</local>
+			<local>More information</local>
 		</translation>
 		<translation>
 			<base><![CDATA[More information on %s, our logo & relevant media are available <a href="%s">here</a>.]]></base>
-			<local><![CDATA[Meer informatie over %s, ons logo & relevante media zijn beschikbaar <a href="%s">hier</a>.]]></local>
+			<local><![CDATA[More information on %s, our logo & relevant media are available <a href="%s">here</a>.]]></local>
 		</translation>		
 		<translation>
 			<base>%s Credits</base>
@@ -194,15 +190,15 @@
 		</translation>
 		<translation>
 			<base>Screenshots</base>
-			<local>Beeldschoten</local>
+			<local>Screenshots</local>
 		</translation>
 		<translation>
 			<base>About Vlambeer</base>
-			<local>Over Vlambeer</local>
+			<local>About Vlambeer</local>
 		</translation>
 		<translation>
 			<base>Game Credits</base>
-			<local>Spel kredieten</local>
+			<local>Game Credits</local>
 		</translation>
 		<translation>
 			<base>Inquiries</base>
