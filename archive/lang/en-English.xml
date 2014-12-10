@@ -3,6 +3,10 @@
 	<!-- Set for texts used in 'index.php', and other pages --> 
 	<set>
 		<translation>
+			<base>Language: </base>
+			<local>Language: </local>
+		</translation>
+		<translation>
 			<base>Factsheet</base>
 			<local>Factsheet</local>
 		</translation>

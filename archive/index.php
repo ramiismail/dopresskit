@@ -207,15 +207,20 @@ echo '<!DOCTYPE html>
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
-					<a class="nav-header" href="http://'. parseLink(COMPANY_WEBSITE) .'">'. trim( parseLink(COMPANY_WEBSITE), "/") .'</a>';
-echo '<ul>';
-foreach (TranslateTool::getLanguages() as $tag => $name)
-{
-	echo '<li><a href="?l='. $tag .'">'. htmlspecialchars($name) .'</a></li>';
+					<a class="nav-header" href="http://'. parseLink(COMPANY_WEBSITE) .'">'. trim( parseLink(COMPANY_WEBSITE), "/") .'</a>
+					<ul class="uk-nav uk-nav-side">';
+
+if (count(TranslateTool::getLanguages()) > 1) {
+	echo '<li class="language-select"><a>'. tl('Language: ') .'<select onchange="document.location = \'index.php?l=\'+ this.value;">';
+	foreach (TranslateTool::getLanguages() as $tag => $name)
+	{
+		echo '<option value="'. $tag .'" '. ($tag == $language ? 'selected':'') .'>'. htmlspecialchars($name) .'</option>';
+	}
+	echo '</select></a></li>';
+	echo '<li class="uk-nav-divider"></li>';
 }
-echo '</ul>';
-echo '					<ul class="uk-nav uk-nav-side">
-						<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
+
+echo '					<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
 						<li><a href="#description">'. tl('Description') .'</a></li>
 						<li><a href="#history">'. tl('History') .'</a></li>
 						<li><a href="#projects">'. tl('Projects') .'</a></li>

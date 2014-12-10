@@ -180,16 +180,18 @@ function parseLink($uri)
     <div id="navigation">
         <p><h1 id="game-title"><?php echo(GAME_TITLE) ?></h1>
         <strong><a href="#header"><?php echo tl('Press kit') ?></a></strong></p>
-        <br/>
+		<?php 
+		if (count(TranslateTool::getLanguages()) > 1) {
+			echo '<p class="language-select">'. tl('Language: ') .'<select onchange="document.location = \'index.php?l=\'+ this.value;">';
+			foreach (TranslateTool::getLanguages() as $tag => $name)
+			{
+				echo '<option value="'. $tag .'" '. ($tag == $language ? 'selected':'') .'>'. htmlspecialchars($name) .'</option>';
+			}
+			echo '</select>';
+			echo '</p>';
+		}
+		?>      
 		<ul>
-<?php 
-	foreach (TranslateTool::getLanguages() as $tag => $name)
-	{
-		echo '<li><a href="?l='. $tag .'">'. htmlspecialchars($name) .'</a></li>';
-	}
-?>
-		</ul>        
-        <ul>
             <li><a href="#factsheet" id="m-factsheet" target="_self"><?php echo tl('Factsheet') ?></a></li>
             <li><a href="#description" id="m-description" target="_self"><?php echo tl('Description') ?></a></li>
             <li><a href="#history" id="m-history" target="_self"><?php echo tl('History') ?></a></li>

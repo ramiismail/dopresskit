@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <language name="Nederlands">
 	<!-- Set for texts used in 'index.php', and other pages --> 
-	<set name="default">
+	<set>
+		<translation>
+			<base>Language: </base>
+			<local>Taal: </local>
+		</translation>
 		<translation>
 			<base>Factsheet</base>
 			<local>Feitenblad</local>
