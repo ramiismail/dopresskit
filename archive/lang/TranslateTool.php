@@ -44,11 +44,12 @@ class TranslateTool
 			foreach ($xml as $set)
 			{
 				$setAttr = $set->attributes();
+				$setName = isset($setAttr['name']) ? $setAttr['name'] : 'default';
 				if (!isset($setAttr['filename']) || $setAttr['filename'] == $file)
 				{
 					foreach ($set as $translation)
 					{
-						self::$_translations[(string)$setAttr['name']][(string)$translation->base] = $translation->local;
+						self::$_translations[(string)$setName][(string)$translation->base] = $translation->local;
 					}			
 				}		
 			}
@@ -100,6 +101,7 @@ class TranslateTool
 	public static function makeBaseXml()
 	{
 		$xml = '';
+		
 		foreach (self::$_translated as $translate)
 		{
 			if (strpos($translate, '<') !== false)
