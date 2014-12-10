@@ -530,5 +530,3 @@ function parseLink($uri)
 </div>
 </body>
 </html>
-
-<?php echo TranslateTool::makeBaseXml() ?>
