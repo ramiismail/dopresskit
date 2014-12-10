@@ -14,7 +14,9 @@ class TranslateTool
 	{
 		if (!isset(self::$_languages))
 		{
-			$languages = array();
+			$languages = array(
+				'en' => 'English',
+			);
 			if ($handle = opendir(__DIR__)) 
 			{
 				while (false !== ($entry = readdir($handle))) 
@@ -26,13 +28,6 @@ class TranslateTool
 					}
 				}
 			}
-			
-			if (count($languages) == 0)
-			{
-				$languages = array(
-					'en' => 'English',
-				);
-			}	
 			
 			self::$_languages = $languages;
 			self::$_defaultLanguage = key($languages);
