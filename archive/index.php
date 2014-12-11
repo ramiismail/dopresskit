@@ -45,7 +45,7 @@ if( !file_exists('data.xml') )
 // Language logic
 
 include 'lang/TranslateTool.php';
-$language = TranslateTool::loadLanguage(isset($_GET['l']) ? $_GET['l'] : null, __FILENAME__);
+$language = TranslateTool::loadLanguage(isset($_GET['l']) ? $_GET['l'] : null, 'index.php');
 $languageQuery = ($language != TranslateTool::getDefaultLanguage() ? '?l='. $language : '');
 
 if (file_exists('data-'. $language .'.xml'))

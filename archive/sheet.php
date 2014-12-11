@@ -573,7 +573,7 @@ echo '</div>';
 closedir($handle);
 
 if ($found == 0) {
-	echo '<p class="images-text">'. tl('There are currently no screenshots available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
+	echo '<p class="images-text">'. tlHtml('There are currently no screenshots available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
 					
 echo '					<hr>
@@ -723,6 +723,7 @@ if( $press_request == TRUE )
 	<form id="pressrequest" class="uk-form" action="mail.php" method="post">
 		<input type="hidden" value="'. GAME_TITLE .'" id="gametitle" name="gametitle">
 		<input type="hidden" value="'. $game .'" id="game" name="game">
+		<input type="hidden" value="'. htmlspecialchars($language) .'" id="language" name="l">
 		<fieldset>
 			<input type="text" placeholder="'. tl('me@website.com') .'" id="from" name="from">'. tl(', writing for ') .'<input type="text" placeholder="'. tl('company name') .'" id="outlet" name="outlet">'. tl(' would like to ') .'<button class="uk-button" id="submit-button">'. tl('request a press copy') .'</button>
 		</fieldset>
