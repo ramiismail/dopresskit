@@ -246,39 +246,4 @@
 			<local>press kit</local>
 		</translation>
 	</set>	
-	<!-- Set for additional texts used in the '_template/index.php' file --> 
-	<set>
-		<translation>
-			<base>Press kit</base>
-			<local>Press kit</local>
-		</translation>
-		<translation>
-			<base>Screenshots</base>
-			<local>Beeldschoten</local>
-		</translation>
-		<translation>
-			<base>About Vlambeer</base>
-			<local>Over Vlambeer</local>
-		</translation>
-		<translation>
-			<base>Game Credits</base>
-			<local>Spel kredieten</local>
-		</translation>
-		<translation>
-			<base>Inquiries</base>
-			<local>Inquiries</local>
-		</translation>
-		<translation>
-			<base>Twitter</base>
-			<local>Twitter</local>
-		</translation>
-		<translation>
-			<base>Facebook</base>
-			<local>Facebook</local>
-		</translation>
-		<translation>
-			<base>Web</base>
-			<local>Web</local>
-		</translation>
-	</set>
 </language>
