@@ -182,7 +182,7 @@ function parseLink($uri)
         <strong><a href="#header"><?php echo tl('Press kit') ?></a></strong></p>
 		<?php 
 		if (count(TranslateTool::getLanguages()) > 1) {
-			echo '<p class="language-select">'. tl('Language: ') .'<select onchange="document.location = \'index.php?l=\'+ this.value;">';
+			echo '<p>'. tl('Language: ') .'<select onchange="document.location = \'index.php?l=\'+ this.value;">';
 			foreach (TranslateTool::getLanguages() as $tag => $name)
 			{
 				echo '<option value="'. $tag .'" '. ($tag == $language ? 'selected':'') .'>'. htmlspecialchars($name) .'</option>';
@@ -383,7 +383,7 @@ function parseLink($uri)
         	if( file_exists('images/logo.png') ) echo( '<a href="images/logo.png"><img src="images/logo.png" alt="logo" /></a>' );
         	if( file_exists('images/icon.png') ) echo( '<a href="images/icon.png"><img src="images/icon.png" alt="logo" /></a>' );
 			if( !file_exists('images/logo.png') && !file_exists('images/icon.png'))
-			echo('<p>There are currently no logos or icons available for '.GAME_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>');
+			echo('<p>'. tlHtml('There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>');
 		?>
         </div>
         
@@ -439,7 +439,7 @@ function parseLink($uri)
         <div id="preview">
         <h2><?php echo tl('Request Press Copy') ?></h2>
         <p><?php echo tl('Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.') ?><br/>
-        <div id="mailform"><input type="text" value="me@website.com" id="from" /><input type="button" id="submit-button" value="Request Press Copy" /><br/>&nbsp;<br/>Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.</div>
+        <div id="mailform"><input type="text" value="<?php echo tl('me@website.com') ?>" id="from" /><input type="button" id="submit-button" value="<?php echo tl('Request Press Copy') ?>" /><br/>&nbsp;<br/><?php echo tlHtml('Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.') ?></div>
         <div id="mailsuccess" style="display:none;"><?php echo tl('Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>') ?></div>
         </p></div>
         

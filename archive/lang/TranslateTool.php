@@ -96,11 +96,6 @@ class TranslateTool
 		{
 			self::$_untranslated[$defaultText] = $text;
 			$found = false;
-				
-			if (self::$_language != 'en')
-			{ 	
-				$text = '<span style="color:red">' . $text .'</span>';
-			}
 		}
 		self::$_translated[$defaultText] = $text;
 		
@@ -109,10 +104,13 @@ class TranslateTool
 			$text = vsprintf($text, $args);
 		}
 		
-		if (!$isHtml && $found)
+		if (!$isHtml)
 		{
 			$text = htmlspecialchars($text);
 		}
+		
+		if (!$found && self::$_language != 'en')
+			$text = '<span style="color:red">' . $text .'</span>';
 		
 		if ($direction !== null)
 			$text = '<span dir="'. $direction .'">'. $text .'</span>';

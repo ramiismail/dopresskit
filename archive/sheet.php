@@ -548,7 +548,7 @@ if( file_exists($game."/images/images.zip") )
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
-	echo '<a href="'. $game .'/images/images.zip"><div class="uk-alert">'. tl('download all screenshots &amp; photos as .zip (%s)', $filesize) .'</div></a>';
+	echo '<a href="'. $game .'/images/images.zip"><div class="uk-alert">'. tl('download all screenshots & photos as .zip (%s)', $filesize) .'</div></a>';
 }
 
 echo '<div class="uk-grid images">';
@@ -732,13 +732,13 @@ if( $press_request == TRUE )
 
 	if (isset($_GET['mail'])) {
 		if ($_GET['mail'] == 'success') {
-			echo '<div class="uk-alert uk-alert-success">'. tl('Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>') .'</div>';
+			echo '<div class="uk-alert uk-alert-success">'. tlHtml('Thanks for the request. We\'ll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>') .'</div>';
 		} else if ($_GET['mail'] == 'fromerror') {
-			echo '<div class="uk-alert uk-alert-danger">'. tl('We could not validate your email address. Please try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
+			echo '<div class="uk-alert uk-alert-danger">'. tlHtml('We could not validate your email address. Please try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
 		} else if ($_GET['mail'] == 'emptyerror') {
-			echo '<div class="uk-alert uk-alert-danger">'. tl('Please fill in all the fields or try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
+			echo '<div class="uk-alert uk-alert-danger">'. tlHtml('Please fill in all the fields or try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
 		} else {
-			echo '<div class="uk-alert uk-alert-danger">'. tl('We failed to send the email. Please try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
+			echo '<div class="uk-alert uk-alert-danger">'. tlHtml('We failed to send the email. Please try contacting us using <a href="#contact">one of the options listed here</a>.') .'</div>';
 		}
 	}
 
@@ -747,7 +747,7 @@ if( $press_request == TRUE )
 
 if( $monetize >= 1 )
 {
-	echo '<h2 id="monetize">Monetization Permission</h2>';
+	echo '<h2 id="monetize">'. tl('Monetization Permission') .'</h2>';
 	if( $monetize == 1 ) echo('<p>'. tl('%s does currently not allow for the contents of %s to be published through video broadcasting services.', COMPANY_TITLE, GAME_TITLE) .'</p>');
 	if( $monetize == 2 ) echo('<p>'. tl('%s does allow the contents of this game to be published through video broadcasting services only with direct written permission from %s. Check at the bottom of this page for contact information.', COMPANY_TITLE, GAME_TITLE) .'</p>');
 	if( $monetize == 3 ) echo('<p>'. tl('%s allows for the contents of %s to be published through video broadcasting services for non-commercial purposes only. Monetization of any video created containing assets from %s is not allowed.', COMPANY_TITLE, GAME_TITLE, GAME_TITLE) .'</p>');

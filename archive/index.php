@@ -350,7 +350,7 @@ echo '							</ul>
 
 if( count($trailers) == 0 )
 {
-	echo '<p>'. tlHtml('There are currently no trailers available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>', COMPANY_TITLE);
+	echo '<p>'. tlHtml('There are currently no trailers available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', COMPANY_TITLE) .'</p>';
 }
 else
 {
@@ -483,7 +483,7 @@ if( file_exists('images/icon.png') ) {
 echo '</div>';
 
 if( !file_exists('images/logo.png') && !file_exists('images/icon.png')) {
-	echo '<p>'. tlHtml('There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>', COMPANY_TITLE);
+	echo '<p>'. tlHtml('There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', COMPANY_TITLE) .'</p>';
 }
 
 echo '					<hr>';
