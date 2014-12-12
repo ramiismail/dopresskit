@@ -42,7 +42,16 @@ if( !file_exists('data.xml') )
 	}
 }
 
-$xml = simplexml_load_file("data.xml");
+// Language logic
+
+include 'lang/TranslateTool.php';
+$language = TranslateTool::loadLanguage(isset($_GET['l']) ? $_GET['l'] : null, 'index.php');
+$languageQuery = ($language != TranslateTool::getDefaultLanguage() ? '?l='. $language : '');
+
+if (file_exists('data-'. $language .'.xml'))
+	$xml = simplexml_load_file('data-'. $language .'.xml');
+else
+	$xml = simplexml_load_file('data.xml');
 
 foreach( $xml->children() as $child )
 {
@@ -199,24 +208,34 @@ echo '<!DOCTYPE html>
 				<div id="navigation" class="uk-width-medium-1-4">
 					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
 					<a class="nav-header" href="http://'. parseLink(COMPANY_WEBSITE) .'">'. trim( parseLink(COMPANY_WEBSITE), "/") .'</a>
+					<ul class="uk-nav uk-nav-side">';
 
-					<ul class="uk-nav uk-nav-side">
-						<li><a href="#factsheet">Factsheet</a></li>
-						<li><a href="#description">Description</a></li>
-						<li><a href="#history">History</a></li>
-						<li><a href="#projects">Projects</a></li>
-						<li><a href="#trailers">Videos</a></li>
-						<li><a href="#images">Images</a></li>
-						<li><a href="#logo">Logo & Icon</a></li>';
-						if( count($awards) > 0 ) echo'<li><a href="#awards">Awards & Recognition</a></li>';
-						if( count($quotes) > 0 ) echo '<li><a href="#quotes">Selected Articles</a></li>';
-
-if( count($additionals) > 0 ) {
-	echo '<li><a href="#links">Additional Links</a></li>';
+if (count(TranslateTool::getLanguages()) > 1) {
+	echo '<li class="language-select"><a>'. tl('Language: ') .'<select onchange="document.location = \'index.php?l=\'+ this.value;">';
+	foreach (TranslateTool::getLanguages() as $tag => $name)
+	{
+		echo '<option value="'. $tag .'" '. ($tag == $language ? 'selected':'') .'>'. htmlspecialchars($name) .'</option>';
+	}
+	echo '</select></a></li>';
+	echo '<li class="uk-nav-divider"></li>';
 }
 
-echo '						<li><a href="#credits">Team</a></li>
-						<li><a href="#contact">Contact</a></li>
+echo '					<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
+						<li><a href="#description">'. tl('Description') .'</a></li>
+						<li><a href="#history">'. tl('History') .'</a></li>
+						<li><a href="#projects">'. tl('Projects') .'</a></li>
+						<li><a href="#trailers">'. tl('Videos') .'</a></li>
+						<li><a href="#images">'. tl('Images') .'</a></li>
+						<li><a href="#logo">'. tl('Logo & Icon') .'</a></li>';
+						if( count($awards) > 0 ) echo'<li><a href="#awards">'. tl('Awards & Recognition') .'</a></li>';
+						if( count($quotes) > 0 ) echo '<li><a href="#quotes">'. tl('Selected Articles') .'</a></li>';
+
+if( count($additionals) > 0 ) {
+	echo '<li><a href="#links">'. tl('Additional Links') .'</a></li>';
+}
+
+echo '						<li><a href="#credits">'. tl('Team') .'</a></li>
+						<li><a href="#contact">'. tl('Contact') .'</a></li>
 					</ul>
 				</div>
 				<div id="content" class="uk-width-medium-3-4">';
@@ -227,26 +246,26 @@ if( file_exists("images/header.png") ) {
 
 echo '					<div class="uk-grid">
 						<div class="uk-width-medium-2-6">
-							<h2 id="factsheet">Factsheet</h2>
+							<h2 id="factsheet">'. tl('Factsheet') .'</h2>
 							<p>
-								<strong>Developer:</strong><br/>
+								<strong>'. tl('Developer:') .'</strong><br/>
 								<a href="">'. COMPANY_TITLE .'</a><br/>
-								Based in '. COMPANY_BASED .'
+								'. tl('Based in %s', COMPANY_BASED) .'
 							</p>
 							<p>
-								<strong>Founding date:</strong><br/>
+								<strong>'. tl('Founding date:') .'</strong><br/>
 								'. COMPANY_DATE .'
 							</p>
 							<p>
-								<strong>Website:</strong><br/>
+								<strong>'. tl('Website:') .'</strong><br/>
 								<a href="http://'. parseLink(COMPANY_WEBSITE) .'">'. parseLink(COMPANY_WEBSITE) .'</a>
 							</p>
 							<p>
-								<strong>Press / Business Contact:</strong><br/>
+								<strong>'. tl('Press / Business Contact:') .'</strong><br/>
 								<a href="mailto:'. COMPANY_CONTACT .'">'. COMPANY_CONTACT .'</a>
 							</p>        
 							<p>
-								<strong>Social:</strong><br/>';
+								<strong>'. tl('Social:') .'</strong><br/>';
 
 for( $i = 0; $i < count($socials); $i++ )
 {
@@ -262,12 +281,12 @@ for( $i = 0; $i < count($socials); $i++ )
 
 echo '							</p>
 							<p>
-							<strong>Releases:</strong><br />';
+							<strong>'. tl('Releases:') .'</strong><br />';
 
 if ($handle = opendir('.')) {
 	while (false !== ($entry = readdir($handle))) {
-		if ($entry != "." && $entry != ".." && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" && substr($entry,0,9) != "error_log") {
-			echo '<a href="sheet.php?p='.$entry.'">'.ucwords(str_replace("_", " ", $entry)).'</a><br />';
+		if ($entry != "." && $entry != ".." && $entry != "lang" && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" && substr($entry,0,9) != "error_log") {
+			echo '<a href="sheet.php?p='.$entry . str_replace('?', '&', $languageQuery).'">'.ucwords(str_replace("_", " ", $entry)).'</a><br />';
 		}
 	}
 }
@@ -278,7 +297,7 @@ echo '							</p>
 
 if( count($address) > 0 )
 {
-	echo '<strong>Address:</strong><br/>';
+	echo '<strong>'. tl('Address:') .'</strong><br/>';
 	for( $i = 0; $i < count($address); $i++ )
 	{
 		echo $address[$i].'<br/>';
@@ -287,14 +306,14 @@ if( count($address) > 0 )
 
 echo'							</p> 
 							<p>
-								<strong>Phone:</strong><br/>
+								<strong>'. tl('Phone:') .'</strong><br/>
 								'. COMPANY_PHONE .'
 							</p>
 						</div>
 						<div class="uk-width-medium-4-6">
-							<h2 id="description">Description</h2>
+							<h2 id="description">'. tl('Description') .'</h2>
 							<p>'. COMPANY_DESCRIPTION .'</p>
-							<h2 id="history">History</h2>';
+							<h2 id="history">'. tl('History') .'</h2>';
 
 for( $i = 0; $i < count($histories); $i++ )
 {
@@ -309,13 +328,13 @@ for( $i = 0; $i < count($histories); $i++ )
 <p>'.$text.'</p>';
 }
 
-echo '							<h2 id="projects">Projects</h2>
+echo '							<h2 id="projects">'. tl('Projects') .'</h2>
 							<ul>';
 
 if ($handle = opendir('.')) {
 	while (false !== ($entry = readdir($handle))) {
-		if ($entry != "." && $entry != ".." && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" && substr($entry,0,9) != "error_log") {
-			echo '<li><a href="sheet.php?p='.$entry.'">'.ucwords(str_replace("_", " ", $entry)).'</a></li>';
+		if ($entry != "." && $entry != ".." && $entry != "lang" && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" && substr($entry,0,9) != "error_log") {
+			echo '<li><a href="sheet.php?p='.$entry. str_replace('?', '&', $languageQuery).'">'.ucwords(str_replace("_", " ", $entry)).'</a></li>';
 		}
 	}
 }
@@ -327,11 +346,11 @@ echo '							</ul>
 
 					<hr>
 
-					<h2 id="trailers">Videos</h2>';
+					<h2 id="trailers">'. tl('Videos') .'</h2>';
 
 if( count($trailers) == 0 )
 {
-	echo '<p>There are currently no trailers available for '.COMPANY_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';
+	echo '<p>'. tlHtml('There are currently no trailers available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', COMPANY_TITLE) .'</p>';
 }
 else
 {
@@ -398,7 +417,7 @@ else
 
 echo '					<hr>
 
-					<h2 id="images">Images</h2>';
+					<h2 id="images">'. tl('Images') .'</h2>';
 
 if( file_exists("images/images.zip") )
 {
@@ -410,7 +429,7 @@ if( file_exists("images/images.zip") )
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
-	echo '<a href="images/images.zip"><div class="uk-alert">download all screenshots &amp; photos as .zip ('. $filesize .')</div></a>';
+	echo '<a href="images/images.zip"><div class="uk-alert">'. tl('download all screenshots & photos as .zip (%s)', $filesize) .'</div></a>';
 }
 
 echo '<div class="uk-grid images">';
@@ -432,11 +451,11 @@ echo '</div>';
 
 closedir($handle);
 
-echo '					<p class="images-text">There are far more images available for '. COMPANY_TITLE .', but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#contact">contact us</a>!</p>
+echo '					<p class="images-text">'. tlHtml('There are far more images available for %s, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#contact">contact us</a>!', COMPANY_TITLE) .'</p>
 
 					<hr>
 
-					<h2 id="logo">Logo & Icon</h2>';
+					<h2 id="logo">'. tl('Logo & Icon') .'</h2>';
 
 if( file_exists("images/logo.zip") )
 {
@@ -448,7 +467,7 @@ if( file_exists("images/logo.zip") )
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
-	echo '<a href="images/logo.zip"><div class="uk-alert">download logo files as .zip ('. $filesize .')</div></a>';
+	echo '<a href="images/logo.zip"><div class="uk-alert">'. tl('download logo files as .zip (%s)', $filesize) .'</div></a>';
 }
 
 echo '<div class="uk-grid images">';
@@ -464,14 +483,14 @@ if( file_exists('images/icon.png') ) {
 echo '</div>';
 
 if( !file_exists('images/logo.png') && !file_exists('images/icon.png')) {
-	echo '<p>There are currently no logos or icons available for '.COMPANY_TITLE.'. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>';
+	echo '<p>'. tlHtml('There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', COMPANY_TITLE) .'</p>';
 }
 
 echo '					<hr>';
 
 if( count( $awards > 0 ) )
 {
-	echo('<h2 id="awards">Awards & Recognition</h2>
+	echo('<h2 id="awards">'. tl('Awards & Recognition') .'</h2>
 					<ul>');
 
 for( $i = 0; $i < count($awards); $i++ )
@@ -495,7 +514,7 @@ echo('</ul><hr>');
 
 if( count($quotes) > 0 )
 {
-	echo '					<h2 id="quotes">Selected Articles</h2>
+	echo '					<h2 id="quotes">'. tl('Selected Articles') .'</h2>
 						<ul>';
 	
 	for( $i = 0; $i < count($quotes); $i++ )
@@ -522,7 +541,7 @@ if( count($quotes) > 0 )
 }
 
 if( count($additionals) > 0 ) {
-	echo '<h2 id="links">Additional Links</h2>';
+	echo '<h2 id="links">'. tl('Additional Links') .'</h2>';
 
 	for( $i = 0; $i < count($additionals); $i++ )
 	{
@@ -555,7 +574,7 @@ if( count($additionals) > 0 ) {
 
 echo '					<div class="uk-grid">
 						<div class="uk-width-medium-1-2">
-							<h2 id="credits">Team & Repeating Collaborators</h2>';
+							<h2 id="credits">'. tl('Team & Repeating Collaborators') .'</h2>';
 
 for( $i = 0; $i < count($credits); $i++ )
 {
@@ -589,7 +608,7 @@ for( $i = 0; $i < count($credits); $i++ )
 
 echo '						</div>
 						<div class="uk-width-medium-1-2">
-							<h2 id="contact">Contact</h2>';
+							<h2 id="contact">'. tl('Contact') .'</h2>';
 
 for( $i = 0; $i < count($contacts); $i++ )
 {
@@ -657,3 +676,4 @@ if ( defined("ANALYTICS") && strlen(ANALYTICS) > 10 )
 }
 echo'	</body>
 </html>';
+

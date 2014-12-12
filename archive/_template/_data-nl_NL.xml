@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<game>
+	<title>Spel Naam</title>
+	<release-date>1 Mei, 2012</release-date>
+	<website>http://www.spelzijde.nl/</website>
+	<press-can-request-copy>TRUE</press-can-request-copy>
+
+	<platforms>
+		<platform>
+			<name>PC / Mac</name>
+			<link>http://www.gamesite.com/</link>
+		</platform>
+		<platform>
+			<name>Steam</name>
+			<link>http://www.steampowered.com/</link>
+		</platform>
+		<platform>
+			<name>Apple App Store</name>
+			<link>http://www.itunes.com/</link>
+		</platform>
+	</platforms>
+	
+	<prices>
+		<price>
+			<currency>USD</currency>
+			<value>$1.99</value>
+		</price>
+		<price>
+			<currency>EUR</currency>
+			<value>€1.59</value>
+		</price>
+		<price>
+			<currency>CAD</currency>
+			<value>$1.99</value>
+		</price>				
+		<price>
+			<currency>GBP</currency>
+			<value>£1.29</value>
+		</price>
+	</prices>
+
+	<description>
+	Hallo, dit is een kleine samenvatting van feiten over het spel. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</description>
+	
+	<history>
+	Omdat we een indie ontwikkelaar zijn, willen we een historie voor ons spel. Deze paragraaf gaat dit uitleggen in het kort. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</history>
+
+	<features>
+		<feature>Schrijf hier over interessante dingen waar spelers van zullen houden.</feature>
+		<feature>Dit kenmerk gaat over de 8-bit pixels welke ongetwijfeld in het spel zitten.</feature>
+		<feature>De audio is waarschijnlijk subliem, dus zeg daar ook wat over, mkay?</feature>
+		<feature>Dit spel is fantastisch, zorg ervoor dat elk punt this onderstreept!</feature>
+		<feature>Iets mooi klinkends waarmee deze vijfpunten lijst goed afgerond wordt.</feature>
+	</features>
+	
+	<trailers>
+		<trailer>
+			<name>Korte intro video</name>
+			<youtube>7jQbITg0MSk</youtube>
+			<vimeo>23571681</vimeo>
+		</trailer>
+		<trailer>
+			<name>Spel-in-actie Video</name>
+			<youtube>7jQbITg0MSk</youtube>
+			<vimeo>23571681</vimeo>
+		</trailer>
+	</trailers>
+	
+	<awards>
+		<award>
+			<description>Winaar in deze hoogrelevante competitie.</description>
+			<info>Gamestad, 20 October, 1989</info>
+		</award>
+		<award>
+			<description>Genomineerd voor deze prestigieuze prijs.</description>
+			<info>Megaprijs2000, 4 December, 1991</info>
+		</award>
+		<award>
+			<description>Winnaar in deze tevens hoogrelevante wedstrijd.</description>
+			<info>Amstergamedam, 20 October, 1989</info>
+		</award>
+		<award>
+			<description>Genomineerd voor deze prestigieuze prijs.</description>
+			<info>Uitrijkingsplaats, 4 December, 1991</info>
+		</award>
+	</awards>
+	
+	<quotes>
+		<quote>
+			<description>Dit is een zijdelingse uitspraak door deze hoogaangeschreven persoon.</description>
+			<name>Persoon Naam</name>
+			<website>Website</website>
+			<link>http://www.website.com/</link>
+		</quote>
+		<quote>
+			<description>Een extreem positieve quotatie van een aardig person. Fantastisch.</description>
+			<name>Aardige Gast</name>
+			<website>Deze Pagina Heeft 21 miljard bezoekers</website>
+			<link>http://geocities.blog.nl/</link>
+		</quote>
+		<quote>
+			<description>Ik hou van dit spel, ookal begrijp ik er niets van.</description>
+			<name>Vooringenomen Bastaard</name>
+			<website>Kunstrijke Webplaats</website>
+			<link>http://kunst.tumblr.com/</link>
+		</quote>
+		<quote>
+			<description>HEILIGE STROOPWAFELS WAT GOED</description>
+			<name>Hongerige Hoofdletterman</name>
+			<website>Bose Revisies</website>
+			<link>http://startpagina.nl/boosopjouwtube</link>
+		</quote>
+	</quotes>
+	
+	<additionals>
+		<additional>
+			<title>Originele muziekverzameling</title>
+			<description>Gratis beschikbaar via</description>
+			<link>http://somemusicsite.com/thislink</link>
+		</additional>
+		<additional>
+			<title>Uitgave Blog Bericht</title>
+			<description>Het blog bericht welke de uitgave dit spel doet is te vinden op</description>
+			<link>http://vlambeer.com/bloglink</link>
+		</additional>
+	</additionals>
+	
+	<credits>
+		<credit>
+			<person>Rami Ismail</person>
+			<role>Business &amp; Ontwikkeling, Vlambeer</role>
+		</credit>
+		<credit>
+			<person>Jan Willem Nijman</person>
+			<role>Spel Ontwerper, Vlambeer</role>
+		</credit>
+		<credit>
+			<person>John Doe</person>
+			<role>Artiest, Freelancer</role>
+		</credit>
+		<credit>
+			<person>Oliver Twist</person>
+			<website>www.olivertwist.com</website>
+			<role>Artiest, Freelancer</role>
+		</credit>
+		<credit>
+			<person>Jane Doette</person>
+			<website>www.olivertwist.com</website>
+			<role>Muziek, Freelancer</role>
+		</credit>
+	</credits>
+</game>

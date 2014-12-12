@@ -27,6 +27,10 @@ img {
 	padding-bottom: 10px;
 }
 
+#navigation li.language-select select {
+	float: right;
+}
+
 #content h2 {
 	font-family: Georgia, "Times New Roman", Times, serif;s
 }
