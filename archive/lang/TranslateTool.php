@@ -17,7 +17,7 @@ class TranslateTool
 			$languages = array(
 				'en' => 'English',
 			);
-			if ($handle = opendir(__DIR__)) 
+			if ($handle = opendir(dirname(__FILE__))) 
 			{
 				while (false !== ($entry = readdir($handle))) 
 				{
@@ -44,9 +44,9 @@ class TranslateTool
 		
 		self::$_language = $language;
 				
-		if (isset($languages[$language]) && file_exists(__DIR__ . '/'. $language .'-'. $languages[$language]. '.xml'))
+		if (isset($languages[$language]) && file_exists(dirname(__FILE__) . '/'. $language .'-'. $languages[$language]. '.xml'))
 		{
-			$xml = simplexml_load_file(__DIR__ . '/'. $language .'-'. $languages[$language]. '.xml');
+			$xml = simplexml_load_file(dirname(__FILE__) . '/'. $language .'-'. $languages[$language]. '.xml');
 			
 			self::$_translations = array();
 			foreach ($xml as $set)

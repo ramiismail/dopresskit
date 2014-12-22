@@ -6,6 +6,19 @@ if( file_exists('install.php') )
 	exit;
 }
 
+if( file_exists('mail.php') )
+{
+	echo('Update: Unlinking mail.php. You can safely ignore this message. Please refresh the page.');
+	unlink('mail.php');
+}
+
+if( file_exists('validation.js') )
+{
+	echo('Update: Unlinking validation.js. You can safely ignore this message. Please refresh the page.');
+	unlink('validation.js');
+}
+
+
 if( !file_exists('data.xml') )
 {
 	if( file_exists('_data.xml') )

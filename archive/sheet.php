@@ -100,7 +100,59 @@ if( !isset($xml) )
 	}
 }
 
-$press_request = TRUE;
+/* check for distribute() keyfile */
+$files = glob($game.'/ds_*');
+foreach( $files as $keyfile ) {
+	$keyfileContent = fopen($keyfile, 'r');
+	$presskitURL = fgets($keyfileContent);
+	$url = fgets($keyfileContent);
+	$key = substr($keyfile, strpos($keyfile,'/ds_') + 4);
+	$data = array('key' => $key, 'url' => $url);
+	fclose($keyfileContent);
+
+	if( function_exists('curl_version') ) {
+		// curl exists. this is good. let's use it.
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		$result = curl_exec($ch);
+		if( $result != "FAIL" ) $press_request = TRUE;
+		else {
+			$press_request_fail = TRUE;
+			$press_request_fail_msg = tl('There was an unexpected error retrieving data from distribute(). Please try again later.');			
+		}
+
+		curl_close($ch);
+	}
+	else if( ini_get('allow_url') ) {
+		// well maybe this is a good fallback who knows?
+		$options = array(
+			'http' => array(
+				'header' => 'Content-type: application/x-www-form-urlencoded',
+				'method' => 'POST',
+				'content' => http_build_query($data),
+			),
+		);
+
+		$context = stream_context_create($options);
+		$result = file_get_contents($url);
+		if( $result != "FAIL" ) $press_request = TRUE;
+		else {
+			$press_request_fail = TRUE;
+			$press_request_fail_msg = tl('There was an unforeseen error retrieving data from distribute(). Please try again later.');			
+		}
+	} else {
+		// it doesn't matter you have a keyfile, you can't integrate
+		$press_request = FALSE;
+		$press_request_fail = TRUE;
+		$press_request_fail_msg = tl('There is no method to communicate with distribute() available on your server. This functionality is not currently available. Remove the keyfile to remove this warning.');
+	}
+}
+
+// Set default value for monetize
 $monetize = 0;
 
 foreach( $xml->children() as $child )
@@ -186,8 +238,7 @@ foreach( $xml->children() as $child )
 			}
 			break;					
 		case("press-can-request-copy"):
-			if( strtolower($child) == "false" ) $press_request = FALSE;
-			else $press_request = TRUE;
+			if( strtolower($child) != "false" ) $press_request_outdated_warning = TRUE;
 			break;
 		case("monetization-permission"):
 			if( strtolower($child) == "false" ) $monetize = 1;
@@ -716,6 +767,32 @@ if( count($promoterquotes) + count($quotes) > 0 )
 
 if( $press_request == TRUE )
 {
+	echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
+	echo '<p>'. tl("Please fill in your e-mail address below to complete a distribute() request and we'll get back to you as soon as a press copy is available for you.") .'<br/>';
+	echo '<div id="mailform">';
+	echo '<form id="pressrequest" class="uk-form" method="POST" action="'.$url.'">';
+	echo '<input type="email" id="email" name="email" placeholder="name@yourdomain.com" style="width:100%;"></input>';
+	echo '<input type="hidden" id="key" name="key" value="'.$key.'"></input><br/>';
+	echo '<input type="submit" class="uk-button" id="submit-button" value="'. tl('request a press copy') .'" style="width:100%;"></input>';
+	echo '<p>'. tlHtml('Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.').'</p>';
+	echo '</div>';
+	echo '<hr>';
+} else {
+	if( $press_request_fail == TRUE ) {
+		echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
+		echo '<p>'.$press_request_fail_msg.'</p>';
+		echo '<hr>';
+	}
+	if( $press_request_outdated_warning == TRUE ) {
+		echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
+		echo '<p>'.tl("We are afraid this developer has not upgraded their presskit() to use distribute(). For security purposes, this form has been disabled.").'</p>';
+		echo '<hr>';
+	}
+}
+
+
+/*if( $press_request == TRUE )
+{
 	echo '<h2 id="preview">'. tl('Request Press Copy') .'</h2>
 <p>'. tl('Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.') .'<br/>
 <div id="mailform">
@@ -744,7 +821,7 @@ if( $press_request == TRUE )
 	}
 
 	echo '<hr>';
-}
+}*/
 
 if( $monetize >= 1 )
 {
@@ -885,8 +962,7 @@ echo '						</div>
 					});
 				});
 			});
-		</script>
-		<script type="text/javascript" src="validation.js"></script>';
+		</script>';
 if ( defined("ANALYTICS") && strlen(ANALYTICS) > 10 )
 {
 	echo '<script type="text/javascript">
