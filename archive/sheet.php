@@ -84,6 +84,9 @@ if( !isset($xml) )
 		if( !is_dir($game.'/images') ) {
 			mkdir($game.'/images');
 		}
+		if( !is_dir($game.'/images/thumbs') ) {
+			mkdir($game.'/images/thumbs');
+		}
 		if( !is_dir($game.'/trailers') ) {
 			mkdir($game.'/trailers');
 		}
@@ -613,7 +616,11 @@ if ($handle = opendir($game.'/images'))
 		{
 			if( substr($entry,0,4) != "logo" && substr($entry,0,4) != "icon" && substr($entry,0,6) != "header" )
 			{	
-				echo '<div class="uk-width-medium-1-2"><a href="'. $game .'/images/'. $entry .'"><img src="'. $game .'/images/'.$entry.'" alt="'.$entry.'" /></a></div>';
+				if (!file_exists($game .'/images/thumbs/'.$entry))
+				{
+					createThumb($game,$entry,400);
+				}
+				echo '<div class="uk-width-medium-1-2"><a href="'. $game .'/images/'. $entry .'"><img src="'. $game .'/images/thumbs/'.$entry.'" alt="'.$entry.'" /></a></div>';
 				$found++;
 			}
 		}
@@ -979,5 +986,32 @@ if ( defined("ANALYTICS") && strlen(ANALYTICS) > 10 )
 }
 echo'	</body>
 </html>';
+
+function createThumb( $game, $image, $thumbWidth ) 
+{
+ // open the directory
+  $dir = opendir(  $game.'/images/thumbs/' );
+  
+      $img = imagecreatefrompng( $game.'/images/'. $image );
+      $width = imagesx( $img );
+      $height = imagesy( $img );
+
+      // calculate thumbnail size
+      $new_width = $thumbWidth;
+      $new_height = floor( $height * ( $thumbWidth / $width ) );
+
+      // create a new temporary image
+      $tmp_img = imagecreatetruecolor( $new_width, $new_height );
+
+      // copy and resize old image into new image 
+      imagecopyresampled( $tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height );
+
+      // save thumbnail into a file
+      imagepng( $tmp_img,  $game.'/images/thumbs/'. $image  );
+    
+ 
+  // close the directory
+  closedir($dir);
+}
 
 ?>
