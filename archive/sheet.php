@@ -851,8 +851,13 @@ for( $i = 0; $i < count($additionals); $i++ )
 	}
 
 	if( strpos(parseLink($link),'/') !== 0 ) {
-		$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
-	} else { $linkTitle = $link; }
+		if(strpos(parseLink($link),'/') === false) {
+			$linkTitle = parseLink($link);
+		} else {
+			$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
+		}
+	}
+	else { $linkTitle = $link; }
 	
 	echo '<p>
 	<strong>'.$title.'</strong><br/>
