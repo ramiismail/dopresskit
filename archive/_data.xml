@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- example file containing base tags -->
 
-<game>	
+<game>
 	<title>Company Name</title>
 	<founding-date>September 1, 2010</founding-date>
 	<website>http://www.website.com/</website>
 	<based-in>Cityville, Metropolisland</based-in>
-	
+
 	<press-contact>press-contact@company.com</press-contact>
 	<phone>+00 (1) 22 33 44 55 66</phone>
 	<address>
@@ -30,10 +30,10 @@
 		</social>
 	</socials>
 
-	<description>	
+	<description>
 		We're games studio and we make games. We're also capable of editing XML files.
 	</description>
-		
+
 	<histories>
 		<history>
 			<header>Early history</header>
@@ -44,7 +44,7 @@
 			<text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sem dui, volutpat eu adipiscing sed, rutrum aliquam lacus. Proin sollicitudin consequat dolor id dignissim. Aliquam sem turpis, sagittis lobortis viverra eget, varius vitae nunc. Proin ac lacus porttitor dui sollicitudin elementum. Nulla ut hendrerit est. Fusce vitae arcu erat, vel molestie est. Proin et placerat justo. Proin placerat arcu massa, eu blandit leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam eu lorem sed massa lobortis hendrerit vitae vel odio. Maecenas eget pulvinar tortor. Nunc vitae nisl ac odio bibendum luctus ac a leo. Suspendisse auctor elit et velit sagittis vehicula. Maecenas faucibus blandit rutrum. Duis et sem nibh. Vestibulum placerat elit et dui rhoncus accumsan.</text>
 		</history>
 	</histories>
-		
+
 	<trailers>
 		<trailer>
 			<name>This video is nice</name>
@@ -56,7 +56,7 @@
 			<vimeo>12536488</vimeo>
 		</trailer>
 	</trailers>
-	
+
 	<awards>
 		<award>
 			<description>Winner in this highly relevant contest.</description>
@@ -75,7 +75,7 @@
 			<info>Award Ceremony, 4 December, 1991</info>
 		</award>
 	</awards>
-	
+
 	<quotes>
 		<quote>
 			<description>This is a rather insignificant quote by a highly important person.</description>
@@ -102,12 +102,12 @@
 			<link>http://thispage.net/angrytube</link>
 		</quote>
 	</quotes>
-	
+
 	<press-can-request-copy>TRUE</press-can-request-copy> <!-- can be true or false -->
 	<monetization-permission>monetize</monetization-permission> <!-- can be: 	false (no video allowed),
 																			 	ask (permission on case-per-case basis),
 																			 	non-commercial (no monetization allowed),
-																			 	monetize (full permission) -->	
+																			 	monetize (full permission) -->
 	<additionals>
 		<additional>
 			<title>Company Link #1</title>
@@ -115,7 +115,7 @@
 			<link>http://somemusicsite.com/thislink</link>
 		</additional>
 	</additionals>
-	
+
 	<credits>
 		<credit>
 			<person>John Doe</person>
@@ -132,7 +132,7 @@
 			<role>Music, Freelancer</role>
 		</credit>
 	</credits>
-	
+
 	<contacts>
 		<contact>
 			<name>Inquiries</name>

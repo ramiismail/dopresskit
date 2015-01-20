@@ -3,7 +3,7 @@
 $game = $_GET['p'];
 $state = $_GET['s'];
 $checksum = 0;
-	
+
 $todo = array(
 	"required" => array(
 		"data.xml" => array(
@@ -106,7 +106,7 @@ if( $state == 'upgrade' )
 		$todo = array();
 	} else {
 		$contentText = '<h2>Why am I seeing this page?</h2>
-<p>The installation procedure is almost done, but you\'ll probably need another thirty to sixty minutes to fully complete installation. Don\'t worry - things aren\'t in much of a hurry, you can always close this tab now and return later.</p>		
+<p>The installation procedure is almost done, but you\'ll probably need another thirty to sixty minutes to fully complete installation. Don\'t worry - things aren\'t in much of a hurry, you can always close this tab now and return later.</p>
 <p>If you are ready, you will need FTP &amp; XML-editing capabilities. Please complete the following steps to finish the installation.</p>';
 
 		if( file_exists('_data.xml') )
@@ -122,11 +122,11 @@ if( $state == 'upgrade' )
 					{
 						$start = strpos($line, '&lt;title&gt;') + 13;
 						$title = substr($line, $start, strlen("Company Name") );
-																	
+
 						if( ucwords(str_replace("_", " ", $title) ) != "Company Name" )
 						{
 							$todo['required']['data.xml']['done'] = True;
-							break;		
+							break;
 						}
 					}
 				}
@@ -147,15 +147,15 @@ if( $state == 'upgrade' )
 				{
 					if( substr($file, -10) != "header.png" && substr($file, -8) != "logo.png" && substr($file, -8) != "icon.png" )
 					{
-						$found++;	
+						$found++;
 					}
 				}
-				
+
 				if( $found > 0 )
 				{
 					$todo['required']['images']['done'] = True;
 				}
-			}	
+			}
 		}
 
 		if( file_exists('images/images.zip') )
@@ -191,16 +191,16 @@ if( $state == 'upgrade' )
 					$start = strpos($line, '&lt;analytics&gt;') + 17;
 					$end = strpos($line, '&lt;/analytics&gt;');
 					$analytics = substr($line, $start, $end - $start );
-															
+
 					if( strlen($analytics) > 10 )
 					{
 						echo('<li style="color:green"><del>');
 						$found++;
-						break;		
+						break;
 					}
 				}
 			}
-				
+
 			if( $found == 0 )
 			{
 				$todo['additional']['analytics']['done'] = True;
@@ -240,7 +240,7 @@ Don\'t forget that you can always rename the data.xml file back to _data.xml to 
 		$todo = array();
 	} else {
 		$contentText = '<h2>Why am I seeing this page?</h2>
-<p>This game has an entry, but the relevant files have not been uploaded yet.</p>		
+<p>This game has an entry, but the relevant files have not been uploaded yet.</p>
 <p>If you are the webmaster, please note that the appropriate files & directories have been generated for you. Take the following steps to create the press page:</p>';
 
 		if( file_exists('_data.xml') )
@@ -254,11 +254,11 @@ Don\'t forget that you can always rename the data.xml file back to _data.xml to 
 				{
 					$start = strpos($line, '&lt;title&gt;') + 13;
 					$title = substr($line, $start, strlen(ucwords(str_replace("_", " ", $game) ) ) );
-																
+
 					if( ucwords(str_replace("_", " ", $title) ) == ucwords(str_replace("_", " ", $game) ) )
 					{
 						$todo['required']['data.xml']['done'] = True;
-						break;		
+						break;
 					}
 				}
 			}
@@ -278,15 +278,15 @@ Don\'t forget that you can always rename the data.xml file back to _data.xml to 
 				{
 					if( substr($file, -10) != "header.png" && substr($file, -8) != "logo.png" && substr($file, -8) != "icon.png" )
 					{
-						$found++;	
+						$found++;
 					}
 				}
-				
+
 				if( $found > 0 )
 				{
 					$todo['required']['images']['done'] = True;
 				}
-			}	
+			}
 		}
 
 		if( file_exists('images/images.zip') )
@@ -322,11 +322,11 @@ Don\'t forget that you can always rename the data.xml file back to _data.xml to 
 					$start = strpos($line, '&lt;product&gt;') + 15;
 					$end = strpos($line, '&lt;/product&gt;');
 					$promoter = substr($line, $start, $end );
-															
+
 					if( $promoter != 0 )
 					{
 						$todo['optional']['promoter']['done'] = True;
-						break;		
+						break;
 					}
 				}
 			}
