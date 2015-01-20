@@ -58,7 +58,7 @@ img {
 
 #content .iframe-container {
 	position: relative;
-	/* Magic! Makes sure the container is high enough to show the entire iframe 
+	/* Magic! Makes sure the container is high enough to show the entire iframe
 	 * Thanks to http://andmag.se/2011/11/responsive-embeds/ */
 	padding-bottom: 56.5%;
 }

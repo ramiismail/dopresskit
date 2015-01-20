@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <language>
-	<!-- Set for texts used in 'index.php', and other pages --> 
+	<!-- Set for texts used in 'index.php', and other pages -->
 	<set>
 		<translation>
 			<base>Language: </base>
@@ -115,7 +115,7 @@
 			<local>Contact</local>
 		</translation>
 	</set>
-	<!-- Set for additional texts used in 'sheet.php', the '_template/index.php' file --> 
+	<!-- Set for additional texts used in 'sheet.php', the '_template/index.php' file -->
 	<set>
 		<translation>
 			<base>Request Press Copy</base>
@@ -160,15 +160,15 @@
 		<translation>
 			<base>me@website.com</base>
 			<local>me@website.com</local>
-		</translation>			
+		</translation>
 		<translation>
 			<base>, writing for </base>
 			<local>, writing for </local>
-		</translation>			
+		</translation>
 		<translation>
 			<base>company name</base>
 			<local>company naam</local>
-		</translation>			
+		</translation>
 		<translation>
 			<base> would like to </base>
 			<local> would like to </local>
@@ -180,7 +180,7 @@
 		<translation>
 			<base><![CDATA[Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.]]></base>
 			<local><![CDATA[Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.]]></local>
-		</translation>	
+		</translation>
 		<translation>
 			<base><![CDATA[Thanks for the request. We'll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>]]></base>
 			<local><![CDATA[Thanks for the request. We'll be in touch as soon as possible. In the meanwhile, feel free to <a href="#contact">follow up with any questions or requests you might have!</a>]]></local>
@@ -196,7 +196,7 @@
 		<translation>
 			<base><![CDATA[We failed to send the email. Please try contacting us using <a href="#contact">one of the options listed here</a>.]]></base>
 			<local><![CDATA[We failed to send the email. Please try contacting us using <a href="#contact">one of the options listed here</a>.]]></local>
-		</translation>		
+		</translation>
 		<translation>
 			<base>Boilerplate</base>
 			<local>Boilerplate</local>
@@ -237,5 +237,5 @@
 			<base>press kit</base>
 			<local>press kit</local>
 		</translation>
-	</set>	
+	</set>
 </language>

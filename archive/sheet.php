@@ -28,7 +28,7 @@ if( !isset($xml) )
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+
 		<title>Thanks!</title>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
@@ -47,7 +47,7 @@ if( !isset($xml) )
 		</script>
 	</body>
 </html>';
-		exit;		
+		exit;
 	}
 	else if( is_dir($game) && $game != "lang" && $game != "images" && $game != "trailers" && $game != "_template" )
 	{
@@ -56,7 +56,7 @@ if( !isset($xml) )
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+
 		<title>Instructions</title>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
@@ -122,7 +122,7 @@ foreach( $files as $keyfile ) {
 		if( $result != "FAIL" ) $press_request = TRUE;
 		else {
 			$press_request_fail = TRUE;
-			$press_request_fail_msg = tl('There was an unexpected error retrieving data from distribute(). Please try again later.');			
+			$press_request_fail_msg = tl('There was an unexpected error retrieving data from distribute(). Please try again later.');
 		}
 
 		curl_close($ch);
@@ -142,7 +142,7 @@ foreach( $files as $keyfile ) {
 		if( $result != "FAIL" ) $press_request = TRUE;
 		else {
 			$press_request_fail = TRUE;
-			$press_request_fail_msg = tl('There was an unforeseen error retrieving data from distribute(). Please try again later.');			
+			$press_request_fail_msg = tl('There was an unforeseen error retrieving data from distribute(). Please try again later.');
 		}
 	} else {
 		// it doesn't matter you have a keyfile, you can't integrate
@@ -161,7 +161,7 @@ foreach( $xml->children() as $child )
 	{
 		case("title"):
 			define("GAME_TITLE", $child);
-			break;	
+			break;
 		case("release-date"):
 			define("GAME_DATE", $child);
 			break;
@@ -209,7 +209,7 @@ foreach( $xml->children() as $child )
 				$features[$i] = $subchild;
 				$i++;
 			}
-			break;	
+			break;
 		case("trailers"):
 			$trailers = array();
 			$i = 0;
@@ -218,7 +218,7 @@ foreach( $xml->children() as $child )
 				$trailers[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("awards"):
 			$awards = array();
 			$i = 0;
@@ -227,7 +227,7 @@ foreach( $xml->children() as $child )
 				$awards[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("quotes"):
 			$quotes = array();
 			$i = 0;
@@ -236,7 +236,7 @@ foreach( $xml->children() as $child )
 				$quotes[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("press-can-request-copy"):
 			if( strtolower($child) != "false" ) $press_request_outdated_warning = TRUE;
 			break;
@@ -254,7 +254,7 @@ foreach( $xml->children() as $child )
 				$additionals[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("credits"):
 			$credits = array();
 			$i = 0;
@@ -263,16 +263,16 @@ foreach( $xml->children() as $child )
 				$credits[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 		case("promoter"):
 			$promoterawards = array();
 			$promoterquotes = array();
 
 			$promotercode = ($child->children());
 			$promotercode = $promotercode->product;
-			
+
 			$promoterxml = simplexml_load_file('http://promoterapp.com/dopresskit/'.$promotercode);
-			
+
 			foreach( $promoterxml->children() as $promoterchild )
 			{
 				switch( $promoterchild->children()->getName() )
@@ -283,7 +283,7 @@ foreach( $xml->children() as $child )
 						{
 							$promoterquotes[$i][$promotersubchild->getName()] = $promotersubchild;
 							$i++;
-						}					
+						}
 						break;
 					case("award"):
 						$i = 0;
@@ -291,11 +291,11 @@ foreach( $xml->children() as $child )
 						{
 							$promoterawards[$i][$promotersubchild->getName()] = $promotersubchild;
 							$i++;
-						}					
-						break;							
+						}
+						break;
 				}
 			}
-			
+
 			break;
 	}
 }
@@ -311,7 +311,7 @@ foreach( $xml->children() as $child )
 	{
 		case("title"):
 			define("COMPANY_TITLE", $child);
-			break;	
+			break;
 		case("based-in"):
 			define("COMPANY_BASED", $child);
 			break;
@@ -329,7 +329,7 @@ foreach( $xml->children() as $child )
 				$contacts[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
 	}
 }
 
@@ -346,7 +346,7 @@ function parseLink($uri)
         $parsed = substr($parsed, 0, strlen($parsed) - 1);
     if( substr($parsed,-1,1) == "/" )
     	$parsed = substr($parsed, 0, strlen($parsed) - 1);
-    
+
     return $parsed;
 }
 
@@ -355,7 +355,7 @@ echo '<!DOCTYPE html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+
 		<title>'. COMPANY_TITLE .'</title>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
@@ -378,7 +378,7 @@ if (count(TranslateTool::getLanguages()) > 1) {
 	echo '</select></a></li>';
 	echo '<li class="uk-nav-divider"></li>';
 }
-		
+
 echo '					<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
 						<li><a href="#description">'. tl('Description') .'</a></li>
 						<li><a href="#history">'. tl('History') .'</a></li>
@@ -533,12 +533,12 @@ else
 		{
 			if( $child->getName() == "name" ) {
 				$name = $child;
-			} else if( $child->getName() == "youtube" ) { 
-				$youtube = $child; 
-			
-				if( $ytfirst == -1 ) { 
-					$ytfirst = 1; 
-				} 
+			} else if( $child->getName() == "youtube" ) {
+				$youtube = $child;
+
+				if( $ytfirst == -1 ) {
+					$ytfirst = 1;
+				}
 			} else if( $child->getName() == "vimeo" ) {
 				$vimeo = $child; if( $ytfirst == -1 ) {
 					$ytfirst = 0;
@@ -549,8 +549,8 @@ else
 				$mp4 = $child;
 			}
 		}
-				
-		if( strlen($youtube) + strlen($vimeo) > 0 )				
+
+		if( strlen($youtube) + strlen($vimeo) > 0 )
 		{
 			echo '<p><strong>'.$name.'</strong>&nbsp;';
 			$result = "";
@@ -570,7 +570,7 @@ else
 
 			echo substr($result, 0, -2);
 
-			if( $ytfirst == 1 ) 
+			if( $ytfirst == 1 )
 			{
 				echo '<div class="uk-responsive-width iframe-container">
 		<iframe src="http://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
@@ -581,7 +581,7 @@ else
 </div>';
 			}
 			echo '</p>';
-		}				
+		}
 	}
 }
 
@@ -612,7 +612,7 @@ if ($handle = opendir($game.'/images'))
 		if( substr($entry,-4) == ".png" || substr($entry,-4) == ".gif" )
 		{
 			if( substr($entry,0,4) != "logo" && substr($entry,0,4) != "icon" && substr($entry,0,6) != "header" )
-			{	
+			{
 				echo '<div class="uk-width-medium-1-2"><a href="'. $game .'/images/'. $entry .'"><img src="'. $game .'/images/'.$entry.'" alt="'.$entry.'" /></a></div>';
 				$found++;
 			}
@@ -626,7 +626,7 @@ closedir($handle);
 if ($found == 0) {
 	echo '<p class="images-text">'. tlHtml('There are currently no screenshots available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
-					
+
 echo '					<hr>
 
 					<h2 id="logo">'. tl('Logo & Icon') .'</h2>';
@@ -685,9 +685,9 @@ if( count( $promoterawards ) + count( $awards ) > 0 )
 				}
 			}
 			echo '<li>"'.$description.'" <cite>'.$info.'</cite></li>';
-		}			
+		}
 	}
-	
+
 	if( count($awards) > 0 )
 	{
 		for( $i = 0; $i < count($awards); $i++ )
@@ -704,7 +704,7 @@ if( count( $promoterawards ) + count( $awards ) > 0 )
 			echo '<li>"'.$description.'" <cite>'.$info.'</cite></li>';
 		}
 	}
-	
+
 	echo '</ul>';
 	echo '<hr>';
 }
@@ -712,7 +712,7 @@ if( count( $promoterawards ) + count( $awards ) > 0 )
 if( count($promoterquotes) + count($quotes) > 0 )
 {
 	echo '					<hr>
-			
+
 						<h2>'. tl('Selected Articles') .'</h2>
 						<ul>';
 
@@ -737,7 +737,7 @@ if( count($promoterquotes) + count($quotes) > 0 )
 	<cite>- '.$name.', <a href="http://'.parseLink($link).'">'.$website.'</a></cite></li>';
 		}
 	}
-	
+
 	if( count($quotes) > 0 )
 	{
 		for( $i = 0; $i < count($quotes); $i++ )
@@ -759,7 +759,7 @@ if( count($promoterquotes) + count($quotes) > 0 )
 	<cite>- '.$name.', <a href="http://'.parseLink($link).'">'.$website.'</a></cite></li>';
 		}
 	}
-	
+
 	echo '</ul>';
 	echo '<hr>';
 }
@@ -835,7 +835,7 @@ if( $monetize >= 1 )
 
 
 echo '					<h2 id="links">'. tl('Additional Links'). '</h2>';
-		
+
 for( $i = 0; $i < count($additionals); $i++ )
 {
 	$title = $description = $link = "";
@@ -853,7 +853,7 @@ for( $i = 0; $i < count($additionals); $i++ )
 	if( strpos(parseLink($link),'/') !== 0 ) {
 		$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
 	} else { $linkTitle = $link; }
-	
+
 	echo '<p>
 	<strong>'.$title.'</strong><br/>
 	'.$description.' <a href="http://'.parseLink($link).'" alt="'.parseLink($link).'">'.$linkTitle.'</a>.
@@ -872,7 +872,7 @@ echo '					<hr>
 						<strong>'. tl('More information'). '</strong><br/>
 						'. tlHtml('More information on %s, our logo & relevant media are available <a href="%s">here</a>.', COMPANY_TITLE, 'index.php'. $languageQuery). '
 					</p>
-					
+
 					<hr>
 
 					<div class="uk-grid">
@@ -896,7 +896,7 @@ for( $i = 0; $i < count($credits); $i++ )
 	}
 
 	echo '<p>';
-				
+
 	if( strlen($website) == 0 )
 	{
 		echo '<strong>'.$person.'</strong><br/>'.$role;
@@ -950,7 +950,7 @@ echo '						</div>
 		</div>
 
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>		
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
 		<script type="text/javascript">
 			$( document ).ready(function() {
