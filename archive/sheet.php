@@ -850,7 +850,7 @@ for( $i = 0; $i < count($additionals); $i++ )
 		}
 	}
 
-	if( strpos(parseLink($link),'/') !== 0 ) {
+	if( strpos(parseLink($link),'/') !== false ) {
 		$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
 	} else { $linkTitle = $link; }
 	
