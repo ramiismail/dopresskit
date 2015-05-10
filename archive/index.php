@@ -558,8 +558,8 @@ if( count($additionals) > 0 ) {
 
 	for( $i = 0; $i < count($additionals); $i++ )
 	{
-		$title = $description = $link = "";
-				
+		$title = $description = $link = $linkTitle = "";
+
 		foreach( $additionals[$i]['additional']->children() as $child )
 		{
 			if( $child->getName() == "title" ) {
@@ -568,13 +568,15 @@ if( count($additionals) > 0 ) {
 				$description = $child;
 			} else if( $child->getName() == "link" ) {
 				$link = $child;
+			} else if( $child->getName() == "linktitle" ) {
+				$linkTitle = $child;
 			}
 		}
-
-		if( strpos(parseLink($link),'/') !== false ) {
-			$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
-		} else { $linkTitle = $link; }
 		
+		if( strlen($linkTitle) == 0 ) {
+			$linkTitle = parseLink($link);
+		}
+
 		echo '<p>
 		<strong>'.$title.'</strong><br/>
 		'.$description.' <a href="http://'.parseLink($link).'" alt="'.parseLink($link).'">'.$linkTitle.'</a>.
