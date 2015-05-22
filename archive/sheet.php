@@ -210,7 +210,7 @@ foreach( $xml->children() as $child )
 			$promotercode = ($child->children());
 			$promotercode = $promotercode->product;
 			
-			$promoterxml = simplexml_load_file('http://promoterapp.com/dopresskit/'.$promotercode);
+			$promoterxml = simplexml_load_file('http://www.promoterapp.com/dopresskit/'.$promotercode);
 			
 			foreach( $promoterxml->children() as $promoterchild )
 			{
