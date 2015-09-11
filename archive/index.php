@@ -71,22 +71,22 @@ foreach( $xml->children() as $child )
 	switch( $child->getName() )
 	{
 		case("title"):
-			define("COMPANY_TITLE", $child);
+			define("COMPANY_TITLE", (string)$child);
 			break;	
 		case("founding-date"):
-			define("COMPANY_DATE", $child);
+			define("COMPANY_DATE", (string)$child);
 			break;
 		case("website"):
-			define("COMPANY_WEBSITE", $child);
+			define("COMPANY_WEBSITE", (string)$child);
 			break;
 		case("press-contact"):
-			define("COMPANY_CONTACT", $child);
+			define("COMPANY_CONTACT", (string)$child);
 			break;
 		case("based-in"):
-			define("COMPANY_BASED", $child);
+			define("COMPANY_BASED", (string)$child);
 			break;
 		case("analytics"):
-			define("ANALYTICS", $child);
+			define("ANALYTICS", (string)$child);
 			break;
 		case("socials"):
 			$socials = array();
@@ -107,10 +107,10 @@ foreach( $xml->children() as $child )
 			}
 			break;	
 		case("phone"):
-			define("COMPANY_PHONE", $child);
+			define("COMPANY_PHONE", (string)$child);
 			break;
 		case("description"):
-			define("COMPANY_DESCRIPTION", $child);
+			define("COMPANY_DESCRIPTION", (string)$child);
 			break;
 		case("histories"):
 			$histories = array();
