@@ -39,7 +39,7 @@ $todo = array(
 	),
 	"additional" => array(
 		"analytics" => array(
-			"text" => "(Optional) Enable <strong><a href=\"http://analytics.google.com/\">Google Analytics</a></strong> to track traffic to your presskit() by adding &lt;analytics&gt;<em>your property id</em>&lt;/analytics&gt; to your _data.xml file.",
+			"text" => "(Optional) Enable <strong><a href=\"https://analytics.google.com/\">Google Analytics</a></strong> to track traffic to your presskit() by adding &lt;analytics&gt;<em>your property id</em>&lt;/analytics&gt; to your _data.xml file.",
 			"done" => False
 		)
 	)
@@ -225,7 +225,7 @@ if( $state == 'upgrade' )
 	{
 		unset($todo['additional']['analytics']);
 		$todo['additional']['promoter'] = array(
-			"text" => "(Optional) Enable <strong><a href=\"http://promoterapp.com/\">Promoter</a></strong> to automatically list selected awards &amp; reviews by checking the appropriate checkbox in the <a href=\"http://promoterapp.com/\">Promoter</a> settings for your game.",
+			"text" => "(Optional) Enable <strong><a href=\"https://promoterapp.com/\">Promoter</a></strong> to automatically list selected awards &amp; reviews by checking the appropriate checkbox in the <a href=\"https://promoterapp.com/\">Promoter</a> settings for your game.",
 			"done" => False
 		);
 
