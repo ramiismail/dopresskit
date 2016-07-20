@@ -764,7 +764,7 @@ if(isset($promoterquotes) && count($promoterquotes) + count($quotes) > 0 )
 	echo '<hr>';
 }
 
-if( if(isset($press_request) ) 
+if( isset($press_request) ) 
 {
 	if( $press_request == TRUE )
 	{
