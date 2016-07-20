@@ -386,9 +386,9 @@ echo '					<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
 						<li><a href="#trailers">'. tl('Videos') .'</a></li>
 						<li><a href="#images">'. tl('Images') .'</a></li>
 						<li><a href="#logo">'. tl('Logo & Icon') .'</a></li>';
-if( count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">'. tl('Awards & Recognition') .'</a></li>');
-if( count($promoterquotes) + count($quotes) > 0 ) echo('<li><a href="#quotes">'. tl('Selected Articles') .'</a></li>');
-if( $press_request == TRUE) { echo '<li><a href="#preview">'. tl('Request Press Copy') .'</a></li>'; }
+if(isset($promoterawards) && count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">'. tl('Awards & Recognition') .'</a></li>');
+if(isset($promoterquotes) && count($promoterquotes) + count($quotes) > 0 ) echo('<li><a href="#quotes">'. tl('Selected Articles') .'</a></li>');
+if(isset($press_request) && $press_request == TRUE) { echo '<li><a href="#preview">'. tl('Request Press Copy') .'</a></li>'; }
 if( $monetize >= 1) { echo '<li><a href="#monetize">'. tl('Monetization Permission') .'</a></li>'; }
 echo '						<li><a href="#links">'. tl('Additional Links') .'</a></li>
 						<li><a href="#about">'. tl('About %s', COMPANY_TITLE) .'</a></li>
@@ -662,7 +662,7 @@ if( !file_exists($game.'/images/logo.png') && !file_exists($game.'/images/icon.p
 
 echo '<hr>';
 
-if( count( $promoterawards ) + count( $awards ) > 0 )
+if(isset($promoterawards) && count( $promoterawards ) + count( $awards ) > 0 )
 {
 	echo('<h2 id="awards">'. tl('Awards & Recognition') .'</h2>');
 	echo('<ul>');
@@ -709,7 +709,7 @@ if( count( $promoterawards ) + count( $awards ) > 0 )
 	echo '<hr>';
 }
 
-if( count($promoterquotes) + count($quotes) > 0 )
+if(isset($promoterquotes) && count($promoterquotes) + count($quotes) > 0 )
 {
 	echo '					<hr>
 			
@@ -764,29 +764,31 @@ if( count($promoterquotes) + count($quotes) > 0 )
 	echo '<hr>';
 }
 
-
-if( $press_request == TRUE )
+if( if(isset($press_request) ) 
 {
-	echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
-	echo '<p>'. tl("Please fill in your e-mail address below to complete a distribute() request and we'll get back to you as soon as a press copy is available for you.") .'<br/>';
-	echo '<div id="mailform">';
-	echo '<form id="pressrequest" class="uk-form" method="POST" action="'.$url.'">';
-	echo '<input type="email" id="email" name="email" placeholder="name@yourdomain.com" style="width:100%;"></input>';
-	echo '<input type="hidden" id="key" name="key" value="'.$key.'"></input><br/>';
-	echo '<input type="submit" class="uk-button" id="submit-button" value="'. tl('request a press copy') .'" style="width:100%;"></input>';
-	echo '<p>'. tlHtml('Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.').'</p>';
-	echo '</div>';
-	echo '<hr>';
-} else {
-	if( $press_request_fail == TRUE ) {
+	if( $press_request == TRUE )
+	{
 		echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
-		echo '<p>'.$press_request_fail_msg.'</p>';
+		echo '<p>'. tl("Please fill in your e-mail address below to complete a distribute() request and we'll get back to you as soon as a press copy is available for you.") .'<br/>';
+		echo '<div id="mailform">';
+		echo '<form id="pressrequest" class="uk-form" method="POST" action="'.$url.'">';
+		echo '<input type="email" id="email" name="email" placeholder="name@yourdomain.com" style="width:100%;"></input>';
+		echo '<input type="hidden" id="key" name="key" value="'.$key.'"></input><br/>';
+		echo '<input type="submit" class="uk-button" id="submit-button" value="'. tl('request a press copy') .'" style="width:100%;"></input>';
+		echo '<p>'. tlHtml('Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.').'</p>';
+		echo '</div>';
 		echo '<hr>';
-	}
-	if( $press_request_outdated_warning == TRUE ) {
-		echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
-		echo '<p>'.tl("We are afraid this developer has not upgraded their presskit() to use distribute(). For security purposes, this form has been disabled.").'</p>';
-		echo '<hr>';
+	} else {
+		if( $press_request_fail == TRUE ) {
+			echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
+			echo '<p>'.$press_request_fail_msg.'</p>';
+			echo '<hr>';
+		}
+		if( $press_request_outdated_warning == TRUE ) {
+			echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
+			echo '<p>'.tl("We are afraid this developer has not upgraded their presskit() to use distribute(). For security purposes, this form has been disabled.").'</p>';
+			echo '<hr>';
+		}
 	}
 }
 
