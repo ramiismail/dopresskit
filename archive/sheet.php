@@ -154,6 +154,7 @@ foreach( $files as $keyfile ) {
 
 // Set default value for monetize
 $monetize = 0;
+$histories = array();
 
 foreach( $xml->children() as $child )
 {
@@ -193,7 +194,6 @@ foreach( $xml->children() as $child )
 			define("GAME_HISTORY", $child);
 			break;
 		case("histories"):
-			$histories = array();
 			$i = 0;
 			foreach( $child->children() as $subchild )
 			{
