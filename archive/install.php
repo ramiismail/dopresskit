@@ -128,6 +128,11 @@ if( !is_dir('trailers') )
 	mkdir('trailers');
 }
 
+if( !is_dir('_template/images') )
+{
+	mkdir('_template/images');
+}
+
 unlink('archive.zip');
 
 if( $upgrade == 0 )
