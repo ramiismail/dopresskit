@@ -438,7 +438,7 @@ if( file_exists("images/images.zip") )
 	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize >= 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
@@ -476,7 +476,7 @@ if( file_exists("images/logo.zip") )
 	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize >= 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
