@@ -592,10 +592,10 @@ echo '					<hr>
 if( file_exists($game."/images/images.zip") )
 {
 	$filesize = filesize($game."/images/images.zip");
-	if( $filesize > 1024 && $filesize < 1048576 ) {
+	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize > 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
@@ -634,10 +634,10 @@ echo '					<hr>
 if( file_exists($game."/images/logo.zip") )
 {
 	$filesize = filesize($game."/images/logo.zip");
-	if( $filesize > 1024 && $filesize < 1048576 ) {
+	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize > 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
