@@ -435,10 +435,10 @@ echo '					<hr>
 if( file_exists("images/images.zip") )
 {
 	$filesize = filesize("images/images.zip");
-	if( $filesize > 1024 && $filesize < 1048576 ) {
+	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize > 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
@@ -473,10 +473,10 @@ echo '					<p class="images-text">'. tlHtml('There are far more images available
 if( file_exists("images/logo.zip") )
 {
 	$filesize = filesize("images/logo.zip");
-	if( $filesize > 1024 && $filesize < 1048576 ) {
+	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize > 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
@@ -501,7 +501,7 @@ if( !file_exists('images/logo.png') && !file_exists('images/icon.png')) {
 
 echo '					<hr>';
 
-if( count( $awards > 0 ) )
+if( count( $awards ) > 0 )
 {
 	echo('<h2 id="awards">'. tl('Awards & Recognition') .'</h2>
 					<ul>');
