@@ -47,14 +47,14 @@ presskit() was only possible thanks to these fine folks!
 
 presskit() was created in just over a week by Rami Ismail of Dutch independent game studio Vlambeer. Rami does the business & development at Vlambeer and found himself looking for an efficient solution to press kits. presskit() was the result, but it wouldn't have been if it weren't for the following fine folks:
 
-Andreas Zecher - Made by Pixelate - for the original inspiration that made me create this kit.
-Jan Willem Nijman - Vlambeer - for starting Vlambeer with me, which eventually led to this thing.
-Russ Frushtick - Polygon - for general feedback from a press-person point-of-view.
-Martin Jonasson - grapefrukt - for challenging me to a race to see who could write the most efficient install script.
-Joram Wolters - JoramWolters.com - for his always sharp critique on game & web design and functionality.
-Jan Pieter van Seventer - Dutch Game Garden - for support & feedback.
-Adriaan de Jongh - gameovenstudios.com - for distractions and meaningful Skype-conversations during presskit()s development.
-Philip Tibitoski - octodadgame.com - for inspiring me to make this publically available.
+Andreas Zecher - Made by Pixelate - for the original inspiration that made me create this kit.  
+Jan Willem Nijman - Vlambeer - for starting Vlambeer with me, which eventually led to this thing.  
+Russ Frushtick - Polygon - for general feedback from a press-person point-of-view.  
+Martin Jonasson - grapefrukt - for challenging me to a race to see who could write the most efficient install script.  
+Joram Wolters - JoramWolters.com - for his always sharp critique on game & web design and functionality.  
+Jan Pieter van Seventer - Dutch Game Garden - for support & feedback.  
+Adriaan de Jongh - gameovenstudios.com - for distractions and meaningful Skype-conversations during presskit()s development.  
+Philip Tibitoski - octodadgame.com - for inspiring me to make this publically available.  
 
-The indie community at large for being amazing, open-minded, supportive, creative and interesting people.
-Friends, family & girlfriend for allowing & supporting me to do what I love to do, to pursue my dreams and to make games.
+The indie community at large for being amazing, open-minded, supportive, creative and interesting people.  
+Friends, family & girlfriend for allowing & supporting me to do what I love to do, to pursue my dreams and to make games.  
