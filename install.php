@@ -10,17 +10,15 @@
  *
  */	
 
-function getLatestTagUrl($repository, $default = 'master') {
-    $file = @json_decode(@file_get_contents("https://api.github.com/repos/$repository/tags", false,
-        stream_context_create(['http' => ['header' => "User-Agent: dopresskit\r\n"]])
-    ));
+$repository = 'codingthat/dopresskit';
+$latest_info = @json_decode(@file_get_contents("https://api.github.com/repos/$repository/tags", false,
+	stream_context_create(['http' => ['header' => "User-Agent: dopresskit\r\n"]])
+));
+$repo_tag = $latest_info ? reset($latest_info)->name : 'master';
 
-    return sprintf("https://github.com/$repository/archive/%s.zip", $file ? reset($file)->name : $default);
-}
-
-function dl_r($filename) {
-	$remote_url = getLatestTagUrl('codingthat/dopresskit');
-	$local_file = $filename;
+function dl_r($local_file) {
+	global $repository, $repo_tag;
+    $remote_url = "https://raw.githubusercontent.com/$repository/$repo_tag/$local_file";
 	
 	if( ini_get('allow_url_fopen') ) {
 		copy($remote_url, $local_file);
@@ -75,7 +73,8 @@ dl_r('style.css');
 
 if( !file_exists('style.css') )
 {
-	$doneText = "<h1 class='error'>Uhoh, style.css couldn't be downloaded.</h1>"
+	$doneText = "<h1 class='error'>Uhoh, style.css couldn't be downloaded.</h1>";
+	goto html;
 }
 
 if ($upgrade == 0)
@@ -85,35 +84,20 @@ if ($upgrade == 0)
 	$title = 'Upgrade';
 }
 
-dl_r('archive.zip');
+dl_r('create.php');
+dl_r('credits.php');
+dl_r('index.php');
+dl_r('install.php');
+dl_r('sheet.php');
 
-if( !file_exists('archive.zip') )
-{
-	$doneText = "<h1 class='error'>Uhoh, archive.zip couldn't be downloaded.</h1>"
-}
-	
-if( !class_exists("ZipArchive") )
-{
-	dl_r('pclzip.lib');
-	rename('pclzip.lib','pclzip.lib.php');
-	require_once('pclzip.lib.php');
-	$archive = new PclZip('archive.zip');
-	if ($archive->extract() == 0) 
-	{
-		die("Error : ".$archive->errorInfo(true));
-	}
-	unlink('pclzip.lib.php');
-} 
-else 
-{
-	$zip = new ZipArchive;
-	$res = $zip->open('archive.zip');
-	if( $res === TRUE )
-	{
-		$zip->extractTo('.');
-		$zip->close();
-	}
-}
+dl_r('_data.xml');
+mkdir(dirname(__FILE__) . '/_template', 0755);
+copy(dirname(__FILE__) . '/_data.xml', dirname(__FILE__) . '/_template/_data.xml');
+
+mkdir(dirname(__FILE__) . '/lang', 0755);
+dl_r('lang/en-English.xml');
+dl_r('lang/TranslateTool.php');
+
 	
 if( file_exists('_data.bak') )
 {
@@ -133,8 +117,6 @@ if( !is_dir('trailers') )
 	mkdir('trailers');
 }
 
-unlink('archive.zip');
-
 if( $upgrade == 0 )
 {
 	$doneText = '<h2>Now comes the fun part!</h2>
@@ -153,6 +135,7 @@ else
 <button class=\'uk-button uk-button-primary loadUpgrade\'>What are we waiting for?!</button>';
 }
 
+html:
 echo '<!DOCTYPE html>
 <html>
 	<head>
