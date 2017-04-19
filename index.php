@@ -30,7 +30,7 @@ if( !file_exists('data.xml') )
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>Instructions</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -39,7 +39,7 @@ if( !file_exists('data.xml') )
 			<div class="uk-grid">
 			</div>
 		</div>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$(".uk-grid").load("create.php?s=installation");
@@ -211,7 +211,7 @@ echo '<!DOCTYPE html>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>'. COMPANY_TITLE .'</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -399,10 +399,10 @@ else
 			$result = "";
 
 			if( strlen( $youtube ) > 0 ) {
-				$result .= '<a href="http://www.youtube.com/watch?v='.$youtube.'">YouTube</a>, ';
+				$result .= '<a href="https://www.youtube.com/watch?v='.$youtube.'">YouTube</a>, ';
 			}
 			if( strlen( $vimeo ) > 0 ) {
-				$result .= '<a href="http://www.vimeo.com/'.$vimeo.'">Vimeo</a>, ';
+				$result .= '<a href="https://www.vimeo.com/'.$vimeo.'">Vimeo</a>, ';
 			}
 			if( strlen( $mov ) > 0 ) {
 				$result .= '<a href="trailers/'.$mov.'">.mov</a>, ';
@@ -416,11 +416,11 @@ else
 			if( $ytfirst == 1 ) 
 			{
 				echo '<div class="uk-responsive-width iframe-container">
-		<iframe src="http://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
 </div>';
 			} elseif ( $ytfirst == 0 ) {
 				echo '<div class="uk-responsive-width iframe-container">
-		<iframe src="http://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
 </div>';
 			}
 			echo '</p>';
@@ -435,10 +435,10 @@ echo '					<hr>
 if( file_exists("images/images.zip") )
 {
 	$filesize = filesize("images/images.zip");
-	if( $filesize > 1024 && $filesize < 1048576 ) {
+	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize > 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
@@ -473,10 +473,10 @@ echo '					<p class="images-text">'. tlHtml('There are far more images available
 if( file_exists("images/logo.zip") )
 {
 	$filesize = filesize("images/logo.zip");
-	if( $filesize > 1024 && $filesize < 1048576 ) {
+	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize > 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
@@ -501,7 +501,7 @@ if( !file_exists('images/logo.png') && !file_exists('images/icon.png')) {
 
 echo '					<hr>';
 
-if( count( $awards > 0 ) )
+if( count( $awards ) > 0 )
 {
 	echo('<h2 id="awards">'. tl('Awards & Recognition') .'</h2>
 					<ul>');
@@ -558,8 +558,8 @@ if( count($additionals) > 0 ) {
 
 	for( $i = 0; $i < count($additionals); $i++ )
 	{
-		$title = $description = $link = "";
-				
+		$title = $description = $link = $linkTitle = "";
+
 		foreach( $additionals[$i]['additional']->children() as $child )
 		{
 			if( $child->getName() == "title" ) {
@@ -568,13 +568,15 @@ if( count($additionals) > 0 ) {
 				$description = $child;
 			} else if( $child->getName() == "link" ) {
 				$link = $child;
+			} else if( $child->getName() == "linktitle" ) {
+				$linkTitle = $child;
 			}
 		}
-
-		if( strpos(parseLink($link),'/') !== false ) {
-			$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
-		} else { $linkTitle = $link; }
 		
+		if( strlen($linkTitle) == 0 ) {
+			$linkTitle = parseLink($link);
+		}
+
 		echo '<p>
 		<strong>'.$title.'</strong><br/>
 		'.$description.' <a href="http://'.parseLink($link).'" alt="'.parseLink($link).'">'.$linkTitle.'</a>.
@@ -659,9 +661,9 @@ echo '						</div>
 			</div>
 		</div>
 
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>		
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
 		<script type="text/javascript">
 			$( document ).ready(function() {
 				var container = $(\'.images\');

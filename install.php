@@ -10,9 +10,15 @@
  *
  */	
 
-function dl_r($filename, $remote_url = 'http://www.ramiismail.com/kit/press/' ) {
-	$remote_url .=  $filename;
-	$local_file = $filename;
+$repository = 'ramiismail/dopresskit';
+$latest_info = @json_decode(@file_get_contents("https://api.github.com/repos/$repository/tags", false,
+	stream_context_create(['http' => ['header' => "User-Agent: dopresskit\r\n"]])
+));
+$repo_tag = $latest_info ? reset($latest_info)->name : 'master';
+
+function dl_r($local_file) {
+	global $repository, $repo_tag;
+    $remote_url = "https://raw.githubusercontent.com/$repository/$repo_tag/$local_file";
 	
 	if( ini_get('allow_url_fopen') ) {
 		copy($remote_url, $local_file);
@@ -46,17 +52,14 @@ $upgrade = 0;
 $file_needed = 0;
 if( count( glob( "*.*" ) ) > 3 )
 {
-	if( file_exists('validation.js') )
+	if( file_exists('data.xml') )
 	{
-		if( file_exists('data.xml') )
-		{
-			$upgrade = 1;
-		}
-		
-		if( file_exists('_data.xml') )
-		{
-			rename('_data.xml', '_data.bak');
-		}
+		$upgrade = 1;
+	}
+	
+	if( file_exists('_data.xml') )
+	{
+		rename('_data.xml', '_data.bak');
 	}
 }
 
@@ -70,7 +73,8 @@ dl_r('style.css');
 
 if( !file_exists('style.css') )
 {
-	dl_r('style.css', 'http://dl.dropbox.com/u/12157099/presskit/');
+	$doneText = "<h1 class='error'>Uhoh, style.css couldn't be downloaded.</h1>";
+	goto html;
 }
 
 if ($upgrade == 0)
@@ -80,35 +84,20 @@ if ($upgrade == 0)
 	$title = 'Upgrade';
 }
 
-dl_r('archive.zip');
+dl_r('create.php');
+dl_r('credits.php');
+dl_r('index.php');
+dl_r('install.php');
+dl_r('sheet.php');
 
-if( !file_exists('archive.zip') )
-{
-	dl_r('archive.zip', 'http://dl.dropbox.com/u/12157099/presskit/');
-}
-	
-if( !class_exists("ZipArchive") )
-{
-	dl_r('pclzip.lib');
-	rename('pclzip.lib','pclzip.lib.php');
-	require_once('pclzip.lib.php');
-	$archive = new PclZip('archive.zip');
-	if ($archive->extract() == 0) 
-	{
-		die("Error : ".$archive->errorInfo(true));
-	}
-	unlink('pclzip.lib.php');
-} 
-else 
-{
-	$zip = new ZipArchive;
-	$res = $zip->open('archive.zip');
-	if( $res === TRUE )
-	{
-		$zip->extractTo('.');
-		$zip->close();
-	}
-}
+dl_r('_data.xml');
+mkdir(dirname(__FILE__) . '/_template', 0755);
+copy(dirname(__FILE__) . '/_data.xml', dirname(__FILE__) . '/_template/_data.xml');
+
+mkdir(dirname(__FILE__) . '/lang', 0755);
+dl_r('lang/en-English.xml');
+dl_r('lang/TranslateTool.php');
+
 	
 if( file_exists('_data.bak') )
 {
@@ -128,8 +117,6 @@ if( !is_dir('trailers') )
 	mkdir('trailers');
 }
 
-unlink('archive.zip');
-
 if( $upgrade == 0 )
 {
 	$doneText = '<h2>Now comes the fun part!</h2>
@@ -148,6 +135,7 @@ else
 <button class=\'uk-button uk-button-primary loadUpgrade\'>What are we waiting for?!</button>';
 }
 
+html:
 echo '<!DOCTYPE html>
 <html>
 	<head>
@@ -155,7 +143,7 @@ echo '<!DOCTYPE html>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>' . $title . '</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -179,20 +167,15 @@ echo '<!DOCTYPE html>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				var updateContent = function(type) {
 					var company = $("#company").val();
-					var nocache = new Date().getTime();
-					$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
-								    \'&no_cache=\' + nocache);
+					$(".uk-grid").load("create.php?s=" + type + "&p=" + company);
 
 					setInterval(function() {
-						// We need to generate a new time each call to avoid caching.
-						var nocache = new Date().getTime();
-						$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
-									\'&no_cache=\' + nocache);
+						$(".uk-grid").load("create.php?s=" + type + "&p=" + company);
 					}, 5000);
 				}
 

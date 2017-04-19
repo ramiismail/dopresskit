@@ -30,7 +30,7 @@ if( !isset($xml) )
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>Thanks!</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -39,7 +39,7 @@ if( !isset($xml) )
 			<div class="uk-grid">
 			</div>
 		</div>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$(".uk-grid").load("credits.php");
@@ -58,7 +58,7 @@ if( !isset($xml) )
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>Instructions</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -67,7 +67,7 @@ if( !isset($xml) )
 			<div class="uk-grid">
 			</div>
 		</div>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$(".uk-grid").load("create.php?s=installation");
@@ -270,9 +270,9 @@ foreach( $xml->children() as $child )
 
 			$promotercode = ($child->children());
 			$promotercode = $promotercode->product;
-			
-			$promoterxml = simplexml_load_file('http://promoterapp.com/dopresskit/'.$promotercode);
-			
+
+			$promoterxml = simplexml_load_file('https://promoterapp.com/dopresskit/'.$promotercode);
+
 			foreach( $promoterxml->children() as $promoterchild )
 			{
 				switch( $promoterchild->children()->getName() )
@@ -356,8 +356,8 @@ echo '<!DOCTYPE html>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>'. COMPANY_TITLE .'</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<title>'. GAME_TITLE .'</title>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -365,7 +365,7 @@ echo '<!DOCTYPE html>
 		<div class="uk-container uk-container-center">
 			<div class="uk-grid">
 				<div id="navigation" class="uk-width-medium-1-4">
-					<h1 class="nav-header">'. COMPANY_TITLE .'</h1>
+					<h1 class="nav-header">'. GAME_TITLE .'</h1>
 					<a class="nav-header" href="index.php'. $languageQuery .'" target="_self">'. tl('press kit') .'</a></strong>
 					<ul class="uk-nav uk-nav-side">';
 
@@ -382,7 +382,6 @@ if (count(TranslateTool::getLanguages()) > 1) {
 echo '					<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
 						<li><a href="#description">'. tl('Description') .'</a></li>
 						<li><a href="#history">'. tl('History') .'</a></li>
-						<li><a href="#projects">'. tl('Projects') .'</a></li>
 						<li><a href="#trailers">'. tl('Videos') .'</a></li>
 						<li><a href="#images">'. tl('Images') .'</a></li>
 						<li><a href="#logo">'. tl('Logo & Icon') .'</a></li>';
@@ -556,10 +555,10 @@ else
 			$result = "";
 
 			if( strlen( $youtube ) > 0 ) {
-				$result .= '<a href="http://www.youtube.com/watch?v='.$youtube.'">YouTube</a>, ';
+				$result .= '<a href="https://www.youtube.com/watch?v='.$youtube.'">YouTube</a>, ';
 			}
 			if( strlen( $vimeo ) > 0 ) {
-				$result .= '<a href="http://www.vimeo.com/'.$vimeo.'">Vimeo</a>, ';
+				$result .= '<a href="https://www.vimeo.com/'.$vimeo.'">Vimeo</a>, ';
 			}
 			if( strlen( $mov ) > 0 ) {
 				$result .= '<a href="'.$game.'/trailers/'.$mov.'">.mov</a>, ';
@@ -573,11 +572,11 @@ else
 			if( $ytfirst == 1 ) 
 			{
 				echo '<div class="uk-responsive-width iframe-container">
-		<iframe src="http://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
 </div>';
 			} elseif ( $ytfirst == 0 ) {
 				echo '<div class="uk-responsive-width iframe-container">
-		<iframe src="http://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
 </div>';
 			}
 			echo '</p>';
@@ -592,10 +591,10 @@ echo '					<hr>
 if( file_exists($game."/images/images.zip") )
 {
 	$filesize = filesize($game."/images/images.zip");
-	if( $filesize > 1024 && $filesize < 1048576 ) {
+	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize > 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
@@ -634,10 +633,10 @@ echo '					<hr>
 if( file_exists($game."/images/logo.zip") )
 {
 	$filesize = filesize($game."/images/logo.zip");
-	if( $filesize > 1024 && $filesize < 1048576 ) {
+	if( $filesize >= 1024 && $filesize < 1048576 ) {
 		$filesize = (int)( $filesize / 1024 ).'KB';
 	}
-	if( $filesize > 1048576 ) {
+	else if( $filesize >= 1048576 ) {
 		$filesize = (int)(( $filesize / 1024 ) / 1024 ).'MB';
 	}
 
@@ -660,10 +659,10 @@ if( !file_exists($game.'/images/logo.png') && !file_exists($game.'/images/icon.p
 	echo '<p>'. tlHtml('There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
 
-echo '<hr>';
-
 if( count( $promoterawards ) + count( $awards ) > 0 )
 {
+	echo '<hr>';
+
 	echo('<h2 id="awards">'. tl('Awards & Recognition') .'</h2>');
 	echo('<ul>');
 
@@ -838,7 +837,7 @@ echo '					<h2 id="links">'. tl('Additional Links'). '</h2>';
 		
 for( $i = 0; $i < count($additionals); $i++ )
 {
-	$title = $description = $link = "";
+	$title = $description = $link = $linkTitle = "";
 	foreach( $additionals[$i]['additional']->children() as $child )
 	{
 		if( $child->getName() == "title" ) {
@@ -847,12 +846,19 @@ for( $i = 0; $i < count($additionals); $i++ )
 			$description = $child;
 		} else if( $child->getName() == "link" ) {
 			$link = $child;
+		} else if( $child->getName() == "linktitle" ) {
+			$linkTitle = $child;
 		}
 	}
 
 	if( strpos(parseLink($link),'/') !== 0 ) {
-		$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
-	} else { $linkTitle = $link; }
+		if(strpos(parseLink($link),'/') === false) {
+			$linkTitle = parseLink($link);
+		} else {
+			$linkTitle = substr(parseLink($link),0,strpos(parseLink($link),'/'));
+		}
+	}
+	else { $linkTitle = $link; }
 	
 	echo '<p>
 	<strong>'.$title.'</strong><br/>
@@ -949,9 +955,9 @@ echo '						</div>
 			</div>
 		</div>
 
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>		
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
 		<script type="text/javascript">
 			$( document ).ready(function() {
 				var container = $(\'.images\');
