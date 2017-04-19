@@ -70,7 +70,7 @@ dl_r('style.css');
 
 if( !file_exists('style.css') )
 {
-	dl_r('style.css', 'http://dl.dropbox.com/u/12157099/presskit/');
+	dl_r('style.css', 'https://dl.dropboxusercontent.com/u/12157099/presskit/');
 }
 
 if ($upgrade == 0)
@@ -84,7 +84,7 @@ dl_r('archive.zip');
 
 if( !file_exists('archive.zip') )
 {
-	dl_r('archive.zip', 'http://dl.dropbox.com/u/12157099/presskit/');
+	dl_r('archive.zip', 'https://dl.dropboxusercontent.com/u/12157099/presskit/');
 }
 	
 if( !class_exists("ZipArchive") )
@@ -155,7 +155,7 @@ echo '<!DOCTYPE html>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>' . $title . '</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -179,7 +179,7 @@ echo '<!DOCTYPE html>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				var updateContent = function(type) {
