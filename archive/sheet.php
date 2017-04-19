@@ -660,10 +660,10 @@ if( !file_exists($game.'/images/logo.png') && !file_exists($game.'/images/icon.p
 	echo '<p>'. tlHtml('There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
 
-echo '<hr>';
-
 if( count( $promoterawards ) + count( $awards ) > 0 )
 {
+	echo '<hr>';
+
 	echo('<h2 id="awards">'. tl('Awards & Recognition') .'</h2>');
 	echo('<ul>');
 
