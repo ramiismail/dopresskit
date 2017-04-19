@@ -4,6 +4,22 @@ dopresskit
 presskit() - spend time making games, not press.
 
 
+About this fork
+---------------
+I noticed when I went to use presskit() that, while it worked out of the box, there were a few minor issues, such as a dead "projects" link showing up on each individual project.  Looking into it a bit further, I saw that there were 21 outstanding pull requests, and no activity for two years.  My e-mail to Rami was met with an autoresponder indicating a very busy person, which I'm glad about--that means the goal of letting game devs work on their games was being realized!
+
+Meanwhile, for presskit() users, I thought it would be nice if there were a way to get some of these pull requests integrated, and also update directly from GitHub when a release was put out, as [TheSeg recommended](https://github.com/ramiismail/dopresskit/issues/5#issuecomment-72758047).  I also flattened and deduplicated the directory structure, because I noticed even the upstream master had some differences between the root `style.css` and `install.php` and their `/archive` counterparts, likewise with `_data.xml` and its `/_template` counterpart.
+
+If you want to integrate more PRs from upstream, or generally make your own fork of this fork that can update itself from GitHub, you need only change [this line](https://github.com/codingthat/dopresskit/blob/master/install.php#L13) to point to your fork.
+
+If/when Rami wants to take the reins again, at least the structure is there.  Meanwhile, it's maybe a bit easier for all of us to share our improvements with each other.  :)
+
+
+How to upgrade your current install to this fork
+------------------------------------------------
+Just save `install.php` somewhere, and upload it to your server's press directory, wherever you originally put it when you installed presskit().  Access that directory from your web browser, and it should upgrade, and then tell you to delete/move `install.php` afterwards.  That's all there is to it!
+
+
 Simple. Fast. Free.
 ==========
 Developers & press both have the same goal: to bring great games to as many people as possible - after all, a good game is worth nothing if no-one plays it. For the press, finding out about a game but not having access to information & media for the game means that they can't write about it. Of course, developers want to spend their valuable time making games instead of press pages.
@@ -47,14 +63,14 @@ presskit() was only possible thanks to these fine folks!
 
 presskit() was created in just over a week by Rami Ismail of Dutch independent game studio Vlambeer. Rami does the business & development at Vlambeer and found himself looking for an efficient solution to press kits. presskit() was the result, but it wouldn't have been if it weren't for the following fine folks:
 
-Andreas Zecher - Made by Pixelate - for the original inspiration that made me create this kit.
-Jan Willem Nijman - Vlambeer - for starting Vlambeer with me, which eventually led to this thing.
-Russ Frushtick - Polygon - for general feedback from a press-person point-of-view.
-Martin Jonasson - grapefrukt - for challenging me to a race to see who could write the most efficient install script.
-Joram Wolters - JoramWolters.com - for his always sharp critique on game & web design and functionality.
-Jan Pieter van Seventer - Dutch Game Garden - for support & feedback.
-Adriaan de Jongh - gameovenstudios.com - for distractions and meaningful Skype-conversations during presskit()s development.
-Philip Tibitoski - octodadgame.com - for inspiring me to make this publically available.
+* Andreas Zecher - Made by Pixelate - for the original inspiration that made me create this kit.
+* Jan Willem Nijman - Vlambeer - for starting Vlambeer with me, which eventually led to this thing.
+* Russ Frushtick - Polygon - for general feedback from a press-person point-of-view.
+* Martin Jonasson - grapefrukt - for challenging me to a race to see who could write the most efficient install script.
+* Joram Wolters - JoramWolters.com - for his always sharp critique on game & web design and functionality.
+* Jan Pieter van Seventer - Dutch Game Garden - for support & feedback.
+* Adriaan de Jongh - gameovenstudios.com - for distractions and meaningful Skype-conversations during presskit()s development.
+* Philip Tibitoski - octodadgame.com - for inspiring me to make this publically available.
 
 The indie community at large for being amazing, open-minded, supportive, creative and interesting people.
 Friends, family & girlfriend for allowing & supporting me to do what I love to do, to pursue my dreams and to make games.
