@@ -10,7 +10,7 @@
  *
  */	
 
-$repository = 'codingthat/dopresskit';
+$repository = 'ramiismail/dopresskit';
 $latest_info = @json_decode(@file_get_contents("https://api.github.com/repos/$repository/tags", false,
 	stream_context_create(['http' => ['header' => "User-Agent: dopresskit\r\n"]])
 ));
