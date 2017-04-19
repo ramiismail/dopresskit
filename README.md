@@ -10,7 +10,7 @@ I noticed when I went to use presskit() that, while it worked out of the box, th
 
 Meanwhile, for presskit() users, I thought it would be nice if there were a way to get some of these pull requests integrated, and also update directly from GitHub when a release was put out, as [TheSeg recommended](https://github.com/ramiismail/dopresskit/issues/5#issuecomment-72758047).  I also flattened and deduplicated the directory structure, because I noticed even the upstream master had some differences between the root `style.css` and `install.php` and their `/archive` counterparts, likewise with `_data.xml` and its `/_template` counterpart.
 
-If you want to integrate more PRs from upstream, or generally make your own fork of this fork that can update itself from GitHub, you need only change [this line](https://github.com/codingthat/dopresskit/blob/master/install.php#L13) to point to your fork.
+If you want to integrate more PRs from upstream, or generally make your own fork of this fork that can update itself from GitHub, you need only change [this line](https://github.com/codingthat/dopresskit/blob/master/install.php#L13) to point to your fork.  The updater will look for the latest tagged release rather than the latest commit, so be sure to tag releases to make your changes more readily available.
 
 If/when Rami wants to take the reins again, at least the structure is there.  Meanwhile, it's maybe a bit easier for all of us to share our improvements with each other.  :)
 
@@ -18,6 +18,8 @@ If/when Rami wants to take the reins again, at least the structure is there.  Me
 How to upgrade your current install to this fork
 ------------------------------------------------
 Just save `install.php` somewhere, and upload it to your server's press directory, wherever you originally put it when you installed presskit().  Access that directory from your web browser, and it should upgrade, and then tell you to delete/move `install.php` afterwards.  That's all there is to it!
+
+Future upgrades can be done in the same fashion.
 
 
 Simple. Fast. Free.
