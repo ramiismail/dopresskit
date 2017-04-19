@@ -10,8 +10,16 @@
  *
  */	
 
-function dl_r($filename, $remote_url = 'http://www.ramiismail.com/kit/press/' ) {
-	$remote_url .=  $filename;
+function getLatestTagUrl($repository, $default = 'master') {
+    $file = @json_decode(@file_get_contents("https://api.github.com/repos/$repository/tags", false,
+        stream_context_create(['http' => ['header' => "User-Agent: dopresskit\r\n"]])
+    ));
+
+    return sprintf("https://github.com/$repository/archive/%s.zip", $file ? reset($file)->name : $default);
+}
+
+function dl_r($filename) {
+	$remote_url = getLatestTagUrl('codingthat/dopresskit');
 	$local_file = $filename;
 	
 	if( ini_get('allow_url_fopen') ) {
@@ -70,7 +78,7 @@ dl_r('style.css');
 
 if( !file_exists('style.css') )
 {
-	dl_r('style.css', 'https://dl.dropboxusercontent.com/u/12157099/presskit/');
+	$doneText = "<h1 class='error'>Uhoh, style.css couldn't be downloaded.</h1>"
 }
 
 if ($upgrade == 0)
@@ -84,7 +92,7 @@ dl_r('archive.zip');
 
 if( !file_exists('archive.zip') )
 {
-	dl_r('archive.zip', 'https://dl.dropboxusercontent.com/u/12157099/presskit/');
+	$doneText = "<h1 class='error'>Uhoh, archive.zip couldn't be downloaded.</h1>"
 }
 	
 if( !class_exists("ZipArchive") )
