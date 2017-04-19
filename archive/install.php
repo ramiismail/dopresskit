@@ -54,17 +54,14 @@ $upgrade = 0;
 $file_needed = 0;
 if( count( glob( "*.*" ) ) > 3 )
 {
-	if( file_exists('validation.js') )
+	if( file_exists('data.xml') )
 	{
-		if( file_exists('data.xml') )
-		{
-			$upgrade = 1;
-		}
-		
-		if( file_exists('_data.xml') )
-		{
-			rename('_data.xml', '_data.bak');
-		}
+		$upgrade = 1;
+	}
+	
+	if( file_exists('_data.xml') )
+	{
+		rename('_data.xml', '_data.bak');
 	}
 }
 
