@@ -526,8 +526,8 @@ else
 {
 	for( $i = 0; $i < count($trailers); $i++ )
 	{
-		$name = $youtube = $vimeo = $mov = $mp4 = "";
-		$ytfirst = -1;
+		$name = $youtube = $vimeo = $mov = $mp4 = $webm = "";
+		$to_embed = "";
 
 		foreach( $trailers[$i]['trailer']->children() as $child )
 		{
@@ -535,22 +535,27 @@ else
 				$name = $child;
 			} else if( $child->getName() == "youtube" ) { 
 				$youtube = $child; 
-			
-				if( $ytfirst == -1 ) { 
-					$ytfirst = 1; 
+				if( $to_embed == "" ) { 
+					$to_embed = "youtube"; 
 				} 
 			} else if( $child->getName() == "vimeo" ) {
-				$vimeo = $child; if( $ytfirst == -1 ) {
-					$ytfirst = 0;
+				$vimeo = $child;
+				if( $to_embed == "" ) {
+					$to_embed = "vimeo";
 				}
 			} else if( $child->getName() == "mov" ) {
 				$mov = $child;
 			} else if( $child->getName() == "mp4" ) {
 				$mp4 = $child;
+			} else if( $child->getName() == "webm" ) {
+				$webm = $child;
+				if( $to_embed == "" ) { 
+					$to_embed = "webm"; 
+				} 
 			}
 		}
 				
-		if( strlen($youtube) + strlen($vimeo) > 0 )				
+		if( strlen($youtube) + strlen($vimeo) + strlen($webm) > 0 )				
 		{
 			echo '<p><strong>'.$name.'</strong>&nbsp;';
 			$result = "";
@@ -567,17 +572,26 @@ else
 			if( strlen( $mp4 ) > 0 ) {
 				$result .= '<a href="'.$game.'/trailers/'.$mp4.'">.mp4</a>, ';
 			}
+			if( strlen( $webm ) > 0 ) {
+				$result .= '<a href="'.$game.'/trailers/'.$webm.'">.webm</a>, ';
+			}
 
 			echo substr($result, 0, -2);
 
-			if( $ytfirst == 1 ) 
+			if( $to_embed == "youtube" ) 
 			{
 				echo '<div class="uk-responsive-width iframe-container">
 		<iframe src="http://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
 </div>';
-			} elseif ( $ytfirst == 0 ) {
+			} elseif ( $to_embed == "vimeo" ) {
 				echo '<div class="uk-responsive-width iframe-container">
 		<iframe src="http://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
+</div>';
+			} elseif ( $to_embed == "webm" ) {
+				echo '<div class="uk-responsive-width">
+		<video height="480" controls>
+			<source src="'.$game.'/trailers/'.$webm.'" type="video/webm">
+		</video>
 </div>';
 			}
 			echo '</p>';
