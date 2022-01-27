@@ -3,7 +3,7 @@
 	<p><strong><a href="#header">Credits</a></strong></p>
 </div>
 <div id="content" class="uk-width-medium-3-4">
-	<h2>Short introduction by <a href="http://www.vlambeer.com/">Vlambeers Rami Ismail</a></h2>
+	<h2>Short introduction by <a href="https://www.vlambeer.com/">Vlambeers Rami Ismail</a></h2>
 	<p>Even though I\'m still not quite sure what to call <a href="https://dopresskit.com">presskit()</a> - be it a kit or a system or a framework or just a way for me to spend more time making games and less time doing repetitive chores, I ended up making this because I felt it would make a lot of lives a lot easier.</p>
 	<p>A good game is worth nothing if no-one plays it &amp; to play a game one needs to know of it. The way I see it, developers &amp; press both have the same goal: to bring great games to as many people as possible. For the press, finding out about a game but not having access to information &amp; media for the game means that they still can\'t really write something about it. Developers want to spend their valuable time making games instead of press pages, resulting in that so many games that could\'ve touched so many hearts didn\'t end up doing so. </p>
 	<p>I figured that something that is free for everyone, open and easy-to-use for both sides is the ultimate solution. Developers only have to spend an hour or so creating well-laid out press pages with everything the press needs to write to their hearts desire. Everyone wins.</p>

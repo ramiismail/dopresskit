@@ -30,7 +30,7 @@ if( !isset($xml) )
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>Thanks!</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -39,7 +39,9 @@ if( !isset($xml) )
 			<div class="uk-grid">
 			</div>
 		</div>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"   
+			integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+			crossorigin="anonymous"></script>
 		<script type="text/javascript">
 			$(function() {
 				$(".uk-grid").load("credits.php");
@@ -58,7 +60,7 @@ if( !isset($xml) )
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>Instructions</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -67,7 +69,7 @@ if( !isset($xml) )
 			<div class="uk-grid">
 			</div>
 		</div>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$(".uk-grid").load("create.php?s=installation");
@@ -271,7 +273,7 @@ foreach( $xml->children() as $child )
 			$promotercode = ($child->children());
 			$promotercode = $promotercode->product;
 			
-			$promoterxml = simplexml_load_file('http://promoterapp.com/dopresskit/'.$promotercode);
+			$promoterxml = simplexml_load_file('https://promoterapp.com/dopresskit/'.$promotercode);
 			
 			foreach( $promoterxml->children() as $promoterchild )
 			{
@@ -357,7 +359,7 @@ echo '<!DOCTYPE html>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>'. COMPANY_TITLE .'</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -573,11 +575,11 @@ else
 			if( $ytfirst == 1 ) 
 			{
 				echo '<div class="uk-responsive-width iframe-container">
-		<iframe src="http://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://www.youtube.com/embed/'. $youtube .'" frameborder="0" allowfullscreen></iframe>
 </div>';
 			} elseif ( $ytfirst == 0 ) {
 				echo '<div class="uk-responsive-width iframe-container">
-		<iframe src="http://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
+		<iframe src="https://player.vimeo.com/video/'.$vimeo.'" frameborder="0" allowfullscreen></iframe>
 </div>';
 			}
 			echo '</p>';
@@ -933,7 +935,7 @@ for( $i = 0; $i < count($contacts); $i++ )
 		echo '<strong>'.$name.'</strong><br/><a href="mailto:'.$mail.'">'.$mail.'</a>';
 	}
 	if( strlen($link) > 0 && strlen($mail) == 0 ) {
-		echo '<strong>'.$name.'</strong><br/><a href="http://'.parseLink($link).'">'.parseLink($link).'</a>';
+		echo '<strong>'.$name.'</strong><br/><a href="https://'.parseLink($link).'">'.parseLink($link).'</a>';
 	}
 
 	echo '</p>';
@@ -944,14 +946,16 @@ echo '						</div>
 
 					<hr>
 
-					<p><a href="http://dopresskit.com/">presskit()</a> by Rami Ismail (<a href="http://www.vlambeer.com/">Vlambeer</a>) - also thanks to <a href="sheet.php?p=credits">these fine folks</a></p>
+					<p><a href="https://dopresskit.com/">presskit()</a> by Rami Ismail (<a href="https://www.vlambeer.com/">Vlambeer</a>) - also thanks to <a href="sheet.php?p=credits">these fine folks</a></p>
 				</div>
 			</div>
 		</div>
 
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>		
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"   
+			integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
 		<script type="text/javascript">
 			$( document ).ready(function() {
 				var container = $(\'.images\');
