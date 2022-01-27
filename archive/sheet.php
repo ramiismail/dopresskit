@@ -429,13 +429,13 @@ for( $i = 0; $i < count($platforms); $i++ )
 			$link = $child;
 		}
 	}
-	echo '<a href="http://'.parseLink($link).'">'.$name.'</a><br/>';
+	echo '<a href="https://'.parseLink($link).'">'.$name.'</a><br/>';
 }
 
 echo '							</p>
 							<p>
 								<strong>'. tl('Website:'). '</strong><br/>
-								<a href="http://'. parseLink(GAME_WEBSITE) .'">'. parseLink(GAME_WEBSITE) .'</a>
+								<a href="https://'. parseLink(GAME_WEBSITE) .'">'. parseLink(GAME_WEBSITE) .'</a>
 							</p>
 							<p>
 								<strong>'. tl('Regular Price:'). '</strong><br/>';
@@ -556,10 +556,10 @@ else
 			$result = "";
 
 			if( strlen( $youtube ) > 0 ) {
-				$result .= '<a href="http://www.youtube.com/watch?v='.$youtube.'">YouTube</a>, ';
+				$result .= '<a href="https://www.youtube.com/watch?v='.$youtube.'">YouTube</a>, ';
 			}
 			if( strlen( $vimeo ) > 0 ) {
-				$result .= '<a href="http://www.vimeo.com/'.$vimeo.'">Vimeo</a>, ';
+				$result .= '<a href="https://www.vimeo.com/'.$vimeo.'">Vimeo</a>, ';
 			}
 			if( strlen( $mov ) > 0 ) {
 				$result .= '<a href="'.$game.'/trailers/'.$mov.'">.mov</a>, ';
