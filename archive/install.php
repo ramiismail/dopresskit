@@ -7,10 +7,11 @@
  * To install this script you will need a FTP program.
  * Put the install.php file in an empty directory on your server to install.
  * Put the install.php file in the root folder of a completed installation to upgrade your installation.
+ * https://github.com/ramiismail/dopresskit
  *
  */	
 
-function dl_r($filename, $remote_url = 'http://www.ramiismail.com/kit/press/' ) {
+function dl_r($filename, $remote_url = 'https://www.ramiismail.com/kit/press/' ) {
 	$remote_url .=  $filename;
 	$local_file = $filename;
 	
@@ -37,7 +38,7 @@ function dl_r($filename, $remote_url = 'http://www.ramiismail.com/kit/press/' ) 
 	
 if( ini_get('safe_mode') )
 {
-	echo('<h1>Server Environment Check Failed: PHP Safe Mode Enabled</h1><p>Sadly, you or your host seem to have enabled PHP Safe Mode. PHP Safe Mode results in unexpected behaviour with user-installed scripts on your server and might cause presskit() to not function correctly. Please upgrade to PHP 5.4.0 or later or disable Safe Mode to continue.</p><p>If you cannot disable Safe Mode nor upgrade and are comfortable installing scripts, please download the <a href="http://ramiismail.com/kit/press/manual-install.zip">manual installation package</a>.</p>');
+	echo('<h1>Server Environment Check Failed: PHP Safe Mode Enabled</h1><p>Sadly, you or your host seem to have enabled PHP Safe Mode. PHP Safe Mode results in unexpected behaviour with user-installed scripts on your server and might cause presskit() to not function correctly. Please upgrade to PHP 5.4.0 or later or disable Safe Mode to continue.</p><p>If you cannot disable Safe Mode nor upgrade and are comfortable installing scripts, please download the <a href="https://ramiismail.com/kit/press/manual-install.zip">manual installation package</a>.</p>');
 	die();
 }
 	
@@ -70,7 +71,7 @@ dl_r('style.css');
 
 if( !file_exists('style.css') )
 {
-	dl_r('style.css', 'http://dl.dropbox.com/u/12157099/presskit/');
+	dl_r('style.css', 'https://vlambeer.com/kit/presskit/');
 }
 
 if ($upgrade == 0)
@@ -84,7 +85,7 @@ dl_r('archive.zip');
 
 if( !file_exists('archive.zip') )
 {
-	dl_r('archive.zip', 'http://dl.dropbox.com/u/12157099/presskit/');
+	dl_r('archive.zip', 'https://vlambeer.com/kit/presskit/');
 }
 	
 if( !class_exists("ZipArchive") )
@@ -155,7 +156,7 @@ echo '<!DOCTYPE html>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>' . $title . '</title>
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/uikit/1.2.0/css/uikit.gradient.min.css" rel="stylesheet" type="text/css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.16.2/css/components/caption.gradient.min.css" rel="stylesheet" type="text/css">
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -179,15 +180,22 @@ echo '<!DOCTYPE html>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"   
+			integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+			crossorigin="anonymous"></script>
 		<script type="text/javascript">
 			$(function() {
 				var updateContent = function(type) {
 					var company = $("#company").val();
-					$(".uk-grid").load("create.php?s=" + type + "&p=" + company);
+					var nocache = new Date().getTime();
+					$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
+								    \'&no_cache=\' + nocache);
 
 					setInterval(function() {
-						$(".uk-grid").load("create.php?s=" + type + "&p=" + company);
+						// We need to generate a new time each call to avoid caching.
+						var nocache = new Date().getTime();
+						$(".uk-grid").load("create.php?s=" + type + "&p=" + company +
+									\'&no_cache=\' + nocache);
 					}, 5000);
 				}
 
