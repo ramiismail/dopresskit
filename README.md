@@ -30,7 +30,7 @@ presskit() is currently in beta, which means new functions get added every now a
 Easily monitor who mentions you in the press with Promoter and embed awards and reviews that Promoter finds with a single click.
 Integrate easily with Google Analytics to keep track of who, when and from where visits to your presskit() are made.
 Enable or disable the press request section of a project by adding a <can-request-press-copy> tag set to FALSE.
-You have a specific wish, idea or feedback? Get in touch at rami@vlambeer.com or at @tha_rami!
+You have a specific wish, idea or feedback? Get in touch at services@ramiismail.com or at @tha_rami!
 
 
 Why is presskit() free?
